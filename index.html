@@ -3,25 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Den Nye Avis 🚀 ULTRA WOW</title>
+<title>Den Nye Avis 🚀 EMPIRE</title>
 <style>
-body{font-family:Arial;margin:0;background:#0f172a;color:#fff;overflow-x:hidden}
+body{font-family:Arial;margin:0;background:#0f172a;color:#fff}
 header{background:linear-gradient(90deg,#003399,#00c853);padding:15px;display:flex;justify-content:space-between;flex-wrap:wrap}
 button{padding:8px 12px;margin:2px;border:none;border-radius:20px;background:#ffcc00;cursor:pointer;font-weight:bold}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;padding:15px}
 .card{background:#1e293b;padding:12px;border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,0.4);transition:0.3s}
 .card:hover{transform:scale(1.05)}
 .badge{background:#00c853;padding:4px 8px;border-radius:8px;font-size:10px}
-.hero{padding:40px;text-align:center;background:linear-gradient(135deg,#1e3a8a,#0f172a)}
-.glow{animation:glow 2s infinite alternate}
-@keyframes glow{from{text-shadow:0 0 10px #00c853}to{text-shadow:0 0 20px #00c853}}
-.toast{position:fixed;bottom:20px;left:20px;background:#00c853;color:#fff;padding:10px;border-radius:10px}
+.top{background:#ff5252}
+.hero{text-align:center;padding:40px}
 </style>
 </head>
 <body>
 
 <header>
-<div class="glow"><b>Den Nye Avis 🚀</b></div>
+<div><b>Den Nye Avis 🚀</b></div>
 <div>
 <span id="user">Ikke logget ind</span>
 <button onclick="googleLogin()">Login</button>
@@ -32,9 +30,8 @@ button{padding:8px 12px;margin:2px;border:none;border-radius:20px;background:#ff
 </header>
 
 <div class="hero">
-<h1 class="glow">🔥 Danmarks nye markedsplads 🔥</h1>
+<h1>🔥 Den nye markedsplads i Danmark</h1>
 <p id="live">200 personer kigger lige nu 👀</p>
-<button onclick="openModal()">Sælg noget nu</button>
 </div>
 
 <div class="grid" id="listings"></div>
@@ -86,12 +83,17 @@ function loadAds(){
       div.className="card";
 
       div.innerHTML=`
-        <div class="badge">🔥 HOT</div>
+        <div class="badge ${d.premium?'top':''}">${d.premium?'⭐ PREMIUM':'🔥 HOT'}</div>
         <img src="${d.image||'https://via.placeholder.com/200'}" width="100%">
         <h3>${d.title}</h3>
         <p>${d.price} kr</p>
-        <button onclick="chat('${doc.id}')">💬 Chat</button>
+
+        <button onclick="boost('${doc.id}')">🚀 Boost</button>
+        <button onclick="premium('${doc.id}')">⭐ Premium</button>
+        <button onclick="chat()">💬 Chat</button>
         <button onclick="share()">📢 Del</button>
+
+        ${currentUser && d.user===currentUser.uid?`<button onclick="deleteAd('${doc.id}')">Slet</button>`:""}
       `;
 
       container.appendChild(div);
@@ -99,8 +101,17 @@ function loadAds(){
   });
 }
 
-function chat(id){
-  showToast("💬 Ny besked sendt!");
+function boost(id){
+  showToast("🚀 Boost aktiveret (simuleret)");
+}
+
+function premium(id){
+  db.collection("listings").doc(id).update({premium:true});
+  showToast("⭐ Premium aktiv!");
+}
+
+function chat(){
+  showToast("💬 Ny besked!");
 }
 
 function share(){
@@ -112,41 +123,33 @@ function openModal(){
   const title=prompt("Titel");
   const price=prompt("Pris");
 
-  db.collection("listings").add({title,price,user:currentUser.uid,created:Date.now()});
+  db.collection("listings").add({title,price,user:currentUser.uid,created:Date.now(),premium:false});
 }
 
-// 🔥 live counter
+function deleteAd(id){db.collection("listings").doc(id).delete();}
+
+// live users
 setInterval(()=>{
-  const num=Math.floor(Math.random()*400+100);
+  const num=Math.floor(Math.random()*500+100);
   document.getElementById("live").innerText=num+" personer kigger lige nu 👀";
 },2000);
 
-// 🔥 sold popup
-setInterval(()=>{
-  showToast("🔥 En annonce blev lige solgt!");
-},8000);
+// fake activity
+setInterval(()=>showToast("🔥 En annonce blev lige solgt!"),8000);
 
-// 🔥 toast
 function showToast(text){
   const t=document.createElement("div");
-  t.className="toast";
+  t.style.position="fixed";
+  t.style.bottom="20px";
+  t.style.left="20px";
+  t.style.background="#00c853";
+  t.style.color="#fff";
+  t.style.padding="10px";
+  t.style.borderRadius="10px";
   t.innerText=text;
   document.body.appendChild(t);
   setTimeout(()=>t.remove(),3000);
 }
-
-// confetti
-setInterval(()=>{
-  const el=document.createElement('div');
-  el.innerText="🎉";
-  el.style.position='fixed';
-  el.style.left=Math.random()*100+'%';
-  el.style.top='0';
-  el.style.fontSize='25px';
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),2000);
-},1200);
-
 </script>
 
 </body>
