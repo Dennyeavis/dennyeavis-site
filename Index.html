@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Den Nye Avis 🚀</title>
+<style>
+body{font-family:Arial;margin:0;background:#f4f6fb}
+header{background:#003399;color:#fff;padding:15px;display:flex;justify-content:space-between;flex-wrap:wrap}
+button{padding:8px 12px;margin:2px;border:none;border-radius:8px;background:#ffcc00;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;padding:10px}
+.card{background:#fff;padding:10px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1)}
+.badge{background:#00c853;color:#fff;padding:3px 6px;border-radius:6px;font-size:10px}
+</style>
+</head>
+<body>
+
+<header>
+<div><b>Den Nye Avis 🚀</b></div>
+<div>
+<span id="user">Ikke logget ind</span>
+<button onclick="googleLogin()">Google Login</button>
+<button onclick="logout()">Logout</button>
+<button onclick="toggleMyAds()">Mine annoncer</button>
+<button onclick="openModal()">Ny annonce</button>
+</div>
+</header>
+
+<div class="grid" id="listings"></div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDX7j-Kyo60eOrzQGoCJZL_n7-CE1n5BBk",
+  authDomain: "dennyeavis-f2b4a.firebaseapp.com",
+  projectId: "dennyeavis-f2b4a"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+let currentUser = null;
+let showMine = false;
+
+function googleLogin(){
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider);
+}
+
+function logout(){ auth.signOut(); }
+
+auth.onAuthStateChanged(user=>{
+  currentUser = user;
+  document.getElementById("user").innerText = user ? "✅ "+user.email : "❌ Ikke logget ind";
+  loadAds();
+});
+
+function toggleMyAds(){
+  showMine = !showMine;
+  loadAds();
+}
+
+// ❤️ FAVORITTER
+function toggleFav(id){
+  let favs = JSON.parse(localStorage.getItem("favs")||"[]");
+  if(favs.includes(id)){
+    favs = favs.filter(f=>f!==id);
+  } else {
+    favs.push(id);
+  }
+  localStorage.setItem("favs", JSON.stringify(favs));
+  loadAds();
+}
+
+// 📈 VISNINGER
+function addView(id){
+  let views = JSON.parse(localStorage.getItem("views")||"{}");
+  views[id] = (views[id]||0)+1;
+  localStorage.setItem("views", JSON.stringify(views));
+}
+
+function loadAds(){
+  const container = document.getElementById("listings");
+  const favs = JSON.parse(localStorage.getItem("favs")||"[]");
+  const views = JSON.parse(localStorage.getItem("views")||"{}");
+
+  db.collection("listings").orderBy("created","desc").onSnapshot(snapshot=>{
+    container.innerHTML="";
+
+    snapshot.forEach(doc=>{
+      const d = doc.data();
+
+      if(showMine && currentUser && d.user !== currentUser.uid) return;
+
+      const isFav = favs.includes(doc.id);
+
+      const div = document.createElement("div");
+      div.className="card";
+
+      div.innerHTML = `
+        <div class="badge">👁 ${views[doc.id]||0} visninger</div>
+        <img src="${d.image || 'https://via.placeholder.com/200'}" width="100%">
+        <h4>${d.title}</h4>
+        <p>${d.price} kr</p>
+
+        <button onclick="toggleFav('${doc.id}')">${isFav?'❤️ Fjern':'🤍 Favorit'}</button>
+        <button onclick="shareAd('${d.title}')">📢 Del</button>
+
+        ${currentUser && d.user === currentUser.uid ? `
+        <button onclick="deleteAd('${doc.id}')">Slet</button>
+        ` : ""}
+      `;
+
+      div.onclick = ()=>addView(doc.id);
+
+      container.appendChild(div);
+    });
+  });
+}
+
+function shareAd(title){
+  const url = window.location.href;
+  window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url));
+}
+
+function openModal(){
+  if(!currentUser) return alert("Log ind først");
+  const title = prompt("Titel");
+  const price = prompt("Pris");
+
+  db.collection("listings").add({
+    title, price, user: currentUser.uid, created: Date.now()
+  });
+}
+
+function deleteAd(id){
+  db.collection("listings").doc(id).delete();
+}
+
+// 🔥 LIVE FOMO
+setInterval(()=>{
+  const msg = document.createElement("div");
+  msg.innerText = "🔥 En bruger kigger på en annonce!";
+  msg.style.position="fixed";
+  msg.style.bottom="20px";
+  msg.style.right="20px";
+  msg.style.background="#ff5252";
+  msg.style.color="#fff";
+  msg.style.padding="10px";
+  msg.style.borderRadius="10px";
+  document.body.appendChild(msg);
+  setTimeout(()=>msg.remove(),3000);
+},10000);
+
+</script>
+
+</body>
+</html>
