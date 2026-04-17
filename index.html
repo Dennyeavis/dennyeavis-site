@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Den Nye Avis 🚀 WOW</title>
+<title>Den Nye Avis 🚀 ULTRA WOW</title>
 <style>
-body{font-family:Arial;margin:0;background:#0f172a;color:#fff}
+body{font-family:Arial;margin:0;background:#0f172a;color:#fff;overflow-x:hidden}
 header{background:linear-gradient(90deg,#003399,#00c853);padding:15px;display:flex;justify-content:space-between;flex-wrap:wrap}
 button{padding:8px 12px;margin:2px;border:none;border-radius:20px;background:#ffcc00;cursor:pointer;font-weight:bold}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;padding:15px}
@@ -15,6 +15,7 @@ button{padding:8px 12px;margin:2px;border:none;border-radius:20px;background:#ff
 .hero{padding:40px;text-align:center;background:linear-gradient(135deg,#1e3a8a,#0f172a)}
 .glow{animation:glow 2s infinite alternate}
 @keyframes glow{from{text-shadow:0 0 10px #00c853}to{text-shadow:0 0 20px #00c853}}
+.toast{position:fixed;bottom:20px;left:20px;background:#00c853;color:#fff;padding:10px;border-radius:10px}
 </style>
 </head>
 <body>
@@ -32,7 +33,7 @@ button{padding:8px 12px;margin:2px;border:none;border-radius:20px;background:#ff
 
 <div class="hero">
 <h1 class="glow">🔥 Danmarks nye markedsplads 🔥</h1>
-<p>Hundredvis af brugere kigger med lige nu 👀</p>
+<p id="live">200 personer kigger lige nu 👀</p>
 <button onclick="openModal()">Sælg noget nu</button>
 </div>
 
@@ -53,45 +54,43 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
 
-let currentUser = null;
-let showMine = false;
+let currentUser=null;
+let showMine=false;
 
 function googleLogin(){
-  const provider = new firebase.auth.GoogleAuthProvider();
+  const provider=new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(provider);
 }
 
-function logout(){ auth.signOut(); }
+function logout(){auth.signOut();}
 
 auth.onAuthStateChanged(user=>{
-  currentUser = user;
-  document.getElementById("user").innerText = user ? "✅ "+user.email : "❌ Ikke logget ind";
+  currentUser=user;
+  document.getElementById("user").innerText=user?"✅ "+user.email:"❌ Ikke logget ind";
   loadAds();
 });
 
-function toggleMyAds(){
-  showMine = !showMine;
-  loadAds();
-}
+function toggleMyAds(){showMine=!showMine;loadAds();}
 
 function loadAds(){
-  const container = document.getElementById("listings");
+  const container=document.getElementById("listings");
 
-  db.collection("listings").orderBy("created","desc").onSnapshot(snapshot=>{
+  db.collection("listings").orderBy("created","desc").onSnapshot(snap=>{
     container.innerHTML="";
 
-    snapshot.forEach(doc=>{
-      const d = doc.data();
-      if(showMine && currentUser && d.user !== currentUser.uid) return;
+    snap.forEach(doc=>{
+      const d=doc.data();
+      if(showMine && currentUser && d.user!==currentUser.uid)return;
 
-      const div = document.createElement("div");
+      const div=document.createElement("div");
       div.className="card";
 
-      div.innerHTML = `
+      div.innerHTML=`
         <div class="badge">🔥 HOT</div>
-        <img src="${d.image || 'https://via.placeholder.com/200'}" width="100%">
+        <img src="${d.image||'https://via.placeholder.com/200'}" width="100%">
         <h3>${d.title}</h3>
         <p>${d.price} kr</p>
+        <button onclick="chat('${doc.id}')">💬 Chat</button>
         <button onclick="share()">📢 Del</button>
       `;
 
@@ -100,39 +99,53 @@ function loadAds(){
   });
 }
 
+function chat(id){
+  showToast("💬 Ny besked sendt!");
+}
+
 function share(){
   window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(window.location.href));
 }
 
 function openModal(){
-  if(!currentUser) return alert("Log ind først");
-  const title = prompt("Titel");
-  const price = prompt("Pris");
+  if(!currentUser)return alert("Log ind først");
+  const title=prompt("Titel");
+  const price=prompt("Pris");
 
-  db.collection("listings").add({
-    title, price, user: currentUser.uid, created: Date.now()
-  });
+  db.collection("listings").add({title,price,user:currentUser.uid,created:Date.now()});
 }
 
-// WOW live counter
+// 🔥 live counter
 setInterval(()=>{
-  const el = document.querySelector('.hero p');
-  const num = Math.floor(Math.random()*300+100);
-  el.innerText = num + " personer kigger lige nu 👀";
+  const num=Math.floor(Math.random()*400+100);
+  document.getElementById("live").innerText=num+" personer kigger lige nu 👀";
 },2000);
 
-// confetti effect
-function confetti(){
-  const el = document.createElement('div');
-  el.innerText = "🎉";
+// 🔥 sold popup
+setInterval(()=>{
+  showToast("🔥 En annonce blev lige solgt!");
+},8000);
+
+// 🔥 toast
+function showToast(text){
+  const t=document.createElement("div");
+  t.className="toast";
+  t.innerText=text;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),3000);
+}
+
+// confetti
+setInterval(()=>{
+  const el=document.createElement('div');
+  el.innerText="🎉";
   el.style.position='fixed';
   el.style.left=Math.random()*100+'%';
   el.style.top='0';
-  el.style.fontSize='30px';
+  el.style.fontSize='25px';
   document.body.appendChild(el);
   setTimeout(()=>el.remove(),2000);
-}
-setInterval(confetti,1500);
+},1200);
 
 </script>
 
