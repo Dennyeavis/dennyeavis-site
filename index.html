@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Den Nye Avis</title>
+<style>
+body{font-family:Arial;background:#f5f5f5;padding:20px}
+.box{background:#fff;padding:15px;border-radius:10px;margin-bottom:10px}
+button{padding:8px 12px;margin:5px;border:none;background:#007bff;color:#fff;border-radius:6px}
+</style>
+</head>
+<body>
+
+<h1>Den Nye Avis</h1>
+
+<div class="box">
+<b>Status:</b> <span id="user">Ikke logget ind</span><br>
+<button onclick="login()">Login</button>
+<button onclick="logout()">Log ud</button>
+</div>
+
+<div class="box">
+<button onclick="openForm()">Ny annonce</button>
+<div id="form" style="display:none;">
+<input id="title" placeholder="Titel"><br><br>
+<input id="price" placeholder="Pris"><br><br>
+<button onclick="save()">Gem</button>
+</div>
+</div>
+
+<div class="box">
+<h3>Annoncer</h3>
+<div id="listings"></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDX7j-Kyo60eOrzQGoCJZL_n7-CE1n5BBk",
+  authDomain: "dennyeavis-f2b4a.firebaseapp.com",
+  projectId: "dennyeavis-f2b4a"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+let currentUser = null;
+
+function login(){
+  const email = prompt("Email:");
+  const password = prompt("Kode:");
+
+  auth.signInWithEmailAndPassword(email, password)
+  .catch(()=>{
+    auth.createUserWithEmailAndPassword(email, password);
+  });
+}
+
+function logout(){
+  auth.signOut();
+}
+
+auth.onAuthStateChanged(user=>{
+  currentUser = user;
+
+  if(user){
+    document.getElementById("user").innerText = "Logget ind som: " + user.email;
+  } else {
+    document.getElementById("user").innerText = "Ikke logget ind";
+  }
+
+  render();
+});
+
+function openForm(){
+  if(!currentUser){
+    alert("Log ind først");
+    return;
+  }
+  document.getElementById("form").style.display="block";
+}
+
+function save(){
+  const title = document.getElementById("title").value;
+  const price = document.getElementById("price").value;
+
+  if(!title || !price){
+    alert("Udfyld felter");
+    return;
+  }
+
+  db.collection("listings").add({
+    title: title,
+    price: price,
+    user: currentUser.uid,
+    created: Date.now()
+  }).then(()=>{
+    alert("Annonce oprettet");
+    render();
+  });
+}
+
+function render(){
+  const container = document.getElementById("listings");
+  container.innerHTML = "";
+
+  db.collection("listings").orderBy("created","desc").get().then(snap=>{
+    snap.forEach(doc=>{
+      const d = doc.data();
+      const div = document.createElement("div");
+      div.innerHTML = `<b>${d.title}</b> - ${d.price} kr`;
+      container.appendChild(div);
+    });
+  });
+}
+
+render();
+</script>
+
+</body>
+</html>
