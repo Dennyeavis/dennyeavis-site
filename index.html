@@ -3,23 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Den Nye Avis</title>
+<title>Den Nye Avis PRO</title>
 <style>
 body{font-family:Arial;margin:0;background:#f4f6fb}
-header{background:#003399;color:#fff;padding:15px;display:flex;justify-content:space-between}
-button{padding:8px 12px;margin:2px;border:none;border-radius:8px;background:#ffcc00}
+header{background:#003399;color:#fff;padding:15px;display:flex;justify-content:space-between;flex-wrap:wrap}
+button{padding:8px 12px;margin:2px;border:none;border-radius:8px;background:#ffcc00;cursor:pointer}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;padding:10px}
-.card{background:#fff;padding:10px;border-radius:10px}
+.card{background:#fff;padding:10px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1)}
+.badge{background:#00c853;color:#fff;padding:3px 6px;border-radius:6px;font-size:10px}
 </style>
 </head>
 <body>
 
 <header>
-<div><b>Den Nye Avis</b></div>
+<div><b>Den Nye Avis 🚀</b></div>
 <div>
 <span id="user">Ikke logget ind</span>
-<button onclick="login()">Login</button>
+<button onclick="googleLogin()">Google Login</button>
+<button onclick="login()">Email Login</button>
 <button onclick="logout()">Logout</button>
+<button onclick="toggleMyAds()">Mine annoncer</button>
 <button onclick="openModal()">Ny annonce</button>
 </div>
 </header>
@@ -30,7 +33,8 @@ button{padding:8px 12px;margin:2px;border:none;border-radius:8px;background:#ffc
 <div style="background:#fff;padding:20px;margin:50px auto;width:300px">
 <h3>Ny annonce</h3>
 <input id="title" placeholder="Titel"><br>
-<input id="price" placeholder="Pris"><br><br>
+<input id="price" placeholder="Pris"><br>
+<input type="file" id="image"><br><br>
 <button onclick="save()">Gem</button>
 <button onclick="closeModal()">Luk</button>
 </div>
@@ -41,7 +45,6 @@ button{padding:8px 12px;margin:2px;border:none;border-radius:8px;background:#ffc
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
 <script>
-
 const firebaseConfig = {
   apiKey: "AIzaSyDX7j-Kyo60eOrzQGoCJZL_n7-CE1n5BBk",
   authDomain: "dennyeavis-f2b4a.firebaseapp.com",
@@ -53,57 +56,57 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 
 let currentUser = null;
+let showMine = false;
 
-// 🔐 LOGIN
+function googleLogin(){
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider);
+}
+
 function login(){
   const email = prompt("Email:");
   const password = prompt("Kode:");
 
-  if(!email || !password) return;
-
   auth.signInWithEmailAndPassword(email,password)
-  .then(()=>alert("Logget ind"))
   .catch(()=>{
-    auth.createUserWithEmailAndPassword(email,password)
-    .then(()=>alert("Bruger oprettet"))
-    .catch(e=>alert(e.message));
+    auth.createUserWithEmailAndPassword(email,password);
   });
 }
 
-// 🚪 LOGOUT
-function logout(){
-  auth.signOut().then(()=>alert("Logget ud"));
-}
+function logout(){ auth.signOut(); }
 
-// 👤 STATUS
+// STATUS
 auth.onAuthStateChanged(user=>{
   currentUser = user;
-
-  if(user){
-    document.getElementById("user").innerText = "✅ " + user.email;
-  } else {
-    document.getElementById("user").innerText = "❌ Ikke logget ind";
-  }
-
+  document.getElementById("user").innerText = user ? "✅ "+user.email : "❌ Ikke logget ind";
   loadAds();
 });
 
-// 📦 LOAD ADS
+function toggleMyAds(){
+  showMine = !showMine;
+  loadAds();
+}
+
 function loadAds(){
   const container = document.getElementById("listings");
 
-  db.collection("listings").onSnapshot(snapshot=>{
+  db.collection("listings").orderBy("created","desc").onSnapshot(snapshot=>{
     container.innerHTML="";
 
     snapshot.forEach(doc=>{
       const d = doc.data();
 
+      if(showMine && currentUser && d.user !== currentUser.uid) return;
+
       const div = document.createElement("div");
       div.className="card";
 
       div.innerHTML = `
+        <div class="badge">${d.user === currentUser?.uid ? "MIN" : ""}</div>
+        <img src="${d.image || 'https://via.placeholder.com/200'}" width="100%">
         <h4>${d.title}</h4>
         <p>${d.price} kr</p>
+        ${currentUser && d.user === currentUser.uid ? `<button onclick="deleteAd('${doc.id}')">Slet</button>` : ""}
       `;
 
       container.appendChild(div);
@@ -111,7 +114,6 @@ function loadAds(){
   });
 }
 
-// ➕ NY ANNONCE
 function openModal(){
   if(!currentUser) return alert("Log ind først");
   document.getElementById("modal").style.display="block";
@@ -126,20 +128,34 @@ function save(){
 
   const title = document.getElementById("title").value;
   const price = document.getElementById("price").value;
+  const file = document.getElementById("image").files[0];
 
   if(!title || !price) return alert("Udfyld felter");
 
-  db.collection("listings").add({
-    title,
-    price,
-    user: currentUser.uid,
-    created: Date.now()
-  })
-  .then(()=>{
-    alert("Annonce oprettet");
+  if(!file){
+    db.collection("listings").add({
+      title, price, user: currentUser.uid, created: Date.now()
+    });
     closeModal();
-  })
-  .catch(e=>alert(e.message));
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = e=>{
+    db.collection("listings").add({
+      title,
+      price,
+      image: e.target.result,
+      user: currentUser.uid,
+      created: Date.now()
+    });
+    closeModal();
+  };
+  reader.readAsDataURL(file);
+}
+
+function deleteAd(id){
+  db.collection("listings").doc(id).delete();
 }
 
 </script>
