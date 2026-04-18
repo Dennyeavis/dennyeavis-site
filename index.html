@@ -94,7 +94,27 @@ function load(){
   });
 }
 
-// 🚀 CLOUDINARY UPLOAD (AUTOMATISK GRATIS)
+// 🚀 CLOUDINARY UPLOAD (STABIL VERSION)
+async function uploadToCloudinary(file){
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "dennyeavis");
+
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+
+  if(!data.secure_url){
+    console.error(data);
+    throw new Error("Upload fejlede");
+  }
+
+  return data.secure_url;
+}
+
 function openModal(){
   if(!user) return alert("Log ind først");
 
@@ -109,32 +129,22 @@ function openModal(){
     const file = input.files[0];
     if(!file) return;
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", UPLOAD_PRESET);
-
     try{
-      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
-        method: "POST",
-        body: formData
-      });
-
-      const data = await res.json();
-      const url = data.secure_url;
+      const imageUrl = await uploadToCloudinary(file);
 
       await db.collection("listings").add({
         title,
         price,
-        image: url,
+        image: imageUrl,
         user: user.uid,
         created: Date.now()
       });
 
-      alert("Annonce oprettet GRATIS med billede ☁️🔥");
+      alert("Annonce oprettet med billede 🚀");
 
     }catch(e){
       console.error(e);
-      alert("Upload fejl – tjek Cloudinary setup");
+      alert("Upload fejl – tjek Cloudinary");
     }
   };
 
