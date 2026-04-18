@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Den Nye Avis | Køb og sælg brugt online i Danmark</title>
-  <meta name="description" content="Den Nye Avis er en moderne dansk markedsplads, hvor du kan købe og sælge brugte varer online i hele Danmark. Opret annoncer med billeder, premium boost og Google login.">
-  <meta name="keywords" content="dansk markedsplads, køb og sælg, brugte varer, annoncer online, køb brugt, sælg brugt, marketplace danmark, annoncer med billeder, premium annoncer">
+  <meta name="description" content="Den Nye Avis er en moderne dansk markedsplads, hvor du gratis kan oprette annonce, købe og sælge brugte varer online i hele Danmark. Premium boost, e-mail login og mobilvenligt annonceflow.">
+  <meta name="keywords" content="gratis annonce, gratis oprette annonce, dansk markedsplads, køb og sælg, brugte varer, annoncer online, køb brugt, sælg brugt, marketplace danmark, alternativ til dba, alternativ til bilbasen, premium annoncer">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="author" content="Den Nye Avis">
   <meta name="theme-color" content="#04070d">
@@ -13,12 +13,12 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Den Nye Avis">
   <meta property="og:title" content="Den Nye Avis | Køb og sælg brugt online i Danmark">
-  <meta property="og:description" content="En moderne dansk markedsplads til køb og salg af brugte varer med premium annoncer, billedgallerier og mobilvenligt design.">
+  <meta property="og:description" content="Gratis at oprette annonce. En moderne dansk markedsplads til køb og salg af brugte varer med premium annoncer, billedgallerier og mobilvenligt design.">
   <meta property="og:url" content="https://dennyeavis.dk/">
   <meta property="og:image" content="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Den Nye Avis | Køb og sælg brugt online i Danmark">
-  <meta name="twitter:description" content="Sælg hurtigt, køb smart og få premium synlighed på en moderne dansk markedsplads.">
+  <meta name="twitter:description" content="Gratis at oprette annonce. Sælg hurtigt, køb smart og få premium synlighed på en moderne dansk markedsplads.">
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80">
   <link rel="canonical" href="https://dennyeavis.dk/">
   <link rel="manifest" href="manifest.json">
@@ -74,6 +74,14 @@
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "En premium annonce får ekstra synlighed i feedet og er visuelt fremhævet, så flere købere lægger mærke til den."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Er Den Nye Avis et alternativ til andre danske markedspladser?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ja, Den Nye Avis er bygget som et moderne alternativ for sælgere og købere, der ønsker gratis oprettelse, en hurtigere oplevelse og mulighed for betalte synlighedsprodukter."
               }
             }
           ]
@@ -1229,6 +1237,38 @@
       font-weight: 700;
     }
 
+    .config-grid,
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .helper-text {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #eaf1ff;
+      font-weight: 700;
+    }
+
+    .status-pill.ready {
+      background: rgba(34, 197, 94, 0.1);
+      border-color: rgba(34, 197, 94, 0.2);
+      color: #ddffe6;
+    }
+
     .toast-container {
       position: fixed;
       right: 18px;
@@ -1353,7 +1393,9 @@
       .hero-metrics,
       .profile-stats,
       .form-grid,
-      .auth-grid {
+      .auth-grid,
+      .config-grid,
+      .admin-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1430,6 +1472,7 @@
         <a class="nav-link" href="#mine-annoncer" data-view-link="mine-annoncer">Mine annoncer</a>
         <a class="nav-link" href="#opret-annonce" data-view-link="opret-annonce">Opret annonce</a>
         <a class="nav-link" href="#profil" data-view-link="profil">Profil</a>
+        <a class="nav-link hidden" href="#admin" data-view-link="admin" id="adminNavLink">Admin</a>
       </nav>
 
       <div class="auth-actions">
@@ -1447,15 +1490,15 @@
     <section class="hero" id="forside">
       <div class="hero-panel glass">
         <div>
-          <div class="eyebrow">Danmarks nye digitale loppemarked</div>
+          <div class="eyebrow">Gratis oprettelse af annoncer i hele Danmark</div>
           <h2>Sælg smartere. Køb hurtigere. Se bedre ud imens.</h2>
           <p>
             Den Nye Avis kombinerer lækker premium UI, live markedsplads-stemning og Firebase backend i ét hurtigt univers.
-            Opret annoncer med billedgalleri, fremhæv premium varer og del dem med ét klik.
+            Opret annoncer gratis med billedgalleri, fremhæv premium varer og del dem med ét klik. Basisannonce er gratis, og du betaler kun for ekstra synlighed, hvis du vil løfte salget.
           </p>
 
           <div class="hero-actions">
-            <button class="button" type="button" data-view-target="opret-annonce">Opret ny annonce</button>
+            <button class="button" type="button" data-view-target="opret-annonce">Opret gratis annonce</button>
             <button class="ghost-button" type="button" data-view-target="mine-annoncer">Se mine annoncer</button>
           </div>
         </div>
@@ -1562,14 +1605,19 @@
               København, Aarhus, Odense, Aalborg og resten af Danmark. Platformen er bygget til mobil, så dine annoncer ser stærke ud,
               uanset om folk besøger siden fra telefon, tablet eller computer.
             </p>
+            <div class="seo-chip-grid">
+              <button class="seo-chip" type="button" data-view-target="opret-annonce">Gratis at oprette annonce</button>
+              <button class="seo-chip" type="button" data-seo-category="Bil" data-seo-view="forside">Sælg bil online</button>
+              <button class="seo-chip" type="button" data-seo-category="Elektronik" data-seo-view="forside">Sælg elektronik hurtigt</button>
+            </div>
           </div>
 
           <div class="seo-columns">
             <article class="seo-block glass">
               <h4>Hvorfor vælge Den Nye Avis?</h4>
               <p>
-                Designet er moderne og hurtigt, premium annoncer skiller sig visuelt ud, og Facebook deling gør det nemt at hente ekstra
-                trafik. Det giver bedre eksponering for varer som elektronik, møbler, boligtilbehør, børneudstyr, mode og fritidsudstyr.
+                Designet er moderne og hurtigt, gratis oprettelse sænker barrieren for nye sælgere, premium annoncer skiller sig visuelt ud,
+                og Facebook deling gør det nemt at hente ekstra trafik. Det giver bedre eksponering for varer som elektronik, møbler, boligtilbehør, børneudstyr, mode og fritidsudstyr.
               </p>
             </article>
 
@@ -1605,6 +1653,7 @@
               <h3>Populære søgninger</h3>
               <p>Her er de søgeveje, som typisk skaber trafik på danske markedspladser. Klikker man på dem, bliver feedet filtreret direkte.</p>
               <div class="seo-chip-grid">
+                <button class="seo-chip" type="button" data-view-target="opret-annonce">Gratis annonce online</button>
                 <button class="seo-chip" type="button" data-seo-search="iPhone" data-seo-view="forside">Køb brugt iPhone</button>
                 <button class="seo-chip" type="button" data-seo-search="sofa" data-seo-view="forside">Brugt sofa til salg</button>
                 <button class="seo-chip" type="button" data-seo-search="cykel" data-seo-view="forside">Brugt cykel i Danmark</button>
@@ -1628,6 +1677,20 @@
                 <button class="seo-chip" type="button" data-seo-category="Bil" data-seo-view="forside">Bil og transport</button>
               </div>
             </article>
+          </div>
+
+          <div class="seo-block glass">
+            <h3>Et moderne alternativ til tunge markedspladser</h3>
+            <p>
+              Mange sælgere leder efter en enklere og mere moderne vej end ældre classifieds-universer og overfyldte sociale feeds. Den Nye Avis er bygget til dem, der ønsker gratis oprettelse,
+              hurtigere flow, bedre design og mulighed for at betale for ekstra synlighed i stedet for at starte med friktion. Derfor er siden også relevant for søgninger som “alternativ til DBA”,
+              “alternativ til Bilbasen”, “bedre end marketplace” og “gratis markedsplads i Danmark”.
+            </p>
+            <div class="seo-chip-grid">
+              <button class="seo-chip" type="button" data-seo-search="alternativ" data-seo-view="forside">Moderne alternativ</button>
+              <button class="seo-chip" type="button" data-seo-category="Bil" data-seo-view="forside">Bilannoncer uden bøvl</button>
+              <button class="seo-chip" type="button" data-view-target="opret-annonce">Skift og opret gratis</button>
+            </div>
           </div>
 
           <div class="seo-block glass">
@@ -1678,7 +1741,7 @@
               <h3>Næste pengemaskine</h3>
               <p>Den største næste opgradering vil være at koble betaling på dine annoncepakker, så premium, spotlight og auto-fornyelse bliver rigtige produkter med omsætning.</p>
               <div class="checklist">
-                <div class="check-item">Basis annonce: gratis for hurtig vækst og flere opslag.</div>
+                <div class="check-item">Basis annonce: gratis at oprette for hurtig vækst, mere indhold og stærkere SEO.</div>
                 <div class="check-item">Premium annonce: fast pris for ekstra synlighed i feedet.</div>
                 <div class="check-item">Spotlight: topplacering eller forside-rotation som højere pris.</div>
                 <div class="check-item">Auto-fornyelse: lille abonnementsbetaling for at holde annoncer varme.</div>
@@ -1795,7 +1858,7 @@
 
             <div class="monetization-summary">
               <div>
-                <strong id="monetizationSummary">Standard annonce</strong>
+                <strong id="monetizationSummary">Gratis basisannonce</strong>
                 <div class="panel-subtitle" id="monetizationPrice">0 DKK i ekstra tilvalg</div>
               </div>
               <div class="category-tag" id="monetizationPackage">Basis</div>
@@ -1848,6 +1911,45 @@
             </p>
           </div>
 
+          <div class="auth-panel" id="firebaseConfigPanel">
+            <h3 class="panel-title">Firebase opsætning</h3>
+            <p class="panel-subtitle">Demo mode betyder, at appen mangler gyldig Firebase-konfiguration. Når værdierne er gemt her, virker e-mail login, Google login, annoncer og uploads rigtigt.</p>
+            <div class="status-pill" id="firebaseStatusPill">Demo mode aktiv</div>
+            <form id="firebaseConfigForm">
+              <div class="config-grid">
+                <div class="field-group">
+                  <label for="cfgApiKey">API key</label>
+                  <input class="field" id="cfgApiKey" type="text" placeholder="AIza...">
+                </div>
+                <div class="field-group">
+                  <label for="cfgAuthDomain">Auth domain</label>
+                  <input class="field" id="cfgAuthDomain" type="text" placeholder="project.firebaseapp.com eller custom domain">
+                </div>
+                <div class="field-group">
+                  <label for="cfgProjectId">Project ID</label>
+                  <input class="field" id="cfgProjectId" type="text" placeholder="dennyeavis">
+                </div>
+                <div class="field-group">
+                  <label for="cfgStorageBucket">Storage bucket</label>
+                  <input class="field" id="cfgStorageBucket" type="text" placeholder="project.appspot.com">
+                </div>
+                <div class="field-group">
+                  <label for="cfgMessagingSenderId">Messaging sender ID</label>
+                  <input class="field" id="cfgMessagingSenderId" type="text" placeholder="1234567890">
+                </div>
+                <div class="field-group">
+                  <label for="cfgAppId">App ID</label>
+                  <input class="field" id="cfgAppId" type="text" placeholder="1:123:web:abc...">
+                </div>
+              </div>
+              <div class="auth-inline">
+                <button class="button" id="saveFirebaseConfigButton" type="submit">Gem Firebase opsætning</button>
+                <button class="ghost-button" id="clearFirebaseConfigButton" type="button">Ryd gemte værdier</button>
+              </div>
+            </form>
+            <small>Du finder værdierne i Firebase Console under Project settings → General → Your apps → Web app config.</small>
+          </div>
+
           <div class="auth-panel" id="emailAuthPanel">
             <h3 class="panel-title">E-mail login</h3>
             <p class="panel-subtitle">Brug e-mail og adgangskode, hvis du ikke vil logge ind med Google.</p>
@@ -1874,6 +1976,40 @@
             </form>
             <small>Husk at aktivere både Google og E-mail/Password under Authentication i Firebase Console.</small>
           </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-admin">
+        <div class="profile-panel glass">
+          <div class="section-head">
+            <div>
+              <h3>Admin panel</h3>
+              <p>Kun synligt for din ejerkonto. Her får du overblik over platformen og kan rydde op i annoncer.</p>
+            </div>
+          </div>
+          <div class="admin-grid">
+            <div class="profile-stat">
+              <strong id="adminTotalListings">0</strong>
+              <span>Alle annoncer</span>
+            </div>
+            <div class="profile-stat">
+              <strong id="adminTotalPremium">0</strong>
+              <span>Premium annoncer</span>
+            </div>
+            <div class="profile-stat">
+              <strong id="adminTotalUsers">0</strong>
+              <span>Unikke sælgere</span>
+            </div>
+            <div class="profile-stat">
+              <strong id="adminFirebaseState">Demo</strong>
+              <span>Firebase status</span>
+            </div>
+          </div>
+          <div class="floating-card">
+            <h3>Moderation</h3>
+            <p>Som admin kan du slette alle annoncer. Det er smart til spam, testdata eller oprydning.</p>
+          </div>
+          <div id="adminListings" class="listings-grid"></div>
         </div>
       </section>
     </main>
@@ -1915,7 +2051,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
   <script>
-    const firebaseConfig = {
+    const defaultFirebaseConfig = {
       apiKey: "REPLACE_WITH_API_KEY",
       authDomain: "REPLACE_WITH_AUTH_DOMAIN",
       projectId: "REPLACE_WITH_PROJECT_ID",
@@ -1937,13 +2073,15 @@
         "Premium annonce solgt: racercykel i Aalborg.",
         "Deal gennemført: sofa i Esbjerg."
       ],
-      demoSeeded: false
+      demoSeeded: false,
+      ownerEmail: "fotomikkel@hotmail.com"
     };
 
     const dom = {
       loginButton: document.getElementById("loginButton"),
       showEmailAuthButton: document.getElementById("showEmailAuthButton"),
       logoutButton: document.getElementById("logoutButton"),
+      adminNavLink: document.getElementById("adminNavLink"),
       contactButton: document.getElementById("contactButton"),
       userChip: document.getElementById("userChip"),
       userChipAvatar: document.getElementById("userChipAvatar"),
@@ -1987,6 +2125,20 @@
       emailLoginButton: document.getElementById("emailLoginButton"),
       emailSignupButton: document.getElementById("emailSignupButton"),
       resetPasswordButton: document.getElementById("resetPasswordButton"),
+      firebaseConfigForm: document.getElementById("firebaseConfigForm"),
+      firebaseStatusPill: document.getElementById("firebaseStatusPill"),
+      cfgApiKey: document.getElementById("cfgApiKey"),
+      cfgAuthDomain: document.getElementById("cfgAuthDomain"),
+      cfgProjectId: document.getElementById("cfgProjectId"),
+      cfgStorageBucket: document.getElementById("cfgStorageBucket"),
+      cfgMessagingSenderId: document.getElementById("cfgMessagingSenderId"),
+      cfgAppId: document.getElementById("cfgAppId"),
+      clearFirebaseConfigButton: document.getElementById("clearFirebaseConfigButton"),
+      adminTotalListings: document.getElementById("adminTotalListings"),
+      adminTotalPremium: document.getElementById("adminTotalPremium"),
+      adminTotalUsers: document.getElementById("adminTotalUsers"),
+      adminFirebaseState: document.getElementById("adminFirebaseState"),
+      adminListings: document.getElementById("adminListings"),
       contactModal: document.getElementById("contactModal"),
       closeContactButton: document.getElementById("closeContactButton")
     };
@@ -1995,29 +2147,52 @@
     let auth = null;
     let db = null;
     let storage = null;
+    let firebaseConfig = null;
+
+    function getSavedFirebaseConfig() {
+      try {
+        const raw = localStorage.getItem("dna_firebase_config");
+        return raw ? JSON.parse(raw) : null;
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    }
+
+    function getActiveFirebaseConfig() {
+      return getSavedFirebaseConfig() || defaultFirebaseConfig;
+    }
+
+    function isConfigured(config) {
+      return Object.values(config || {}).every((value) => value && !String(value).startsWith("REPLACE_WITH"));
+    }
 
     function initializeFirebase() {
-      const values = Object.values(firebaseConfig);
-      const isConfigured = values.every((value) => value && !String(value).startsWith("REPLACE_WITH"));
+      firebaseConfig = getActiveFirebaseConfig();
 
-      if (!isConfigured) {
+      if (!isConfigured(firebaseConfig)) {
         seedDemoListings();
         showToast("Firebase mangler", "Indsæt dine rigtige Firebase credentials for at aktivere backend og uploads.", "warning");
+        syncFirebaseConfigUi();
         renderAll();
         return;
       }
 
       try {
-        firebase.initializeApp(firebaseConfig);
+        if (!firebase.apps.length) {
+          firebase.initializeApp(firebaseConfig);
+        }
         auth = firebase.auth();
         db = firebase.firestore();
         storage = firebase.storage();
         firebaseReady = true;
+        syncFirebaseConfigUi();
         attachAuthListener();
         attachListingsListener();
       } catch (error) {
         console.error(error);
         seedDemoListings();
+        syncFirebaseConfigUi();
         showToast("Firebase fejl", "Kunne ikke starte Firebase. Appen kører i demo mode lige nu.", "error");
         renderAll();
       }
@@ -2117,12 +2292,14 @@
     function updateAuthUi() {
       const user = appState.user;
       const loggedIn = Boolean(user);
+      const isAdmin = Boolean(user && user.email && user.email.toLowerCase() === appState.ownerEmail.toLowerCase());
 
       dom.loginButton.classList.toggle("hidden", loggedIn);
       dom.showEmailAuthButton.classList.toggle("hidden", loggedIn);
       dom.logoutButton.classList.toggle("hidden", !loggedIn);
       dom.userChip.style.display = loggedIn ? "inline-flex" : "none";
       dom.emailAuthPanel.classList.toggle("hidden", loggedIn);
+      dom.adminNavLink.classList.toggle("hidden", !isAdmin);
 
       if (loggedIn) {
         dom.userChipAvatar.src = user.photoURL || "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80";
@@ -2130,7 +2307,7 @@
         dom.profileAvatar.src = user.photoURL || dom.userChipAvatar.src;
         dom.profileName.textContent = user.displayName || "Google bruger";
         dom.profileEmail.textContent = user.email || "Ingen e-mail fundet";
-        dom.profileStatus.textContent = "Logget ind";
+        dom.profileStatus.textContent = isAdmin ? "Admin" : "Logget ind";
       } else {
         dom.profileAvatar.src = "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80";
         dom.profileName.textContent = "Ikke logget ind";
@@ -2142,6 +2319,7 @@
     function renderAll() {
       renderListings();
       renderMyListings();
+      renderAdminListings();
       updateMetrics();
       updateProfileStats();
     }
@@ -2175,6 +2353,21 @@
       dom.myListings.innerHTML = listings.length
         ? listings.map((listing, index) => createListingCard(listing, { showDelete: true, carouselId: "mine-" + index })).join("")
         : createEmptyState(appState.user ? "Du har ikke oprettet nogen annoncer endnu." : "Log ind for at se dine egne annoncer.");
+    }
+
+    function renderAdminListings() {
+      const isAdmin = Boolean(appState.user && appState.user.email && appState.user.email.toLowerCase() === appState.ownerEmail.toLowerCase());
+      const listings = isAdmin ? appState.listings : [];
+      const userCount = new Set(listings.map((listing) => listing.userId).filter(Boolean)).size;
+
+      dom.adminTotalListings.textContent = String(listings.length);
+      dom.adminTotalPremium.textContent = String(listings.filter((listing) => listing.premium).length);
+      dom.adminTotalUsers.textContent = String(userCount);
+      dom.adminFirebaseState.textContent = firebaseReady ? "Live" : "Demo";
+
+      dom.adminListings.innerHTML = listings.length
+        ? listings.map((listing, index) => createListingCard(listing, { showDelete: true, carouselId: "admin-" + index })).join("")
+        : createEmptyState(isAdmin ? "Ingen annoncer endnu." : "Admin-panelet bliver synligt, når du logger ind som ejer.");
     }
 
     function createListingCard(listing, options = {}) {
@@ -2250,6 +2443,46 @@
       dom.profilePremiumCount.textContent = String(myListings.filter((listing) => listing.premium).length);
     }
 
+    function syncFirebaseConfigUi() {
+      const config = getActiveFirebaseConfig();
+      dom.cfgApiKey.value = config.apiKey && !String(config.apiKey).startsWith("REPLACE_WITH") ? config.apiKey : "";
+      dom.cfgAuthDomain.value = config.authDomain && !String(config.authDomain).startsWith("REPLACE_WITH") ? config.authDomain : "";
+      dom.cfgProjectId.value = config.projectId && !String(config.projectId).startsWith("REPLACE_WITH") ? config.projectId : "";
+      dom.cfgStorageBucket.value = config.storageBucket && !String(config.storageBucket).startsWith("REPLACE_WITH") ? config.storageBucket : "";
+      dom.cfgMessagingSenderId.value = config.messagingSenderId && !String(config.messagingSenderId).startsWith("REPLACE_WITH") ? config.messagingSenderId : "";
+      dom.cfgAppId.value = config.appId && !String(config.appId).startsWith("REPLACE_WITH") ? config.appId : "";
+      dom.firebaseStatusPill.textContent = firebaseReady ? "Firebase live" : "Demo mode aktiv";
+      dom.firebaseStatusPill.classList.toggle("ready", firebaseReady);
+    }
+
+    function saveFirebaseConfig(event) {
+      event.preventDefault();
+
+      const config = {
+        apiKey: dom.cfgApiKey.value.trim(),
+        authDomain: dom.cfgAuthDomain.value.trim(),
+        projectId: dom.cfgProjectId.value.trim(),
+        storageBucket: dom.cfgStorageBucket.value.trim(),
+        messagingSenderId: dom.cfgMessagingSenderId.value.trim(),
+        appId: dom.cfgAppId.value.trim()
+      };
+
+      if (!isConfigured(config)) {
+        showToast("Mangler oplysninger", "Udfyld alle seks Firebase felter før du gemmer.", "warning");
+        return;
+      }
+
+      localStorage.setItem("dna_firebase_config", JSON.stringify(config));
+      showToast("Firebase gemt", "Opsætningen er gemt lokalt. Genindlæser siden nu.", "success");
+      setTimeout(() => window.location.reload(), 700);
+    }
+
+    function clearFirebaseConfig() {
+      localStorage.removeItem("dna_firebase_config");
+      showToast("Firebase ryddet", "Gemte værdier er fjernet. Siden går tilbage til demo mode ved næste indlæsning.", "success");
+      setTimeout(() => window.location.reload(), 700);
+    }
+
     function getMonetizationState() {
       const premium = Boolean(dom.premiumCheckbox.checked);
       const spotlight = Boolean(dom.spotlightCheckbox.checked);
@@ -2270,7 +2503,7 @@
 
       dom.monetizationSummary.textContent = labels.length
         ? "Valgte tilvalg: " + labels.join(", ")
-        : "Standard annonce";
+        : "Gratis basisannonce";
       dom.monetizationPrice.textContent = monetization.extraPrice + " DKK i ekstra tilvalg";
       dom.monetizationPackage.textContent = monetization.extraPrice >= 120 ? "Power" : monetization.extraPrice > 0 ? "Plus" : "Basis";
     }
@@ -2511,8 +2744,9 @@
     async function deleteListing(listingId) {
       const listing = appState.listings.find((item) => item.id === listingId);
       if (!listing) return;
+      const isAdmin = Boolean(appState.user && appState.user.email && appState.user.email.toLowerCase() === appState.ownerEmail.toLowerCase());
 
-      if (!isOwner(listing)) {
+      if (!isOwner(listing) && !isAdmin) {
         showToast("Ingen adgang", "Du kan kun slette dine egne annoncer.", "error");
         return;
       }
@@ -2723,6 +2957,8 @@
       dom.logoutButton.addEventListener("click", signOutUser);
       dom.contactButton.addEventListener("click", openContactModal);
       dom.closeContactButton.addEventListener("click", closeContactModal);
+      dom.firebaseConfigForm.addEventListener("submit", saveFirebaseConfig);
+      dom.clearFirebaseConfigButton.addEventListener("click", clearFirebaseConfig);
       dom.listingForm.addEventListener("submit", handleListingSubmit);
       dom.emailAuthForm.addEventListener("submit", signInWithEmail);
       dom.emailSignupButton.addEventListener("click", signUpWithEmail);
@@ -2777,6 +3013,7 @@
       triggerSocialProof();
       setInterval(triggerSocialProof, 10000);
       updateMonetizationSummary();
+      syncFirebaseConfigUi();
       updateAuthUi();
       renderAll();
     }
