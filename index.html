@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Den Nye Avis 🚀 FINAL BOSS</title>
+<title>Den Nye Avis 🚀 DEBUG FIX</title>
 <style>
 body{font-family:Arial;margin:0;background:#0f172a;color:#fff}
-header{background:linear-gradient(90deg,#003399,#00c853);padding:15px;display:flex;justify-content:space-between;flex-wrap:wrap}
-button{padding:8px 12px;margin:2px;border:none;border-radius:20px;background:#ffcc00;cursor:pointer;font-weight:bold}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;padding:15px}
-.card{background:#1e293b;padding:12px;border-radius:16px}
-img{border-radius:10px}
+header{background:#003399;padding:10px;display:flex;justify-content:space-between;flex-wrap:wrap}
+button{margin:3px;padding:8px;border-radius:10px;border:none;background:#ffcc00;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;padding:10px}
+.card{background:#1e293b;padding:10px;border-radius:12px}
+img{width:100%;border-radius:8px}
 </style>
 </head>
 <body>
@@ -21,7 +21,7 @@ img{border-radius:10px}
 <span id="user">Ikke logget ind</span>
 <button onclick="login()">Login</button>
 <button onclick="logout()">Logout</button>
-<button onclick="toggleMyAds()">Mine annoncer</button>
+<button onclick="toggleMine()">Mine annoncer</button>
 <button onclick="openModal()">+ Opret</button>
 </div>
 </header>
@@ -46,65 +46,55 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 const storage = firebase.storage();
 
-let currentUser=null;
-let showMine=false;
+let user = null;
+let showMine = false;
 
 function login(){
-  const provider=new firebase.auth.GoogleAuthProvider();
+  const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(provider);
 }
+
 function logout(){auth.signOut();}
 
-auth.onAuthStateChanged(user=>{
-  currentUser=user;
-  document.getElementById("user").innerText=user?"✅ "+user.email:"❌ Ikke logget ind";
-  loadAds();
+auth.onAuthStateChanged(u=>{
+  user = u;
+  document.getElementById("user").innerText = u ? "✅ " + u.email : "❌ Ikke logget ind";
+  load();
 });
 
-function toggleMyAds(){
-  showMine=!showMine;
-  loadAds();
+function toggleMine(){
+  showMine = !showMine;
+  load();
 }
 
-function loadAds(){
-  const container=document.getElementById("listings");
+function load(){
+  const box = document.getElementById("listings");
 
   db.collection("listings").orderBy("created","desc").onSnapshot(snap=>{
-    container.innerHTML="";
+    box.innerHTML = "";
 
     snap.forEach(doc=>{
-      const d=doc.data();
+      const d = doc.data();
 
-      if(showMine && currentUser && d.user!==currentUser.uid) return;
+      if(showMine && user && d.user !== user.uid) return;
 
-      const div=document.createElement("div");
-      div.className="card";
+      const div = document.createElement("div");
+      div.className = "card";
 
-      const images = d.images || [d.image];
-
-      let gallery = "";
-      images.forEach(img=>{
-        gallery += `<img src="${img}" width="100%">`;
-      });
-
-      div.innerHTML=`
-        ${gallery}
-        <h3>${d.title}</h3>
-        <p>${d.price} kr</p>
-
-        ${currentUser && d.user===currentUser.uid?`
-          <button onclick="deleteAd('${doc.id}')">Slet</button>
-        `:""}
+      div.innerHTML = `
+        <img src="${d.image || 'https://via.placeholder.com/300'}">
+        <h3>${d.title || ''}</h3>
+        <p>${d.price || ''} kr</p>
+        ${user && d.user===user.uid ? `<button onclick="deleteAd('${doc.id}')">Slet</button>` : ""}
       `;
 
-      container.appendChild(div);
+      box.appendChild(div);
     });
   });
 }
 
-// 🚀 MULTI IMAGE UPLOAD
 function openModal(){
-  if(!currentUser) return alert("Log ind først");
+  if(!user) return alert("Log ind først");
 
   const title = prompt("Titel");
   const price = prompt("Pris");
@@ -112,40 +102,36 @@ function openModal(){
   const input = document.createElement("input");
   input.type = "file";
   input.accept = "image/*";
-  input.multiple = true;
 
-  input.onchange = async () => {
-    const files = input.files;
-    if(!files.length) return;
+  input.onchange = async ()=>{
+    const file = input.files[0];
+    if(!file) return;
 
-    const urls=[];
-
-    for(let file of files){
-      const ref = storage.ref("images/" + Date.now() + "_" + file.name);
+    try{
+      const ref = storage.ref("images/" + Date.now());
       const snap = await ref.put(file);
       const url = await snap.ref.getDownloadURL();
-      urls.push(url);
+
+      await db.collection("listings").add({
+        title,
+        price,
+        image: url,
+        user: user.uid,
+        created: Date.now()
+      });
+
+      alert("Annonce oprettet ✅");
+    }catch(e){
+      console.error(e);
+      alert("Fejl – tjek storage regler");
     }
-
-    await db.collection("listings").add({
-      title,
-      price,
-      image: urls[0],
-      images: urls,
-      user: currentUser.uid,
-      created: Date.now()
-    });
-
-    alert("Annonce oprettet med flere billeder 📸🔥");
   };
 
   input.click();
 }
 
 function deleteAd(id){
-  if(confirm("Slet annonce?")){
-    db.collection("listings").doc(id).delete();
-  }
+  db.collection("listings").doc(id).delete();
 }
 
 </script>
