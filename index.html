@@ -1,140 +1,2101 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Den Nye Avis 🚀 DEBUG FIX</title>
-<style>
-body{font-family:Arial;margin:0;background:#0f172a;color:#fff}
-header{background:#003399;padding:10px;display:flex;justify-content:space-between;flex-wrap:wrap}
-button{margin:3px;padding:8px;border-radius:10px;border:none;background:#ffcc00;cursor:pointer}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;padding:10px}
-.card{background:#1e293b;padding:10px;border-radius:12px}
-img{width:100%;border-radius:8px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Den Nye Avis | Køb og sælg brugt online i Danmark</title>
+  <meta name="description" content="Den Nye Avis er en moderne dansk markedsplads, hvor du kan købe og sælge brugte varer online i hele Danmark. Opret annoncer med billeder, premium boost og Google login.">
+  <meta name="keywords" content="dansk markedsplads, køb og sælg, brugte varer, annoncer online, køb brugt, sælg brugt, marketplace danmark, annoncer med billeder, premium annoncer">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Den Nye Avis">
+  <meta name="theme-color" content="#04070d">
+  <meta property="og:locale" content="da_DK">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Den Nye Avis">
+  <meta property="og:title" content="Den Nye Avis | Køb og sælg brugt online i Danmark">
+  <meta property="og:description" content="En moderne dansk markedsplads til køb og salg af brugte varer med premium annoncer, billedgallerier og mobilvenligt design.">
+  <meta property="og:url" content="https://din-side.dk/">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Den Nye Avis | Køb og sælg brugt online i Danmark">
+  <meta name="twitter:description" content="Sælg hurtigt, køb smart og få premium synlighed på en moderne dansk markedsplads.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80">
+  <link rel="canonical" href="https://din-side.dk/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Den Nye Avis",
+          "url": "https://din-side.dk/",
+          "inLanguage": "da-DK",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://din-side.dk/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "name": "Den Nye Avis",
+          "url": "https://din-side.dk/",
+          "logo": "https://din-side.dk/logo.png",
+          "sameAs": [
+            "https://www.facebook.com/"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Hvordan opretter jeg en annonce på Den Nye Avis?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Du logger ind med Google, udfylder titel, pris, beskrivelse, by og kategori, uploader billeder og udgiver annoncen direkte fra siden."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Kan jeg sælge brugte varer i hele Danmark?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ja, Den Nye Avis er bygget til køb og salg af brugte varer i hele Danmark med fokus på mobilvenlig browsing og tydelige annoncer."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Hvad er en premium annonce?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "En premium annonce får ekstra synlighed i feedet og er visuelt fremhævet, så flere købere lægger mærke til den."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #04070d;
+      --bg-soft: #09111f;
+      --panel: rgba(11, 18, 32, 0.72);
+      --panel-strong: rgba(17, 25, 40, 0.88);
+      --panel-border: rgba(255, 255, 255, 0.1);
+      --text: #f6f8fb;
+      --muted: #9ca9bd;
+      --accent: #6ee7f9;
+      --accent-2: #5b8cff;
+      --accent-3: #8b5cf6;
+      --success: #22c55e;
+      --danger: #fb7185;
+      --warning: #f59e0b;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --container: 1240px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Manrope", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(91, 140, 255, 0.24), transparent 28%),
+        radial-gradient(circle at top right, rgba(110, 231, 249, 0.14), transparent 25%),
+        radial-gradient(circle at bottom center, rgba(139, 92, 246, 0.18), transparent 25%),
+        linear-gradient(140deg, #02050b 0%, #07101c 46%, #04070d 100%);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(90px);
+      opacity: 0.35;
+    }
+
+    body::before {
+      width: 260px;
+      height: 260px;
+      top: 100px;
+      left: -80px;
+      background: rgba(110, 231, 249, 0.35);
+    }
+
+    body::after {
+      width: 320px;
+      height: 320px;
+      right: -80px;
+      bottom: 140px;
+      background: rgba(91, 140, 255, 0.28);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    .app-shell {
+      position: relative;
+      z-index: 1;
+      width: min(calc(100% - 32px), var(--container));
+      margin: 24px auto 80px;
+    }
+
+    .glass {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--panel-border);
+      box-shadow: var(--shadow);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 16px;
+      z-index: 30;
+      padding: 16px 18px;
+      border-radius: 24px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: rgba(8, 13, 24, 0.7);
+      animation: slideDown 0.7s ease;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 50px;
+      height: 50px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      background: linear-gradient(135deg, rgba(110, 231, 249, 0.85), rgba(91, 140, 255, 0.95));
+      color: #02111f;
+      box-shadow: 0 12px 30px rgba(91, 140, 255, 0.35);
+    }
+
+    .brand-copy h1 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brand-copy p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .nav-link {
+      padding: 12px 16px;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .auth-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .user-chip {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .user-chip img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .button,
+    .ghost-button,
+    .icon-button {
+      border: none;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, opacity 0.25s ease;
+    }
+
+    .button {
+      color: #04111d;
+      font-weight: 800;
+      padding: 13px 18px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #6ee7f9, #5b8cff 58%, #8b5cf6);
+      box-shadow: 0 14px 34px rgba(91, 140, 255, 0.28);
+    }
+
+    .button:hover,
+    .ghost-button:hover,
+    .icon-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button:disabled,
+    .ghost-button:disabled,
+    .icon-button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .ghost-button {
+      padding: 12px 16px;
+      color: var(--text);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .icon-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.95fr);
+      gap: 22px;
+      margin-bottom: 26px;
+    }
+
+    .hero-panel,
+    .stats-panel,
+    .section-panel,
+    .form-panel,
+    .profile-panel,
+    .listing-card {
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      background: var(--panel);
+    }
+
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(110, 231, 249, 0.08), transparent 36%),
+        linear-gradient(330deg, rgba(91, 140, 255, 0.12), transparent 48%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(110, 231, 249, 0.08);
+      color: #c8f6fc;
+      border: 1px solid rgba(110, 231, 249, 0.15);
+      font-size: 0.85rem;
+      margin-bottom: 18px;
+    }
+
+    .hero-panel h2 {
+      margin: 0 0 16px;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.9rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      max-width: 9ch;
+    }
+
+    .hero-panel p {
+      margin: 0;
+      color: #c4cfde;
+      font-size: 1.05rem;
+      max-width: 620px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .metric {
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.35rem;
+      margin-bottom: 4px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .stats-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      justify-content: space-between;
+    }
+
+    .stats-top {
+      display: grid;
+      gap: 14px;
+    }
+
+    .floating-card {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .floating-card h3,
+    .panel-title {
+      margin: 0 0 8px;
+      font-size: 1.04rem;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+
+    .floating-card p,
+    .panel-subtitle {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .online-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.18);
+      color: #d5ffdf;
+      font-weight: 700;
+    }
+
+    .online-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.15);
+      animation: pulse 1.8s infinite;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+      gap: 22px;
+      align-items: start;
+      margin-bottom: 26px;
+    }
+
+    .section-panel {
+      min-height: 180px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .section-head h3 {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 1.4rem;
+    }
+
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .search-wrap {
+      flex: 1 1 260px;
+      position: relative;
+    }
+
+    .search-wrap input,
+    .filters select,
+    .filters .ghost-button {
+      width: 100%;
+      min-height: 48px;
+    }
+
+    .field,
+    .filters select,
+    textarea,
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.045);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 14px 15px;
+      outline: none;
+      transition: 0.25s ease;
+    }
+
+    .field:focus,
+    .filters select:focus,
+    textarea:focus,
+    input[type="text"]:focus,
+    input[type="number"]:focus {
+      border-color: rgba(110, 231, 249, 0.35);
+      box-shadow: 0 0 0 4px rgba(110, 231, 249, 0.08);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .signal-panel {
+      display: grid;
+      gap: 14px;
+    }
+
+    .signal-stat {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .signal-stat strong {
+      display: block;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .signal-stat span {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .view {
+      display: none;
+      animation: fadeUp 0.5s ease;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    .listings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .listing-card {
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03)),
+        rgba(8, 13, 24, 0.8);
+    }
+
+    .listing-card:hover {
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.34);
+      border-color: rgba(110, 231, 249, 0.18);
+    }
+
+    .listing-media {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(91, 140, 255, 0.18), rgba(110, 231, 249, 0.1));
+    }
+
+    .listing-media img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      inset: auto 12px 12px auto;
+      display: flex;
+      gap: 8px;
+    }
+
+    .carousel-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(4, 8, 15, 0.62);
+      color: white;
+      cursor: pointer;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.35);
+      transition: 0.25s ease;
+    }
+
+    .carousel-dot.active {
+      width: 22px;
+      background: white;
+    }
+
+    .premium-badge,
+    .city-pill,
+    .sold-pill {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      backdrop-filter: blur(10px);
+    }
+
+    .premium-badge {
+      background: rgba(245, 158, 11, 0.16);
+      border: 1px solid rgba(245, 158, 11, 0.28);
+      color: #ffe4a4;
+    }
+
+    .city-pill {
+      left: auto;
+      right: 14px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ebf1ff;
+    }
+
+    .listing-content {
+      padding: 18px 18px 20px;
+    }
+
+    .listing-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 12px;
+    }
+
+    .listing-title {
+      margin: 0 0 10px;
+      font-size: 1.18rem;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      line-height: 1.25;
+    }
+
+    .listing-description {
+      margin: 0 0 16px;
+      color: #c4cfde;
+      line-height: 1.65;
+      min-height: 78px;
+    }
+
+    .listing-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .price {
+      font-size: 1.38rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .category-tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(110, 231, 249, 0.08);
+      border: 1px solid rgba(110, 231, 249, 0.16);
+      color: #c8f6fc;
+      font-size: 0.84rem;
+    }
+
+    .listing-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 46px 24px;
+      border-radius: var(--radius-xl);
+      border: 1px dashed rgba(255, 255, 255, 0.14);
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .form-panel {
+      display: grid;
+      gap: 16px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field-group label {
+      color: #dbe6f5;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .upload-box {
+      border: 1px dashed rgba(110, 231, 249, 0.26);
+      border-radius: 20px;
+      padding: 18px;
+      background: rgba(110, 231, 249, 0.05);
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+    }
+
+    .checkbox-row input {
+      width: 18px;
+      height: 18px;
+      accent-color: #6ee7f9;
+    }
+
+    .image-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .preview-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      aspect-ratio: 1 / 1;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .preview-item img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-panel {
+      display: grid;
+      gap: 16px;
+    }
+
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .profile-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 24px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .profile-meta h4 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+
+    .profile-meta p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .profile-stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .profile-stat strong {
+      display: block;
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+    }
+
+    .profile-stat span {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .footer-note {
+      margin-top: 34px;
+      padding: 18px 22px;
+      text-align: center;
+      color: var(--muted);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .seo-content {
+      margin-top: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .seo-block {
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .seo-block h3,
+    .seo-block h4 {
+      margin: 0 0 10px;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+
+    .seo-block p {
+      margin: 0;
+      color: #c7d2e2;
+      line-height: 1.8;
+    }
+
+    .seo-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .faq-item {
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 18px 20px;
+    }
+
+    .faq-item summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: #edf3ff;
+      list-style: none;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item p {
+      margin-top: 12px;
+    }
+
+    .toast-container {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      display: grid;
+      gap: 12px;
+      z-index: 60;
+      width: min(360px, calc(100vw - 24px));
+    }
+
+    .toast {
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(8, 13, 24, 0.88);
+      backdrop-filter: blur(14px);
+      animation: toastIn 0.35s ease;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .toast strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .toast p {
+      margin: 0;
+      color: #c8d3e2;
+      line-height: 1.5;
+    }
+
+    .toast.success {
+      border-color: rgba(34, 197, 94, 0.2);
+    }
+
+    .toast.error {
+      border-color: rgba(251, 113, 133, 0.24);
+    }
+
+    .toast.warning {
+      border-color: rgba(245, 158, 11, 0.22);
+    }
+
+    .social-proof {
+      position: fixed;
+      left: 18px;
+      bottom: 18px;
+      z-index: 55;
+      pointer-events: none;
+      display: grid;
+      gap: 10px;
+      width: min(320px, calc(100vw - 24px));
+    }
+
+    .social-proof-popup {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(34, 197, 94, 0.22);
+      color: #ddffe6;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(12px);
+      animation: slideInLeft 0.35s ease;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.82; }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(18px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-18px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .section-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .listings-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 820px) {
+      .topbar {
+        position: static;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav,
+      .auth-actions {
+        justify-content: flex-start;
+      }
+
+      .hero-panel h2 {
+        max-width: none;
+      }
+
+      .hero-metrics,
+      .profile-stats,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .listings-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .app-shell {
+        width: min(calc(100% - 20px), var(--container));
+        margin-top: 10px;
+      }
+
+      .topbar,
+      .hero-panel,
+      .stats-panel,
+      .section-panel,
+      .form-panel,
+      .profile-panel,
+      .listing-content {
+        padding: 18px;
+      }
+
+      .brand {
+        align-items: flex-start;
+      }
+
+      .hero-panel h2 {
+        font-size: clamp(2.1rem, 12vw, 3.2rem);
+      }
+
+      .seo-columns {
+        grid-template-columns: 1fr;
+      }
+
+      .listing-actions {
+        flex-direction: column;
+      }
+
+      .listing-actions > * {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="app-shell">
+    <header class="topbar glass">
+      <div class="brand">
+        <div class="brand-mark">DNA</div>
+        <div class="brand-copy">
+          <h1>Den Nye Avis</h1>
+          <p>Den moderne markedsplads med fart, tillid og premium reach.</p>
+        </div>
+      </div>
 
-<header>
-<div><b>Den Nye Avis 🚀</b></div>
-<div>
-<span id="user">Ikke logget ind</span>
-<button onclick="login()">Login</button>
-<button onclick="logout()">Logout</button>
-<button onclick="toggleMine()">Mine annoncer</button>
-<button onclick="openModal()">+ Opret</button>
-</div>
-</header>
+      <nav class="nav" aria-label="Primær navigation">
+        <a class="nav-link active" href="#forside" data-view-link="forside">Forside</a>
+        <a class="nav-link" href="#mine-annoncer" data-view-link="mine-annoncer">Mine annoncer</a>
+        <a class="nav-link" href="#opret-annonce" data-view-link="opret-annonce">Opret annonce</a>
+        <a class="nav-link" href="#profil" data-view-link="profil">Profil</a>
+      </nav>
 
-<div class="grid" id="listings"></div>
+      <div class="auth-actions">
+        <div class="user-chip" id="userChip">
+          <img id="userChipAvatar" alt="Bruger avatar">
+          <span id="userChipName"></span>
+        </div>
+        <button class="button" id="loginButton" type="button">Log ind med Google</button>
+        <button class="ghost-button hidden" id="logoutButton" type="button">Log ud</button>
+      </div>
+    </header>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+    <section class="hero" id="forside">
+      <div class="hero-panel glass">
+        <div>
+          <div class="eyebrow">Danmarks nye digitale loppemarked</div>
+          <h2>Sælg smartere. Køb hurtigere. Se bedre ud imens.</h2>
+          <p>
+            Den Nye Avis kombinerer lækker premium UI, live markedsplads-stemning og Firebase backend i ét hurtigt univers.
+            Opret annoncer med billedgalleri, fremhæv premium varer og del dem med ét klik.
+          </p>
 
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyDX7j-Kyo60eOrzQGoCJZL_n7-CE1n5BBk",
-  authDomain: "dennyeavis-f2b4a.firebaseapp.com",
-  projectId: "dennyeavis-f2b4a",
-  storageBucket: "dennyeavis-f2b4a.appspot.com"
-};
+          <div class="hero-actions">
+            <button class="button" type="button" data-view-target="opret-annonce">Opret ny annonce</button>
+            <button class="ghost-button" type="button" data-view-target="mine-annoncer">Se mine annoncer</button>
+          </div>
+        </div>
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
-const storage = firebase.storage();
+        <div class="hero-metrics">
+          <div class="metric">
+            <strong id="listingCountMetric">0+</strong>
+            <span>annoncer live nu</span>
+          </div>
+          <div class="metric">
+            <strong id="premiumCountMetric">0</strong>
+            <span>premium annoncer</span>
+          </div>
+          <div class="metric">
+            <strong>24/7</strong>
+            <span>klar til at sælge</span>
+          </div>
+        </div>
+      </div>
 
-let user = null;
-let showMine = false;
+      <aside class="stats-panel glass">
+        <div class="stats-top">
+          <div class="floating-card">
+            <h3>Live aktivitet</h3>
+            <div class="online-count" id="liveCounter">
+              <span class="online-dot"></span>
+              <span>182 personer kigger lige nu</span>
+            </div>
+          </div>
 
-function login(){
-  const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider);
-}
+          <div class="floating-card">
+            <h3>Viralt momentum</h3>
+            <p>Premium annoncer får ekstra glow i feedet, bedre placering og mere opmærksomhed fra købere.</p>
+          </div>
 
-function logout(){auth.signOut();}
+          <div class="floating-card">
+            <h3>Del på Facebook</h3>
+            <p>Hver annonce kan deles direkte for at få flere øjne på varen uden ekstra setup.</p>
+          </div>
+        </div>
 
-auth.onAuthStateChanged(u=>{
-  user = u;
-  document.getElementById("user").innerText = u ? "✅ " + u.email : "❌ Ikke logget ind";
-  load();
-});
+        <div class="floating-card">
+          <h3>Firebase opsætning</h3>
+          <p>
+            Indsæt dine Firebase credentials i konfigurationen nederst i filen for at aktivere Google login, Firestore og Storage.
+          </p>
+        </div>
+      </aside>
+    </section>
 
-function toggleMine(){
-  showMine = !showMine;
-  load();
-}
+    <section class="section-grid">
+      <div class="section-panel glass">
+        <div class="section-head">
+          <div>
+            <h3>Markedspladsen lige nu</h3>
+            <p>Filtrér, søg og surf gennem alle aktive annoncer på forsiden.</p>
+          </div>
+          <button class="ghost-button" type="button" id="refreshButton">Opdater feed</button>
+        </div>
 
-function load(){
-  const box = document.getElementById("listings");
+        <div class="filters">
+          <div class="search-wrap">
+            <input class="field" id="searchInput" type="text" placeholder="Søg efter titel, by eller kategori">
+          </div>
+          <select id="categoryFilter" aria-label="Filtrér kategori">
+            <option value="all">Alle kategorier</option>
+            <option value="Elektronik">Elektronik</option>
+            <option value="Bolig">Bolig</option>
+            <option value="Mode">Mode</option>
+            <option value="Fritid">Fritid</option>
+            <option value="Børn">Børn</option>
+            <option value="Bil">Bil</option>
+            <option value="Andet">Andet</option>
+          </select>
+          <button class="ghost-button" type="button" id="premiumFilterButton">Kun premium</button>
+        </div>
+      </div>
 
-  db.collection("listings").orderBy("created","desc").onSnapshot(snap=>{
-    box.innerHTML = "";
+      <aside class="section-panel glass signal-panel">
+        <div class="signal-stat">
+          <strong id="activeUsersMetric">3.4k</strong>
+          <span>månedlige handlende, klar til at klikke rundt i dit feed.</span>
+        </div>
+        <div class="signal-stat">
+          <strong id="cityMetric">København</strong>
+          <span>trender lige nu blandt mest aktive lokationer.</span>
+        </div>
+        <div class="signal-stat">
+          <strong id="socialProofMetric">Nyt salg om få sekunder</strong>
+          <span>social proof popper automatisk op og giver platformen puls.</span>
+        </div>
+      </aside>
+    </section>
 
-    snap.forEach(doc=>{
-      const d = doc.data();
+    <main>
+      <section class="view active" id="view-forside">
+        <div id="homepageListings" class="listings-grid"></div>
+        <section class="seo-content" aria-label="Information om Den Nye Avis">
+          <div class="seo-block glass">
+            <h3>Køb og sælg brugt online i Danmark</h3>
+            <p>
+              Den Nye Avis er skabt til dansk køb og salg med fokus på hastighed, tillid og synlighed. Her kan private sælgere og små
+              virksomheder oprette annoncer med billeder, beskrivelser, by og kategori, så købere hurtigt kan finde relevante varer i
+              København, Aarhus, Odense, Aalborg og resten af Danmark. Platformen er bygget til mobil, så dine annoncer ser stærke ud,
+              uanset om folk besøger siden fra telefon, tablet eller computer.
+            </p>
+          </div>
 
-      if(showMine && user && d.user !== user.uid) return;
+          <div class="seo-columns">
+            <article class="seo-block glass">
+              <h4>Hvorfor vælge Den Nye Avis?</h4>
+              <p>
+                Designet er moderne og hurtigt, premium annoncer skiller sig visuelt ud, og Facebook deling gør det nemt at hente ekstra
+                trafik. Det giver bedre eksponering for varer som elektronik, møbler, boligtilbehør, børneudstyr, mode og fritidsudstyr.
+              </p>
+            </article>
 
-      const div = document.createElement("div");
-      div.className = "card";
+            <article class="seo-block glass">
+              <h4>Skabt til flere henvendelser</h4>
+              <p>
+                Tydelige kort, billedkaruseller, live aktivitet og social proof er ikke kun flot frontend. Det er også med til at øge
+                opmærksomhed, skabe tryghed og hjælpe købere videre til handling hurtigere.
+              </p>
+            </article>
+          </div>
 
-      div.innerHTML = `
-        <img src="${d.image || 'https://via.placeholder.com/300'}">
-        <h3>${d.title || ''}</h3>
-        <p>${d.price || ''} kr</p>
-        ${user && d.user===user.uid ? `<button onclick="deleteAd('${doc.id}')">Slet</button>` : ""}
+          <div class="seo-block glass">
+            <h3>Ofte stillede spørgsmål</h3>
+            <div class="faq-list">
+              <details class="faq-item">
+                <summary>Hvordan sælger jeg hurtigere på en online markedsplads?</summary>
+                <p>Brug en tydelig titel, realistisk pris, skarpe billeder og en beskrivelse med stand, afhentning og relevante detaljer. Premium kan give ekstra synlighed.</p>
+              </details>
+              <details class="faq-item">
+                <summary>Kan jeg oprette flere billeder i samme annonce?</summary>
+                <p>Ja. Systemet understøtter flere billeder pr. annonce, så du kan vise varen fra flere vinkler og øge chancen for hurtigere salg.</p>
+              </details>
+              <details class="faq-item">
+                <summary>Er Den Nye Avis god til lokal handel i danske byer?</summary>
+                <p>Ja. Hver annonce viser by, så brugere nemt kan filtrere efter lokale handler i blandt andet København, Aarhus, Odense og Aalborg.</p>
+              </details>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="view" id="view-mine-annoncer">
+        <div class="section-panel glass">
+          <div class="section-head">
+            <div>
+              <h3>Mine annoncer</h3>
+              <p>Dine egne annoncer samlet ét sted. Du kan slette dem direkte herfra.</p>
+            </div>
+          </div>
+          <div id="myListings" class="listings-grid"></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-opret-annonce">
+        <div class="form-panel glass">
+          <div class="section-head">
+            <div>
+              <h3>Opret annonce</h3>
+              <p>Byg en visuelt stærk annonce med flere billeder, premium flag og stærk metadata.</p>
+            </div>
+          </div>
+
+          <form id="listingForm">
+            <div class="form-grid">
+              <div class="field-group">
+                <label for="title">Titel</label>
+                <input class="field" id="title" name="title" type="text" placeholder="fx iPhone 15 Pro Max, næsten som ny" required>
+              </div>
+
+              <div class="field-group">
+                <label for="price">Pris (DKK)</label>
+                <input class="field" id="price" name="price" type="number" min="0" step="1" placeholder="4999" required>
+              </div>
+
+              <div class="field-group">
+                <label for="city">By</label>
+                <input class="field" id="city" name="city" type="text" placeholder="København" required>
+              </div>
+
+              <div class="field-group">
+                <label for="category">Kategori</label>
+                <select class="field" id="category" name="category" required>
+                  <option value="">Vælg kategori</option>
+                  <option value="Elektronik">Elektronik</option>
+                  <option value="Bolig">Bolig</option>
+                  <option value="Mode">Mode</option>
+                  <option value="Fritid">Fritid</option>
+                  <option value="Børn">Børn</option>
+                  <option value="Bil">Bil</option>
+                  <option value="Andet">Andet</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label for="description">Beskrivelse</label>
+              <textarea id="description" name="description" placeholder="Beskriv stand, afhentning, detaljer og hvorfor varen er fed." required></textarea>
+            </div>
+
+            <div class="field-group upload-box">
+              <label for="images">Billeder (flere billeder understøttes)</label>
+              <input id="images" name="images" type="file" accept="image/*" multiple>
+              <div class="image-preview-grid" id="imagePreviewGrid"></div>
+            </div>
+
+            <label class="checkbox-row" for="premium">
+              <input id="premium" name="premium" type="checkbox">
+              <span>Marker som premium annonce</span>
+            </label>
+
+            <div class="hero-actions">
+              <button class="button" id="submitListingButton" type="submit">Udgiv annonce</button>
+              <button class="ghost-button" id="resetFormButton" type="reset">Nulstil</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="view" id="view-profil">
+        <div class="profile-panel glass">
+          <div class="profile-top">
+            <img class="profile-avatar" id="profileAvatar" alt="Profilbillede" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80">
+            <div class="profile-meta">
+              <h4 id="profileName">Ikke logget ind</h4>
+              <p id="profileEmail">Log ind med Google for at oprette og administrere annoncer.</p>
+            </div>
+          </div>
+
+          <div class="profile-stats">
+            <div class="profile-stat">
+              <strong id="profileListingCount">0</strong>
+              <span>Dine annoncer</span>
+            </div>
+            <div class="profile-stat">
+              <strong id="profilePremiumCount">0</strong>
+              <span>Premium annoncer</span>
+            </div>
+            <div class="profile-stat">
+              <strong id="profileStatus">Gæst</strong>
+              <span>Status</span>
+            </div>
+          </div>
+
+          <div class="floating-card">
+            <h3>Profil & troværdighed</h3>
+            <p>
+              Når du er logget ind, kan du udgive annoncer, slette egne opslag og få din Google-profil vist som en troværdig afsender.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer-note glass">
+      Den Nye Avis er bygget som ren HTML, CSS og JavaScript med Firebase v9 compat libraries.
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+  <div class="social-proof" id="socialProofContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "REPLACE_WITH_API_KEY",
+      authDomain: "REPLACE_WITH_AUTH_DOMAIN",
+      projectId: "REPLACE_WITH_PROJECT_ID",
+      storageBucket: "REPLACE_WITH_STORAGE_BUCKET",
+      messagingSenderId: "REPLACE_WITH_MESSAGING_SENDER_ID",
+      appId: "REPLACE_WITH_APP_ID"
+    };
+
+    const appState = {
+      user: null,
+      listings: [],
+      premiumOnly: false,
+      selectedFiles: [],
+      cityRotation: ["København", "Aarhus", "Odense", "Aalborg", "Esbjerg", "Randers"],
+      socialProofMessages: [
+        "Annonce solgt: designerstol i Aarhus.",
+        "Ny handel lukket: gaming PC i København.",
+        "Hurtigt salg: barnevogn i Odense.",
+        "Premium annonce solgt: racercykel i Aalborg.",
+        "Deal gennemført: sofa i Esbjerg."
+      ],
+      demoSeeded: false
+    };
+
+    const dom = {
+      loginButton: document.getElementById("loginButton"),
+      logoutButton: document.getElementById("logoutButton"),
+      userChip: document.getElementById("userChip"),
+      userChipAvatar: document.getElementById("userChipAvatar"),
+      userChipName: document.getElementById("userChipName"),
+      homepageListings: document.getElementById("homepageListings"),
+      myListings: document.getElementById("myListings"),
+      listingForm: document.getElementById("listingForm"),
+      submitListingButton: document.getElementById("submitListingButton"),
+      imagesInput: document.getElementById("images"),
+      imagePreviewGrid: document.getElementById("imagePreviewGrid"),
+      toastContainer: document.getElementById("toastContainer"),
+      socialProofContainer: document.getElementById("socialProofContainer"),
+      liveCounter: document.getElementById("liveCounter"),
+      searchInput: document.getElementById("searchInput"),
+      categoryFilter: document.getElementById("categoryFilter"),
+      premiumFilterButton: document.getElementById("premiumFilterButton"),
+      refreshButton: document.getElementById("refreshButton"),
+      listingCountMetric: document.getElementById("listingCountMetric"),
+      premiumCountMetric: document.getElementById("premiumCountMetric"),
+      activeUsersMetric: document.getElementById("activeUsersMetric"),
+      cityMetric: document.getElementById("cityMetric"),
+      socialProofMetric: document.getElementById("socialProofMetric"),
+      profileAvatar: document.getElementById("profileAvatar"),
+      profileName: document.getElementById("profileName"),
+      profileEmail: document.getElementById("profileEmail"),
+      profileListingCount: document.getElementById("profileListingCount"),
+      profilePremiumCount: document.getElementById("profilePremiumCount"),
+      profileStatus: document.getElementById("profileStatus")
+    };
+
+    let firebaseReady = false;
+    let auth = null;
+    let db = null;
+    let storage = null;
+
+    function initializeFirebase() {
+      const values = Object.values(firebaseConfig);
+      const isConfigured = values.every((value) => value && !String(value).startsWith("REPLACE_WITH"));
+
+      if (!isConfigured) {
+        seedDemoListings();
+        showToast("Firebase mangler", "Indsæt dine rigtige Firebase credentials for at aktivere backend og uploads.", "warning");
+        renderAll();
+        return;
+      }
+
+      try {
+        firebase.initializeApp(firebaseConfig);
+        auth = firebase.auth();
+        db = firebase.firestore();
+        storage = firebase.storage();
+        firebaseReady = true;
+        attachAuthListener();
+        attachListingsListener();
+      } catch (error) {
+        console.error(error);
+        seedDemoListings();
+        showToast("Firebase fejl", "Kunne ikke starte Firebase. Appen kører i demo mode lige nu.", "error");
+        renderAll();
+      }
+    }
+
+    function seedDemoListings() {
+      if (appState.demoSeeded) return;
+      appState.demoSeeded = true;
+      appState.listings = [
+        {
+          id: "demo-1",
+          title: "Louis Poulsen PH lampe",
+          price: 3200,
+          description: "Original PH lampe i flot stand. Perfekt til spisestue eller kreativt kontor.",
+          city: "København",
+          category: "Bolig",
+          premium: true,
+          imageUrls: [
+            "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=1200&q=80"
+          ],
+          userId: "demo-user",
+          userName: "Studio Nord",
+          createdAt: new Date().toISOString()
+        },
+        {
+          id: "demo-2",
+          title: "Retro racercykel",
+          price: 4700,
+          description: "Nyserviceret vintage racer med let stel, lækkert look og masser af charme.",
+          city: "Aarhus",
+          category: "Fritid",
+          premium: false,
+          imageUrls: [
+            "https://images.unsplash.com/photo-1502744688674-c619d1586c9e?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80"
+          ],
+          userId: "demo-user-2",
+          userName: "Mads K.",
+          createdAt: new Date(Date.now() - 3600 * 1000).toISOString()
+        },
+        {
+          id: "demo-3",
+          title: "PlayStation 5 med ekstra controller",
+          price: 3600,
+          description: "PS5 med to controllere og opladerstation. Klar til afhentning i dag.",
+          city: "Odense",
+          category: "Elektronik",
+          premium: true,
+          imageUrls: [
+            "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?auto=format&fit=crop&w=1200&q=80"
+          ],
+          userId: "demo-user-3",
+          userName: "Louise S.",
+          createdAt: new Date(Date.now() - 7200 * 1000).toISOString()
+        }
+      ];
+    }
+
+    function attachAuthListener() {
+      auth.onAuthStateChanged((user) => {
+        appState.user = user;
+        updateAuthUi();
+        renderAll();
+      });
+    }
+
+    function attachListingsListener() {
+      db.collection("listings")
+        .orderBy("createdAt", "desc")
+        .onSnapshot((snapshot) => {
+          appState.listings = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+          renderAll();
+        }, (error) => {
+          console.error(error);
+          showToast("Kunne ikke hente annoncer", "Tjek Firestore regler og indeks. Demo data er stadig tilgængelig.", "error");
+          if (!appState.listings.length) {
+            seedDemoListings();
+            renderAll();
+          }
+        });
+    }
+
+    function updateAuthUi() {
+      const user = appState.user;
+      const loggedIn = Boolean(user);
+
+      dom.loginButton.classList.toggle("hidden", loggedIn);
+      dom.logoutButton.classList.toggle("hidden", !loggedIn);
+      dom.userChip.style.display = loggedIn ? "inline-flex" : "none";
+
+      if (loggedIn) {
+        dom.userChipAvatar.src = user.photoURL || "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80";
+        dom.userChipName.textContent = user.displayName || user.email || "Bruger";
+        dom.profileAvatar.src = user.photoURL || dom.userChipAvatar.src;
+        dom.profileName.textContent = user.displayName || "Google bruger";
+        dom.profileEmail.textContent = user.email || "Ingen e-mail fundet";
+        dom.profileStatus.textContent = "Logget ind";
+      } else {
+        dom.profileAvatar.src = "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80";
+        dom.profileName.textContent = "Ikke logget ind";
+        dom.profileEmail.textContent = "Log ind med Google for at oprette og administrere annoncer.";
+        dom.profileStatus.textContent = firebaseReady ? "Gæst" : "Demo mode";
+      }
+    }
+
+    function renderAll() {
+      renderListings();
+      renderMyListings();
+      updateMetrics();
+      updateProfileStats();
+    }
+
+    function getFilteredListings() {
+      const search = dom.searchInput.value.trim().toLowerCase();
+      const category = dom.categoryFilter.value;
+
+      return appState.listings.filter((listing) => {
+        const matchesSearch = !search || [listing.title, listing.city, listing.category, listing.description]
+          .filter(Boolean)
+          .some((value) => String(value).toLowerCase().includes(search));
+        const matchesCategory = category === "all" || listing.category === category;
+        const matchesPremium = !appState.premiumOnly || Boolean(listing.premium);
+        return matchesSearch && matchesCategory && matchesPremium;
+      });
+    }
+
+    function renderListings() {
+      const listings = getFilteredListings();
+      dom.homepageListings.innerHTML = listings.length
+        ? listings.map((listing, index) => createListingCard(listing, { showDelete: isOwner(listing), carouselId: "home-" + index })).join("")
+        : createEmptyState("Ingen annoncer matcher dine filtre endnu.");
+    }
+
+    function renderMyListings() {
+      const listings = appState.user
+        ? appState.listings.filter((listing) => listing.userId === appState.user.uid)
+        : [];
+
+      dom.myListings.innerHTML = listings.length
+        ? listings.map((listing, index) => createListingCard(listing, { showDelete: true, carouselId: "mine-" + index })).join("")
+        : createEmptyState(appState.user ? "Du har ikke oprettet nogen annoncer endnu." : "Log ind for at se dine egne annoncer.");
+    }
+
+    function createListingCard(listing, options = {}) {
+      const images = Array.isArray(listing.imageUrls) && listing.imageUrls.length
+        ? listing.imageUrls
+        : ["https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80"];
+      const createdDate = formatDate(listing.createdAt);
+      const ownerName = listing.userName || "Sælger";
+
+      return `
+        <article class="listing-card glass" data-listing-id="${escapeHtml(listing.id)}" data-carousel='${escapeHtml(JSON.stringify(images))}' data-carousel-index="0">
+          <div class="listing-media">
+            <img src="${escapeAttribute(images[0])}" alt="${escapeAttribute(listing.title)}">
+            ${listing.premium ? '<div class="premium-badge">Premium boost</div>' : ""}
+            <div class="city-pill">${escapeHtml(listing.city || "Ukendt by")}</div>
+            ${images.length > 1 ? `
+              <div class="carousel-dots">
+                ${images.map((_, imageIndex) => `<span class="carousel-dot ${imageIndex === 0 ? "active" : ""}"></span>`).join("")}
+              </div>
+              <div class="carousel-nav">
+                <button class="carousel-btn" type="button" data-carousel-action="prev" aria-label="Forrige billede">‹</button>
+                <button class="carousel-btn" type="button" data-carousel-action="next" aria-label="Næste billede">›</button>
+              </div>
+            ` : ""}
+          </div>
+          <div class="listing-content">
+            <div class="listing-meta">
+              <span>${escapeHtml(ownerName)}</span>
+              <span>${escapeHtml(createdDate)}</span>
+            </div>
+            <h4 class="listing-title">${escapeHtml(listing.title)}</h4>
+            <p class="listing-description">${escapeHtml(listing.description || "Ingen beskrivelse endnu.")}</p>
+            <div class="listing-footer">
+              <div class="price">${formatPrice(listing.price)}</div>
+              <div class="category-tag">${escapeHtml(listing.category || "Andet")}</div>
+            </div>
+            <div class="listing-actions">
+              <button class="icon-button" type="button" data-share-id="${escapeHtml(listing.id)}">Del på Facebook</button>
+              ${options.showDelete ? `<button class="ghost-button" type="button" data-delete-id="${escapeHtml(listing.id)}">Slet annonce</button>` : ""}
+            </div>
+          </div>
+        </article>
       `;
+    }
 
-      box.appendChild(div);
-    });
-  });
-}
+    function createEmptyState(message) {
+      return `<div class="empty-state">${escapeHtml(message)}</div>`;
+    }
 
-function openModal(){
-  if(!user) return alert("Log ind først");
+    function updateMetrics() {
+      const listings = appState.listings;
+      const premiumCount = listings.filter((listing) => listing.premium).length;
+      dom.listingCountMetric.textContent = listings.length + "+";
+      dom.premiumCountMetric.textContent = String(premiumCount);
+      dom.activeUsersMetric.textContent = ((listings.length * 132) + 2800).toLocaleString("da-DK");
+      dom.cityMetric.textContent = appState.cityRotation[Math.floor(Math.random() * appState.cityRotation.length)];
+      dom.profilePremiumCount.textContent = String(
+        appState.user ? listings.filter((listing) => listing.userId === appState.user.uid && listing.premium).length : 0
+      );
+    }
 
-  const title = prompt("Titel");
-  const price = prompt("Pris");
+    function updateProfileStats() {
+      const myListings = appState.user
+        ? appState.listings.filter((listing) => listing.userId === appState.user.uid)
+        : [];
+      dom.profileListingCount.textContent = String(myListings.length);
+      dom.profilePremiumCount.textContent = String(myListings.filter((listing) => listing.premium).length);
+    }
 
-  const input = document.createElement("input");
-  input.type = "file";
-  input.accept = "image/*";
+    async function signInWithGoogle() {
+      if (!firebaseReady) {
+        showToast("Demo mode", "Firebase er ikke konfigureret endnu. Login er derfor slået fra.", "warning");
+        return;
+      }
 
-  input.onchange = async ()=>{
-    const file = input.files[0];
-    if(!file) return;
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
 
-    try{
-      const ref = storage.ref("images/" + Date.now());
-      const snap = await ref.put(file);
-      const url = await snap.ref.getDownloadURL();
+      try {
+        await auth.signInWithPopup(provider);
+        showToast("Velkommen", "Du er nu logget ind med Google.", "success");
+      } catch (error) {
+        console.error(error);
+        showToast("Login mislykkedes", error.message || "Kunne ikke logge ind med Google.", "error");
+      }
+    }
 
-      await db.collection("listings").add({
-        title,
-        price,
-        image: url,
-        user: user.uid,
-        created: Date.now()
+    async function signOutUser() {
+      if (!firebaseReady) return;
+      try {
+        await auth.signOut();
+        showToast("Logget ud", "Du er nu logget ud.", "success");
+      } catch (error) {
+        console.error(error);
+        showToast("Logout fejl", error.message || "Kunne ikke logge ud.", "error");
+      }
+    }
+
+    async function handleListingSubmit(event) {
+      event.preventDefault();
+
+      if (!appState.user) {
+        showToast("Login kræves", "Du skal være logget ind for at oprette en annonce.", "warning");
+        setActiveView("profil");
+        return;
+      }
+
+      const formData = new FormData(dom.listingForm);
+      const payload = {
+        title: String(formData.get("title") || "").trim(),
+        price: Number(formData.get("price")),
+        description: String(formData.get("description") || "").trim(),
+        city: String(formData.get("city") || "").trim(),
+        category: String(formData.get("category") || "").trim(),
+        premium: Boolean(formData.get("premium"))
+      };
+
+      if (!payload.title || !payload.description || !payload.city || !payload.category || Number.isNaN(payload.price)) {
+        showToast("Manglende felter", "Udfyld alle obligatoriske felter før du udgiver.", "warning");
+        return;
+      }
+
+      dom.submitListingButton.disabled = true;
+      dom.submitListingButton.textContent = "Uploader...";
+
+      try {
+        let imageUrls = [];
+        if (firebaseReady && appState.selectedFiles.length) {
+          imageUrls = await uploadImages(appState.selectedFiles);
+        } else if (appState.selectedFiles.length) {
+          imageUrls = await Promise.all(appState.selectedFiles.map(fileToDataUrl));
+        }
+
+        if (!imageUrls.length) {
+          imageUrls = ["https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80"];
+        }
+
+        const listingPayload = {
+          ...payload,
+          imageUrls,
+          userId: appState.user.uid,
+          userName: appState.user.displayName || appState.user.email || "Ukendt bruger",
+          userEmail: appState.user.email || "",
+          createdAt: firebaseReady ? firebase.firestore.FieldValue.serverTimestamp() : new Date().toISOString()
+        };
+
+        if (firebaseReady) {
+          await db.collection("listings").add(listingPayload);
+        } else {
+          appState.listings.unshift({
+            id: "demo-" + Date.now(),
+            ...listingPayload,
+            createdAt: new Date().toISOString()
+          });
+          renderAll();
+        }
+
+        dom.listingForm.reset();
+        appState.selectedFiles = [];
+        renderImagePreviews();
+        setActiveView("mine-annoncer");
+        showToast("Annonce oprettet", "Din annonce er nu live på Den Nye Avis.", "success");
+      } catch (error) {
+        console.error(error);
+        showToast("Kunne ikke oprette annonce", error.message || "Prøv igen om et øjeblik.", "error");
+      } finally {
+        dom.submitListingButton.disabled = false;
+        dom.submitListingButton.textContent = "Udgiv annonce";
+      }
+    }
+
+    async function uploadImages(files) {
+      const uploads = files.map(async (file) => {
+        const extension = file.name.split(".").pop() || "jpg";
+        const path = "listings/" + appState.user.uid + "/" + Date.now() + "-" + Math.random().toString(36).slice(2) + "." + extension;
+        const snapshot = await storage.ref(path).put(file);
+        return snapshot.ref.getDownloadURL();
       });
 
-      alert("Annonce oprettet ✅");
-    }catch(e){
-      console.error(e);
-      alert("Fejl – tjek storage regler");
+      return Promise.all(uploads);
     }
-  };
 
-  input.click();
-}
+    function handleFileSelection(event) {
+      appState.selectedFiles = Array.from(event.target.files || []).slice(0, 8);
+      renderImagePreviews();
+    }
 
-function deleteAd(id){
-  db.collection("listings").doc(id).delete();
-}
+    function renderImagePreviews() {
+      if (!appState.selectedFiles.length) {
+        dom.imagePreviewGrid.innerHTML = "";
+        return;
+      }
 
-</script>
+      Promise.all(appState.selectedFiles.map(fileToDataUrl))
+        .then((sources) => {
+          dom.imagePreviewGrid.innerHTML = sources.map((source, index) => `
+            <div class="preview-item">
+              <img src="${source}" alt="Valgt billede ${index + 1}">
+            </div>
+          `).join("");
+        })
+        .catch((error) => {
+          console.error(error);
+          showToast("Forhåndsvisning fejl", "Kunne ikke vise alle billeder.", "error");
+        });
+    }
 
+    function fileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function deleteListing(listingId) {
+      const listing = appState.listings.find((item) => item.id === listingId);
+      if (!listing) return;
+
+      if (!isOwner(listing)) {
+        showToast("Ingen adgang", "Du kan kun slette dine egne annoncer.", "error");
+        return;
+      }
+
+      const confirmed = window.confirm("Vil du slette denne annonce permanent?");
+      if (!confirmed) return;
+
+      try {
+        if (firebaseReady) {
+          await db.collection("listings").doc(listingId).delete();
+        } else {
+          appState.listings = appState.listings.filter((item) => item.id !== listingId);
+          renderAll();
+        }
+        showToast("Annonce slettet", "Opslaget er fjernet fra markedspladsen.", "success");
+      } catch (error) {
+        console.error(error);
+        showToast("Sletning fejlede", error.message || "Kunne ikke slette annoncen.", "error");
+      }
+    }
+
+    function isOwner(listing) {
+      return Boolean(appState.user && listing.userId === appState.user.uid);
+    }
+
+    function setActiveView(viewName) {
+      document.querySelectorAll(".view").forEach((view) => {
+        view.classList.toggle("active", view.id === "view-" + viewName);
+      });
+      document.querySelectorAll("[data-view-link]").forEach((link) => {
+        link.classList.toggle("active", link.dataset.viewLink === viewName);
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function bindNavigation() {
+      document.querySelectorAll("[data-view-link], [data-view-target]").forEach((element) => {
+        element.addEventListener("click", (event) => {
+          event.preventDefault();
+          const target = element.dataset.viewLink || element.dataset.viewTarget;
+          setActiveView(target);
+        });
+      });
+    }
+
+    function handleListingsClick(event) {
+      const deleteButton = event.target.closest("[data-delete-id]");
+      if (deleteButton) {
+        deleteListing(deleteButton.dataset.deleteId);
+        return;
+      }
+
+      const shareButton = event.target.closest("[data-share-id]");
+      if (shareButton) {
+        shareListing(shareButton.dataset.shareId);
+        return;
+      }
+
+      const carouselAction = event.target.closest("[data-carousel-action]");
+      if (carouselAction) {
+        const card = event.target.closest(".listing-card");
+        if (!card) return;
+        moveCarousel(card, carouselAction.dataset.carouselAction === "next" ? 1 : -1);
+      }
+    }
+
+    function moveCarousel(card, direction) {
+      const images = JSON.parse(card.dataset.carousel || "[]");
+      if (!images.length) return;
+
+      const currentIndex = Number(card.dataset.carouselIndex || 0);
+      const nextIndex = (currentIndex + direction + images.length) % images.length;
+      card.dataset.carouselIndex = String(nextIndex);
+
+      const imageElement = card.querySelector(".listing-media img");
+      const dots = card.querySelectorAll(".carousel-dot");
+      if (imageElement) {
+        imageElement.src = images[nextIndex];
+      }
+      dots.forEach((dot, index) => dot.classList.toggle("active", index === nextIndex));
+    }
+
+    function shareListing(listingId) {
+      const listing = appState.listings.find((item) => item.id === listingId);
+      if (!listing) return;
+
+      const shareText = encodeURIComponent("Se denne annonce på Den Nye Avis: " + listing.title + " til " + formatPrice(listing.price));
+      const shareUrl = encodeURIComponent(window.location.href.split("#")[0] + "#annonce-" + listingId);
+      const facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=" + shareUrl + "&quote=" + shareText;
+      window.open(facebookUrl, "_blank", "noopener,noreferrer,width=640,height=560");
+    }
+
+    function showToast(title, message, type = "success") {
+      const toast = document.createElement("div");
+      toast.className = "toast " + type;
+      toast.innerHTML = `<strong>${escapeHtml(title)}</strong><p>${escapeHtml(message)}</p>`;
+      dom.toastContainer.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateY(12px)";
+      }, 3400);
+
+      setTimeout(() => toast.remove(), 3900);
+    }
+
+    function triggerSocialProof() {
+      const message = appState.socialProofMessages[Math.floor(Math.random() * appState.socialProofMessages.length)];
+      dom.socialProofMetric.textContent = message;
+      const popup = document.createElement("div");
+      popup.className = "social-proof-popup";
+      popup.textContent = "🔥 " + message;
+      dom.socialProofContainer.appendChild(popup);
+      setTimeout(() => {
+        popup.style.opacity = "0";
+        popup.style.transform = "translateX(-12px)";
+      }, 3200);
+      setTimeout(() => popup.remove(), 3700);
+    }
+
+    function startLiveCounter() {
+      const update = () => {
+        const number = Math.floor(Math.random() * 400 + 120);
+        dom.liveCounter.innerHTML = '<span class="online-dot"></span><span>' + number + ' personer kigger lige nu</span>';
+      };
+      update();
+      setInterval(update, 2000);
+    }
+
+    function startAmbientMetrics() {
+      setInterval(() => {
+        const value = ((Math.random() * 2.6) + 2.8).toFixed(1);
+        dom.activeUsersMetric.textContent = value + "k";
+        dom.cityMetric.textContent = appState.cityRotation[Math.floor(Math.random() * appState.cityRotation.length)];
+      }, 5000);
+    }
+
+    function formatPrice(price) {
+      const number = Number(price) || 0;
+      return new Intl.NumberFormat("da-DK", {
+        style: "currency",
+        currency: "DKK",
+        maximumFractionDigits: 0
+      }).format(number);
+    }
+
+    function formatDate(value) {
+      let date = value;
+      if (value && typeof value.toDate === "function") {
+        date = value.toDate();
+      }
+      if (!(date instanceof Date)) {
+        date = new Date(date);
+      }
+      if (Number.isNaN(date.getTime())) {
+        return "Lige nu";
+      }
+      return new Intl.DateTimeFormat("da-DK", {
+        day: "2-digit",
+        month: "short"
+      }).format(date);
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function escapeAttribute(value) {
+      return escapeHtml(value);
+    }
+
+    function bindControls() {
+      dom.loginButton.addEventListener("click", signInWithGoogle);
+      dom.logoutButton.addEventListener("click", signOutUser);
+      dom.listingForm.addEventListener("submit", handleListingSubmit);
+      dom.imagesInput.addEventListener("change", handleFileSelection);
+      dom.refreshButton.addEventListener("click", () => {
+        renderAll();
+        showToast("Feed opdateret", "Annoncer og metrics er opfrisket.", "success");
+      });
+      dom.searchInput.addEventListener("input", renderListings);
+      dom.categoryFilter.addEventListener("change", renderListings);
+      dom.premiumFilterButton.addEventListener("click", () => {
+        appState.premiumOnly = !appState.premiumOnly;
+        dom.premiumFilterButton.textContent = appState.premiumOnly ? "Vis alle" : "Kun premium";
+        renderListings();
+      });
+
+      document.addEventListener("click", (event) => {
+        if (event.target.closest("#homepageListings")) {
+          handleListingsClick(event);
+        }
+        if (event.target.closest("#myListings")) {
+          handleListingsClick(event);
+        }
+      });
+    }
+
+    function boot() {
+      bindNavigation();
+      bindControls();
+      initializeFirebase();
+      startLiveCounter();
+      startAmbientMetrics();
+      triggerSocialProof();
+      setInterval(triggerSocialProof, 10000);
+      updateAuthUi();
+      renderAll();
+    }
+
+    boot();
+  </script>
 </body>
 </html>
