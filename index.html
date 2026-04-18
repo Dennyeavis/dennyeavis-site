@@ -3,16 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Den Nye Avis 💰 MONEY MODE</title>
+<title>Den Nye Avis 🚀 IMAGE PRO</title>
 <style>
 body{font-family:Arial;margin:0;background:#0f172a;color:#fff}
 header{background:linear-gradient(90deg,#003399,#00c853);padding:15px;display:flex;justify-content:space-between;flex-wrap:wrap}
 button{padding:8px 12px;margin:2px;border:none;border-radius:20px;background:#ffcc00;cursor:pointer;font-weight:bold}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;padding:15px}
-.card{background:#1e293b;padding:12px;border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,0.4)}
-.badge{background:#00c853;padding:4px 8px;border-radius:8px;font-size:10px}
-.top{background:#ff5252}
-.moneybar{position:fixed;bottom:0;width:100%;background:#003399;padding:10px;display:flex;justify-content:space-between}
+.card{background:#1e293b;padding:12px;border-radius:16px}
+img{border-radius:10px}
 </style>
 </head>
 <body>
@@ -29,25 +27,23 @@ button{padding:8px 12px;margin:2px;border:none;border-radius:20px;background:#ff
 
 <div class="grid" id="listings"></div>
 
-<div class="moneybar">
-<div>💰 Tjen penge på dine annoncer</div>
-<button onclick="showPricing()">Se priser</button>
-</div>
-
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
 
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyDX7j-Kyo60eOrzQGoCJZL_n7-CE1n5BBk",
   authDomain: "dennyeavis-f2b4a.firebaseapp.com",
-  projectId: "dennyeavis-f2b4a"
+  projectId: "dennyeavis-f2b4a",
+  storageBucket: "dennyeavis-f2b4a.appspot.com"
 };
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
+const storage = firebase.storage();
 
 let currentUser=null;
 
@@ -76,14 +72,9 @@ function loadAds(){
       div.className="card";
 
       div.innerHTML=`
-        <div class="badge ${d.premium?'top':''}">${d.premium?'⭐ PREMIUM':'Gratis'}</div>
+        <img src="${d.image||'https://via.placeholder.com/200'}" width="100%">
         <h3>${d.title}</h3>
         <p>${d.price} kr</p>
-
-        <button onclick="buyBoost('${doc.id}')">🚀 Boost (19 kr)</button>
-        <button onclick="buyPremium('${doc.id}')">⭐ Premium (49 kr)</button>
-
-        ${currentUser && d.user===currentUser.uid?`<button onclick="deleteAd('${doc.id}')">Slet</button>`:""}
       `;
 
       container.appendChild(div);
@@ -91,49 +82,45 @@ function loadAds(){
   });
 }
 
-// 💰 MOBILEPAY FLOW
-function buyBoost(id){
-  window.open("https://mobilepay.dk");
-  alert("Send 19 kr til 22473434 og skriv annonce titel");
-  markPending(id,"boost");
-}
-
-function buyPremium(id){
-  window.open("https://mobilepay.dk");
-  alert("Send 49 kr til 22473434 og skriv annonce titel");
-  markPending(id,"premium");
-}
-
-function markPending(id,type){
-  db.collection("payments").add({
-    adId:id,
-    type:type,
-    user:currentUser?currentUser.uid:"guest",
-    created:Date.now(),
-    status:"pending"
-  });
-}
-
-// 🔥 ADMIN: GODKEND BETALING (manual)
-function approvePayment(adId){
-  db.collection("listings").doc(adId).update({premium:true});
-  alert("Premium aktiveret 💰");
-}
-
+// 🚀 IMAGE UPLOAD SYSTEM (REAL)
 function openModal(){
-  if(!currentUser)return alert("Log ind først");
-  const title=prompt("Titel");
-  const price=prompt("Pris");
+  if(!currentUser) return alert("Log ind først");
 
-  db.collection("listings").add({
-    title,price,user:currentUser.uid,created:Date.now(),premium:false
-  });
-}
+  const title = prompt("Titel");
+  const price = prompt("Pris");
 
-function deleteAd(id){db.collection("listings").doc(id).delete();}
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "image/*";
 
-function showPricing(){
-  alert("Gratis annoncer\nBoost: 19 kr\nPremium: 49 kr");
+  input.onchange = async () => {
+    const file = input.files[0];
+
+    if(!file) return;
+
+    const storageRef = storage.ref("images/" + Date.now() + "_" + file.name);
+
+    try{
+      const snapshot = await storageRef.put(file);
+      const url = await snapshot.ref.getDownloadURL();
+
+      await db.collection("listings").add({
+        title,
+        price,
+        image: url,
+        user: currentUser.uid,
+        created: Date.now()
+      });
+
+      alert("Annonce oprettet med billede 📸");
+
+    }catch(e){
+      console.error(e);
+      alert("Fejl ved upload – tjek Firebase Storage regler");
+    }
+  };
+
+  input.click();
 }
 
 </script>
