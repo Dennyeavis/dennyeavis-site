@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Den Nye Avis 🚀 IMAGE PRO</title>
+<title>Den Nye Avis 🚀 FINAL BOSS</title>
 <style>
 body{font-family:Arial;margin:0;background:#0f172a;color:#fff}
 header{background:linear-gradient(90deg,#003399,#00c853);padding:15px;display:flex;justify-content:space-between;flex-wrap:wrap}
@@ -21,6 +21,7 @@ img{border-radius:10px}
 <span id="user">Ikke logget ind</span>
 <button onclick="login()">Login</button>
 <button onclick="logout()">Logout</button>
+<button onclick="toggleMyAds()">Mine annoncer</button>
 <button onclick="openModal()">+ Opret</button>
 </div>
 </header>
@@ -46,6 +47,7 @@ const auth = firebase.auth();
 const storage = firebase.storage();
 
 let currentUser=null;
+let showMine=false;
 
 function login(){
   const provider=new firebase.auth.GoogleAuthProvider();
@@ -59,6 +61,11 @@ auth.onAuthStateChanged(user=>{
   loadAds();
 });
 
+function toggleMyAds(){
+  showMine=!showMine;
+  loadAds();
+}
+
 function loadAds(){
   const container=document.getElementById("listings");
 
@@ -68,13 +75,26 @@ function loadAds(){
     snap.forEach(doc=>{
       const d=doc.data();
 
+      if(showMine && currentUser && d.user!==currentUser.uid) return;
+
       const div=document.createElement("div");
       div.className="card";
 
+      const images = d.images || [d.image];
+
+      let gallery = "";
+      images.forEach(img=>{
+        gallery += `<img src="${img}" width="100%">`;
+      });
+
       div.innerHTML=`
-        <img src="${d.image||'https://via.placeholder.com/200'}" width="100%">
+        ${gallery}
         <h3>${d.title}</h3>
         <p>${d.price} kr</p>
+
+        ${currentUser && d.user===currentUser.uid?`
+          <button onclick="deleteAd('${doc.id}')">Slet</button>
+        `:""}
       `;
 
       container.appendChild(div);
@@ -82,7 +102,7 @@ function loadAds(){
   });
 }
 
-// 🚀 IMAGE UPLOAD SYSTEM (REAL)
+// 🚀 MULTI IMAGE UPLOAD
 function openModal(){
   if(!currentUser) return alert("Log ind først");
 
@@ -92,35 +112,40 @@ function openModal(){
   const input = document.createElement("input");
   input.type = "file";
   input.accept = "image/*";
+  input.multiple = true;
 
   input.onchange = async () => {
-    const file = input.files[0];
+    const files = input.files;
+    if(!files.length) return;
 
-    if(!file) return;
+    const urls=[];
 
-    const storageRef = storage.ref("images/" + Date.now() + "_" + file.name);
-
-    try{
-      const snapshot = await storageRef.put(file);
-      const url = await snapshot.ref.getDownloadURL();
-
-      await db.collection("listings").add({
-        title,
-        price,
-        image: url,
-        user: currentUser.uid,
-        created: Date.now()
-      });
-
-      alert("Annonce oprettet med billede 📸");
-
-    }catch(e){
-      console.error(e);
-      alert("Fejl ved upload – tjek Firebase Storage regler");
+    for(let file of files){
+      const ref = storage.ref("images/" + Date.now() + "_" + file.name);
+      const snap = await ref.put(file);
+      const url = await snap.ref.getDownloadURL();
+      urls.push(url);
     }
+
+    await db.collection("listings").add({
+      title,
+      price,
+      image: urls[0],
+      images: urls,
+      user: currentUser.uid,
+      created: Date.now()
+    });
+
+    alert("Annonce oprettet med flere billeder 📸🔥");
   };
 
   input.click();
+}
+
+function deleteAd(id){
+  if(confirm("Slet annonce?")){
+    db.collection("listings").doc(id).delete();
+  }
 }
 
 </script>
