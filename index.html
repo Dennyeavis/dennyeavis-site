@@ -76,6 +76,20 @@
               }
             }
           ]
+        },
+        {
+          "@type": "Service",
+          "name": "Online markedsplads i Danmark",
+          "provider": {
+            "@type": "Organization",
+            "name": "Den Nye Avis"
+          },
+          "serviceType": "Køb og salg af brugte varer online",
+          "areaServed": "DK",
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://din-side.dk/"
+          }
         }
       ]
     }
@@ -804,6 +818,87 @@
       accent-color: #6ee7f9;
     }
 
+    .monetization-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .option-card {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: grid;
+      gap: 8px;
+    }
+
+    .option-card strong {
+      font-size: 0.98rem;
+    }
+
+    .option-card span {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .option-card .checkbox-row {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .monetization-summary {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(110, 231, 249, 0.06);
+      border: 1px solid rgba(110, 231, 249, 0.14);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .monetization-summary strong {
+      font-size: 1.1rem;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .listing-badge {
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .listing-badge.spotlight {
+      color: #d8f7ff;
+      border-color: rgba(110, 231, 249, 0.22);
+      background: rgba(110, 231, 249, 0.08);
+    }
+
+    .listing-badge.urgent {
+      color: #ffe1b5;
+      border-color: rgba(245, 158, 11, 0.22);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .listing-badge.renew {
+      color: #e6dcff;
+      border-color: rgba(139, 92, 246, 0.22);
+      background: rgba(139, 92, 246, 0.08);
+    }
+
     .image-preview-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -828,6 +923,34 @@
     .profile-panel {
       display: grid;
       gap: 16px;
+    }
+
+    .auth-panel {
+      margin-top: 8px;
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: grid;
+      gap: 14px;
+    }
+
+    .auth-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .auth-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .auth-panel small {
+      color: var(--muted);
+      line-height: 1.6;
     }
 
     .profile-top {
@@ -945,6 +1068,60 @@
 
     .faq-item p {
       margin-top: 12px;
+    }
+
+    .seo-chip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .seo-chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(110, 231, 249, 0.14);
+      background: rgba(110, 231, 249, 0.06);
+      color: #dbf9ff;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .seo-chip:hover {
+      transform: translateY(-2px);
+      background: rgba(110, 231, 249, 0.1);
+    }
+
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .guide-card {
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .guide-card h4 {
+      margin: 0 0 10px;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+
+    .guide-card p {
+      margin: 0 0 14px;
+      color: #c7d2e2;
+      line-height: 1.75;
+    }
+
+    .guide-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #d9f7ff;
+      font-weight: 700;
     }
 
     .toast-container {
@@ -1070,7 +1247,12 @@
 
       .hero-metrics,
       .profile-stats,
-      .form-grid {
+      .form-grid,
+      .auth-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .monetization-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1104,6 +1286,10 @@
       }
 
       .seo-columns {
+        grid-template-columns: 1fr;
+      }
+
+      .guide-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1142,6 +1328,7 @@
           <span id="userChipName"></span>
         </div>
         <button class="button" id="loginButton" type="button">Log ind med Google</button>
+        <button class="ghost-button" id="showEmailAuthButton" type="button">Log ind med e-mail</button>
         <button class="ghost-button hidden" id="logoutButton" type="button">Log ud</button>
       </div>
     </header>
@@ -1301,6 +1488,57 @@
               </details>
             </div>
           </div>
+
+          <div class="seo-columns">
+            <article class="seo-block glass">
+              <h3>Populære søgninger</h3>
+              <p>Her er de søgeveje, som typisk skaber trafik på danske markedspladser. Klikker man på dem, bliver feedet filtreret direkte.</p>
+              <div class="seo-chip-grid">
+                <button class="seo-chip" type="button" data-seo-search="iPhone" data-seo-view="forside">Køb brugt iPhone</button>
+                <button class="seo-chip" type="button" data-seo-search="sofa" data-seo-view="forside">Brugt sofa til salg</button>
+                <button class="seo-chip" type="button" data-seo-search="cykel" data-seo-view="forside">Brugt cykel i Danmark</button>
+                <button class="seo-chip" type="button" data-seo-city="København" data-seo-view="forside">Køb og sælg i København</button>
+                <button class="seo-chip" type="button" data-seo-city="Aarhus" data-seo-view="forside">Køb og sælg i Aarhus</button>
+                <button class="seo-chip" type="button" data-seo-category="Elektronik" data-seo-view="forside">Brugt elektronik</button>
+                <button class="seo-chip" type="button" data-seo-category="Bolig" data-seo-view="forside">Bolig og møbler</button>
+                <button class="seo-chip" type="button" data-seo-category="Børn" data-seo-view="forside">Børneudstyr brugt</button>
+              </div>
+            </article>
+
+            <article class="seo-block glass">
+              <h3>Lokale landingssider i samme univers</h3>
+              <p>Selv i én fil kan vi skabe klare lokale søgesignaler. Byer og kategorier herunder virker som interne “entry points” for brugeren og skubber på relevansen.</p>
+              <div class="seo-chip-grid">
+                <button class="seo-chip" type="button" data-seo-city="Odense" data-seo-view="forside">Annoncer i Odense</button>
+                <button class="seo-chip" type="button" data-seo-city="Aalborg" data-seo-view="forside">Annoncer i Aalborg</button>
+                <button class="seo-chip" type="button" data-seo-city="Esbjerg" data-seo-view="forside">Annoncer i Esbjerg</button>
+                <button class="seo-chip" type="button" data-seo-category="Mode" data-seo-view="forside">Brugt tøj og mode</button>
+                <button class="seo-chip" type="button" data-seo-category="Fritid" data-seo-view="forside">Fritid og sport</button>
+                <button class="seo-chip" type="button" data-seo-category="Bil" data-seo-view="forside">Bil og transport</button>
+              </div>
+            </article>
+          </div>
+
+          <div class="seo-block glass">
+            <h3>SEO guides til købere og sælgere</h3>
+            <div class="guide-grid">
+              <article class="guide-card">
+                <h4>Sådan sælger du hurtigere online</h4>
+                <p>Brug stærke titler med produktnavn, mærke og stand. Kombinér det med lokale bynavne og skarpe billeder for at få mere relevant trafik fra søgninger.</p>
+                <a class="guide-link" href="#opret-annonce" data-view-target="opret-annonce">Opret en stærk annonce</a>
+              </article>
+              <article class="guide-card">
+                <h4>Find brugte varer i din by</h4>
+                <p>Købere søger ofte lokalt først. Derfor hjælper tydelige byfelter, kategorier og filtrering med at ramme søgninger som “brugt sofa København” eller “cykel Aarhus”.</p>
+                <a class="guide-link" href="#forside" data-view-target="forside">Gå til feedet</a>
+              </article>
+              <article class="guide-card">
+                <h4>Premium og spotlight for bedre synlighed</h4>
+                <p>Fremhævede annoncer kan bruges som en betalt opgradering, der giver mere eksponering og højere klikrate. Det er godt for både SEO, konvertering og omsætning.</p>
+                <a class="guide-link" href="#opret-annonce" data-view-target="opret-annonce">Se premium muligheder</a>
+              </article>
+            </div>
+          </div>
         </section>
       </section>
 
@@ -1368,10 +1606,54 @@
               <div class="image-preview-grid" id="imagePreviewGrid"></div>
             </div>
 
-            <label class="checkbox-row" for="premium">
-              <input id="premium" name="premium" type="checkbox">
-              <span>Marker som premium annonce</span>
-            </label>
+            <div class="field-group">
+              <label>Indtjeningsmuligheder</label>
+              <div class="monetization-grid">
+                <div class="option-card">
+                  <label class="checkbox-row" for="premium">
+                    <input id="premium" name="premium" type="checkbox">
+                    <span>Fremhæv annonce</span>
+                  </label>
+                  <strong>Premium boost</strong>
+                  <span>Giver ekstra synlighed i feedet og et tydeligt premium badge på kortet.</span>
+                </div>
+
+                <div class="option-card">
+                  <label class="checkbox-row" for="spotlight">
+                    <input id="spotlight" name="spotlight" type="checkbox">
+                    <span>Forside-boost</span>
+                  </label>
+                  <strong>Spotlight placering</strong>
+                  <span>Marker annoncen som kandidat til topplacering eller en betalt forside-rotation.</span>
+                </div>
+
+                <div class="option-card">
+                  <label class="checkbox-row" for="urgent">
+                    <input id="urgent" name="urgent" type="checkbox">
+                    <span>Haster badge</span>
+                  </label>
+                  <strong>Fang hurtige købere</strong>
+                  <span>God til sælgere der vil sælge hurtigt og gerne vil skille sig ud visuelt.</span>
+                </div>
+
+                <div class="option-card">
+                  <label class="checkbox-row" for="autoRenew">
+                    <input id="autoRenew" name="autoRenew" type="checkbox">
+                    <span>Automatisk fornyelse</span>
+                  </label>
+                  <strong>Forny efter 7 dage</strong>
+                  <span>Et oplagt fremtidigt betalt abonnement, så annoncer kan holdes varme længere.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="monetization-summary">
+              <div>
+                <strong id="monetizationSummary">Standard annonce</strong>
+                <div class="panel-subtitle" id="monetizationPrice">0 DKK i ekstra tilvalg</div>
+              </div>
+              <div class="category-tag" id="monetizationPackage">Basis</div>
+            </div>
 
             <div class="hero-actions">
               <button class="button" id="submitListingButton" type="submit">Udgiv annonce</button>
@@ -1387,7 +1669,7 @@
             <img class="profile-avatar" id="profileAvatar" alt="Profilbillede" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80">
             <div class="profile-meta">
               <h4 id="profileName">Ikke logget ind</h4>
-              <p id="profileEmail">Log ind med Google for at oprette og administrere annoncer.</p>
+              <p id="profileEmail">Log ind med Google eller e-mail for at oprette og administrere annoncer.</p>
             </div>
           </div>
 
@@ -1409,8 +1691,35 @@
           <div class="floating-card">
             <h3>Profil & troværdighed</h3>
             <p>
-              Når du er logget ind, kan du udgive annoncer, slette egne opslag og få din Google-profil vist som en troværdig afsender.
+              Når du er logget ind, kan du udgive annoncer, slette egne opslag og få din profil vist som en troværdig afsender.
             </p>
+          </div>
+
+          <div class="auth-panel" id="emailAuthPanel">
+            <h3 class="panel-title">E-mail login</h3>
+            <p class="panel-subtitle">Brug e-mail og adgangskode, hvis du ikke vil logge ind med Google.</p>
+            <form id="emailAuthForm">
+              <div class="auth-grid">
+                <div class="field-group">
+                  <label for="authName">Navn</label>
+                  <input class="field" id="authName" name="authName" type="text" placeholder="Dit navn">
+                </div>
+                <div class="field-group">
+                  <label for="authEmail">E-mail</label>
+                  <input class="field" id="authEmail" name="authEmail" type="email" placeholder="navn@email.dk" required>
+                </div>
+                <div class="field-group">
+                  <label for="authPassword">Adgangskode</label>
+                  <input class="field" id="authPassword" name="authPassword" type="password" placeholder="Mindst 6 tegn" required>
+                </div>
+              </div>
+              <div class="auth-inline">
+                <button class="button" id="emailLoginButton" type="submit">Log ind</button>
+                <button class="ghost-button" id="emailSignupButton" type="button">Opret konto</button>
+                <button class="ghost-button" id="resetPasswordButton" type="button">Glemt kode?</button>
+              </div>
+            </form>
+            <small>Husk at aktivere både Google og E-mail/Password under Authentication i Firebase Console.</small>
           </div>
         </div>
       </section>
@@ -1456,6 +1765,7 @@
 
     const dom = {
       loginButton: document.getElementById("loginButton"),
+      showEmailAuthButton: document.getElementById("showEmailAuthButton"),
       logoutButton: document.getElementById("logoutButton"),
       userChip: document.getElementById("userChip"),
       userChipAvatar: document.getElementById("userChipAvatar"),
@@ -1483,7 +1793,22 @@
       profileEmail: document.getElementById("profileEmail"),
       profileListingCount: document.getElementById("profileListingCount"),
       profilePremiumCount: document.getElementById("profilePremiumCount"),
-      profileStatus: document.getElementById("profileStatus")
+      profileStatus: document.getElementById("profileStatus"),
+      premiumCheckbox: document.getElementById("premium"),
+      spotlightCheckbox: document.getElementById("spotlight"),
+      urgentCheckbox: document.getElementById("urgent"),
+      autoRenewCheckbox: document.getElementById("autoRenew"),
+      monetizationSummary: document.getElementById("monetizationSummary"),
+      monetizationPrice: document.getElementById("monetizationPrice"),
+      monetizationPackage: document.getElementById("monetizationPackage"),
+      emailAuthPanel: document.getElementById("emailAuthPanel"),
+      emailAuthForm: document.getElementById("emailAuthForm"),
+      authName: document.getElementById("authName"),
+      authEmail: document.getElementById("authEmail"),
+      authPassword: document.getElementById("authPassword"),
+      emailLoginButton: document.getElementById("emailLoginButton"),
+      emailSignupButton: document.getElementById("emailSignupButton"),
+      resetPasswordButton: document.getElementById("resetPasswordButton")
     };
 
     let firebaseReady = false;
@@ -1530,6 +1855,9 @@
           city: "København",
           category: "Bolig",
           premium: true,
+          spotlight: true,
+          urgent: false,
+          autoRenew: true,
           imageUrls: [
             "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
             "https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=1200&q=80"
@@ -1546,6 +1874,9 @@
           city: "Aarhus",
           category: "Fritid",
           premium: false,
+          spotlight: false,
+          urgent: true,
+          autoRenew: false,
           imageUrls: [
             "https://images.unsplash.com/photo-1502744688674-c619d1586c9e?auto=format&fit=crop&w=1200&q=80",
             "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80"
@@ -1562,6 +1893,9 @@
           city: "Odense",
           category: "Elektronik",
           premium: true,
+          spotlight: true,
+          urgent: true,
+          autoRenew: false,
           imageUrls: [
             "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=1200&q=80",
             "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?auto=format&fit=crop&w=1200&q=80"
@@ -1605,8 +1939,10 @@
       const loggedIn = Boolean(user);
 
       dom.loginButton.classList.toggle("hidden", loggedIn);
+      dom.showEmailAuthButton.classList.toggle("hidden", loggedIn);
       dom.logoutButton.classList.toggle("hidden", !loggedIn);
       dom.userChip.style.display = loggedIn ? "inline-flex" : "none";
+      dom.emailAuthPanel.classList.toggle("hidden", loggedIn);
 
       if (loggedIn) {
         dom.userChipAvatar.src = user.photoURL || "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80";
@@ -1618,7 +1954,7 @@
       } else {
         dom.profileAvatar.src = "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80";
         dom.profileName.textContent = "Ikke logget ind";
-        dom.profileEmail.textContent = "Log ind med Google for at oprette og administrere annoncer.";
+        dom.profileEmail.textContent = "Log ind med Google eller e-mail for at oprette og administrere annoncer.";
         dom.profileStatus.textContent = firebaseReady ? "Gæst" : "Demo mode";
       }
     }
@@ -1667,6 +2003,11 @@
         : ["https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80"];
       const createdDate = formatDate(listing.createdAt);
       const ownerName = listing.userName || "Sælger";
+      const badges = [
+        listing.spotlight ? '<span class="listing-badge spotlight">Forside-boost</span>' : "",
+        listing.urgent ? '<span class="listing-badge urgent">Haster</span>' : "",
+        listing.autoRenew ? '<span class="listing-badge renew">Auto-forny</span>' : ""
+      ].filter(Boolean).join("");
 
       return `
         <article class="listing-card glass" data-listing-id="${escapeHtml(listing.id)}" data-carousel='${escapeHtml(JSON.stringify(images))}' data-carousel-index="0">
@@ -1690,6 +2031,7 @@
               <span>${escapeHtml(createdDate)}</span>
             </div>
             <h4 class="listing-title">${escapeHtml(listing.title)}</h4>
+            ${badges ? `<div class="badge-row">${badges}</div>` : ""}
             <p class="listing-description">${escapeHtml(listing.description || "Ingen beskrivelse endnu.")}</p>
             <div class="listing-footer">
               <div class="price">${formatPrice(listing.price)}</div>
@@ -1728,6 +2070,31 @@
       dom.profilePremiumCount.textContent = String(myListings.filter((listing) => listing.premium).length);
     }
 
+    function getMonetizationState() {
+      const premium = Boolean(dom.premiumCheckbox.checked);
+      const spotlight = Boolean(dom.spotlightCheckbox.checked);
+      const urgent = Boolean(dom.urgentCheckbox.checked);
+      const autoRenew = Boolean(dom.autoRenewCheckbox.checked);
+      const extraPrice = (premium ? 49 : 0) + (spotlight ? 79 : 0) + (urgent ? 29 : 0) + (autoRenew ? 19 : 0);
+
+      return { premium, spotlight, urgent, autoRenew, extraPrice };
+    }
+
+    function updateMonetizationSummary() {
+      const monetization = getMonetizationState();
+      const labels = [];
+      if (monetization.premium) labels.push("premium");
+      if (monetization.spotlight) labels.push("forside-boost");
+      if (monetization.urgent) labels.push("haster");
+      if (monetization.autoRenew) labels.push("auto-fornyelse");
+
+      dom.monetizationSummary.textContent = labels.length
+        ? "Valgte tilvalg: " + labels.join(", ")
+        : "Standard annonce";
+      dom.monetizationPrice.textContent = monetization.extraPrice + " DKK i ekstra tilvalg";
+      dom.monetizationPackage.textContent = monetization.extraPrice >= 120 ? "Power" : monetization.extraPrice > 0 ? "Plus" : "Basis";
+    }
+
     async function signInWithGoogle() {
       if (!firebaseReady) {
         showToast("Demo mode", "Firebase er ikke konfigureret endnu. Login er derfor slået fra.", "warning");
@@ -1743,6 +2110,86 @@
       } catch (error) {
         console.error(error);
         showToast("Login mislykkedes", error.message || "Kunne ikke logge ind med Google.", "error");
+      }
+    }
+
+    async function signInWithEmail(event) {
+      event.preventDefault();
+
+      if (!firebaseReady) {
+        showToast("Demo mode", "Firebase er ikke konfigureret endnu. E-mail login er derfor slået fra.", "warning");
+        return;
+      }
+
+      const email = dom.authEmail.value.trim();
+      const password = dom.authPassword.value;
+
+      if (!email || !password) {
+        showToast("Manglende login", "Indtast både e-mail og adgangskode.", "warning");
+        return;
+      }
+
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        dom.emailAuthForm.reset();
+        showToast("Velkommen tilbage", "Du er nu logget ind med e-mail.", "success");
+      } catch (error) {
+        console.error(error);
+        showToast("Login mislykkedes", error.message || "Kunne ikke logge ind med e-mail.", "error");
+      }
+    }
+
+    async function signUpWithEmail() {
+      if (!firebaseReady) {
+        showToast("Demo mode", "Firebase er ikke konfigureret endnu. Konto-oprettelse er derfor slået fra.", "warning");
+        return;
+      }
+
+      const name = dom.authName.value.trim();
+      const email = dom.authEmail.value.trim();
+      const password = dom.authPassword.value;
+
+      if (!email || !password) {
+        showToast("Manglende felter", "Indtast e-mail og adgangskode for at oprette konto.", "warning");
+        return;
+      }
+
+      if (password.length < 6) {
+        showToast("For kort kode", "Adgangskoden skal være mindst 6 tegn.", "warning");
+        return;
+      }
+
+      try {
+        const credential = await auth.createUserWithEmailAndPassword(email, password);
+        if (credential.user && name) {
+          await credential.user.updateProfile({ displayName: name });
+        }
+        dom.emailAuthForm.reset();
+        showToast("Konto oprettet", "Din e-mail konto er klar, og du er nu logget ind.", "success");
+      } catch (error) {
+        console.error(error);
+        showToast("Kunne ikke oprette konto", error.message || "Prøv igen om lidt.", "error");
+      }
+    }
+
+    async function resetPassword() {
+      if (!firebaseReady) {
+        showToast("Demo mode", "Firebase er ikke konfigureret endnu. Password reset er derfor slået fra.", "warning");
+        return;
+      }
+
+      const email = dom.authEmail.value.trim();
+      if (!email) {
+        showToast("Mangler e-mail", "Skriv din e-mail først, så sender vi et reset-link.", "warning");
+        return;
+      }
+
+      try {
+        await auth.sendPasswordResetEmail(email);
+        showToast("Reset sendt", "Tjek din indbakke for link til ny adgangskode.", "success");
+      } catch (error) {
+        console.error(error);
+        showToast("Reset fejl", error.message || "Kunne ikke sende reset e-mail.", "error");
       }
     }
 
@@ -1767,13 +2214,18 @@
       }
 
       const formData = new FormData(dom.listingForm);
+      const monetization = getMonetizationState();
       const payload = {
         title: String(formData.get("title") || "").trim(),
         price: Number(formData.get("price")),
         description: String(formData.get("description") || "").trim(),
         city: String(formData.get("city") || "").trim(),
         category: String(formData.get("category") || "").trim(),
-        premium: Boolean(formData.get("premium"))
+        premium: monetization.premium,
+        spotlight: monetization.spotlight,
+        urgent: monetization.urgent,
+        autoRenew: monetization.autoRenew,
+        monetizationPrice: monetization.extraPrice
       };
 
       if (!payload.title || !payload.description || !payload.city || !payload.category || Number.isNaN(payload.price)) {
@@ -1819,6 +2271,7 @@
         dom.listingForm.reset();
         appState.selectedFiles = [];
         renderImagePreviews();
+        updateMonetizationSummary();
         setActiveView("mine-annoncer");
         showToast("Annonce oprettet", "Din annonce er nu live på Den Nye Avis.", "success");
       } catch (error) {
@@ -1923,6 +2376,24 @@
           setActiveView(target);
         });
       });
+    }
+
+    function applySeoRoute(button) {
+      const search = button.dataset.seoSearch || "";
+      const city = button.dataset.seoCity || "";
+      const category = button.dataset.seoCategory || "all";
+      const targetView = button.dataset.seoView || "forside";
+
+      setActiveView(targetView);
+      dom.searchInput.value = search || city;
+      dom.categoryFilter.value = category;
+      renderListings();
+
+      const label = search || city || category;
+      if (label && history.replaceState) {
+        const slug = encodeURIComponent(String(label).toLowerCase().replaceAll(" ", "-"));
+        history.replaceState(null, "", "#soegning-" + slug);
+      }
     }
 
     function handleListingsClick(event) {
@@ -2058,9 +2529,16 @@
 
     function bindControls() {
       dom.loginButton.addEventListener("click", signInWithGoogle);
+      dom.showEmailAuthButton.addEventListener("click", () => setActiveView("profil"));
       dom.logoutButton.addEventListener("click", signOutUser);
       dom.listingForm.addEventListener("submit", handleListingSubmit);
+      dom.emailAuthForm.addEventListener("submit", signInWithEmail);
+      dom.emailSignupButton.addEventListener("click", signUpWithEmail);
+      dom.resetPasswordButton.addEventListener("click", resetPassword);
       dom.imagesInput.addEventListener("change", handleFileSelection);
+      [dom.premiumCheckbox, dom.spotlightCheckbox, dom.urgentCheckbox, dom.autoRenewCheckbox].forEach((checkbox) => {
+        checkbox.addEventListener("change", updateMonetizationSummary);
+      });
       dom.refreshButton.addEventListener("click", () => {
         renderAll();
         showToast("Feed opdateret", "Annoncer og metrics er opfrisket.", "success");
@@ -2074,6 +2552,11 @@
       });
 
       document.addEventListener("click", (event) => {
+        const seoButton = event.target.closest("[data-seo-view]");
+        if (seoButton) {
+          applySeoRoute(seoButton);
+          return;
+        }
         if (event.target.closest("#homepageListings")) {
           handleListingsClick(event);
         }
@@ -2091,6 +2574,7 @@
       startAmbientMetrics();
       triggerSocialProof();
       setInterval(triggerSocialProof, 10000);
+      updateMonetizationSummary();
       updateAuthUi();
       renderAll();
     }
