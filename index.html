@@ -14,13 +14,14 @@
   <meta property="og:site_name" content="Den Nye Avis">
   <meta property="og:title" content="Den Nye Avis | Køb og sælg brugt online i Danmark">
   <meta property="og:description" content="En moderne dansk markedsplads til køb og salg af brugte varer med premium annoncer, billedgallerier og mobilvenligt design.">
-  <meta property="og:url" content="https://din-side.dk/">
+  <meta property="og:url" content="https://dennyeavis.dk/">
   <meta property="og:image" content="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Den Nye Avis | Køb og sælg brugt online i Danmark">
   <meta name="twitter:description" content="Sælg hurtigt, køb smart og få premium synlighed på en moderne dansk markedsplads.">
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80">
-  <link rel="canonical" href="https://din-side.dk/">
+  <link rel="canonical" href="https://dennyeavis.dk/">
+  <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -31,19 +32,19 @@
         {
           "@type": "WebSite",
           "name": "Den Nye Avis",
-          "url": "https://din-side.dk/",
+          "url": "https://dennyeavis.dk/",
           "inLanguage": "da-DK",
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://din-side.dk/?q={search_term_string}",
+            "target": "https://dennyeavis.dk/?q={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         },
         {
           "@type": "Organization",
           "name": "Den Nye Avis",
-          "url": "https://din-side.dk/",
-          "logo": "https://din-side.dk/logo.png",
+          "url": "https://dennyeavis.dk/",
+          "logo": "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80",
           "sameAs": [
             "https://www.facebook.com/"
           ]
@@ -88,7 +89,7 @@
           "areaServed": "DK",
           "availableChannel": {
             "@type": "ServiceChannel",
-            "serviceUrl": "https://din-side.dk/"
+            "serviceUrl": "https://dennyeavis.dk/"
           }
         }
       ]
@@ -1124,6 +1125,110 @@
       font-weight: 700;
     }
 
+    .launch-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .check-item {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #dbe4f2;
+      line-height: 1.6;
+    }
+
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .trust-pill {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+      color: #d5e2f5;
+      font-weight: 700;
+    }
+
+    .contact-hub {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .contact-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(1, 6, 14, 0.7);
+      backdrop-filter: blur(8px);
+    }
+
+    .contact-modal.open {
+      display: grid;
+    }
+
+    .contact-card {
+      width: min(560px, 100%);
+      padding: 26px;
+      border-radius: 28px;
+      background: rgba(8, 13, 24, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
+    }
+
+    .contact-card h3 {
+      margin: 0 0 10px;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 1.35rem;
+    }
+
+    .contact-card p {
+      margin: 0 0 18px;
+      color: #c8d3e2;
+      line-height: 1.7;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 20px;
+    }
+
+    .contact-item {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .contact-item a {
+      color: #d8f7ff;
+      font-weight: 700;
+    }
+
     .toast-container {
       position: fixed;
       right: 18px;
@@ -1293,6 +1398,11 @@
         grid-template-columns: 1fr;
       }
 
+      .launch-grid,
+      .trust-strip {
+        grid-template-columns: 1fr;
+      }
+
       .listing-actions {
         flex-direction: column;
       }
@@ -1323,6 +1433,7 @@
       </nav>
 
       <div class="auth-actions">
+        <button class="ghost-button" id="contactButton" type="button">Kontakt</button>
         <div class="user-chip" id="userChip">
           <img id="userChipAvatar" alt="Bruger avatar">
           <span id="userChipName"></span>
@@ -1539,6 +1650,41 @@
               </article>
             </div>
           </div>
+
+          <div class="seo-block glass">
+            <h3>Bygget til tillid og konvertering</h3>
+            <p>SEO er stærkest, når siden både bliver fundet og faktisk får folk til at blive. Derfor har Den Nye Avis også brug for tydelige tillidssignaler, stærke salgsargumenter og en klar vej til handling.</p>
+            <div class="trust-strip">
+              <div class="trust-pill">Google og e-mail login</div>
+              <div class="trust-pill">Mobilvenligt annonceflow</div>
+              <div class="trust-pill">Premium og spotlight pakker</div>
+              <div class="trust-pill">Klar til deling på Facebook</div>
+            </div>
+          </div>
+
+          <div class="launch-grid">
+            <article class="seo-block glass">
+              <h3>Launch checklist</h3>
+              <p>Her er de konkrete ting, der gør forskellen, når du går live og vil have Google til at tage siden seriøst.</p>
+              <div class="checklist">
+                <div class="check-item">Domænet er nu sat til `https://dennyeavis.dk/` i `index.html`, `robots.txt` og `sitemap.xml`.</div>
+                <div class="check-item">Upload alle filer i samme mappe: `index.html`, `robots.txt`, `sitemap.xml` og `manifest.json`.</div>
+                <div class="check-item">Aktivér Firebase Authentication, Firestore og Storage, så der kommer rigtigt indhold og rigtige annoncer på siden.</div>
+                <div class="check-item">Tilmeld siden til Google Search Console og indsend dit sitemap lige efter launch.</div>
+              </div>
+            </article>
+
+            <article class="seo-block glass">
+              <h3>Næste pengemaskine</h3>
+              <p>Den største næste opgradering vil være at koble betaling på dine annoncepakker, så premium, spotlight og auto-fornyelse bliver rigtige produkter med omsætning.</p>
+              <div class="checklist">
+                <div class="check-item">Basis annonce: gratis for hurtig vækst og flere opslag.</div>
+                <div class="check-item">Premium annonce: fast pris for ekstra synlighed i feedet.</div>
+                <div class="check-item">Spotlight: topplacering eller forside-rotation som højere pris.</div>
+                <div class="check-item">Auto-fornyelse: lille abonnementsbetaling for at holde annoncer varme.</div>
+              </div>
+            </article>
+          </div>
         </section>
       </section>
 
@@ -1695,6 +1841,13 @@
             </p>
           </div>
 
+          <div class="floating-card">
+            <h3>Admin & sikkerhed</h3>
+            <p>
+              Ja, du bør på sigt have en rigtig administrator-adgang, men ikke som en almindelig offentlig login-knap til alle. Den bør senere låses til bestemte Firebase-brugere eller admin-roller, så kun du kan styre annoncer, betalinger og support sikkert.
+            </p>
+          </div>
+
           <div class="auth-panel" id="emailAuthPanel">
             <h3 class="panel-title">E-mail login</h3>
             <p class="panel-subtitle">Brug e-mail og adgangskode, hvis du ikke vil logge ind med Google.</p>
@@ -1732,6 +1885,30 @@
 
   <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
   <div class="social-proof" id="socialProofContainer" aria-live="polite" aria-atomic="true"></div>
+  <div class="contact-modal" id="contactModal" aria-hidden="true">
+    <div class="contact-card glass">
+      <div class="contact-hub">
+        <button class="ghost-button" id="closeContactButton" type="button">Luk</button>
+      </div>
+      <h3>Kontakt Den Nye Avis</h3>
+      <p>
+        Her kan interesserede købere, samarbejdspartnere eller presse kontakte dig direkte. Oplysningerne ligger bag denne kontaktmulighed i stedet for at stå åbent på hele siden.
+      </p>
+      <div class="contact-list">
+        <div class="contact-item">
+          <strong>E-mail</strong>
+          <a href="mailto:fotomikkel@hotmail.com">fotomikkel@hotmail.com</a>
+        </div>
+        <div class="contact-item">
+          <strong>Mobil / MobilePay</strong>
+          <a href="tel:+4522473434">22 47 34 34</a>
+        </div>
+      </div>
+      <p>
+        Brug denne kontakt til henvendelser om samarbejde, support, premium annoncer eller MobilePay-aftaler.
+      </p>
+    </div>
+  </div>
 
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -1767,6 +1944,7 @@
       loginButton: document.getElementById("loginButton"),
       showEmailAuthButton: document.getElementById("showEmailAuthButton"),
       logoutButton: document.getElementById("logoutButton"),
+      contactButton: document.getElementById("contactButton"),
       userChip: document.getElementById("userChip"),
       userChipAvatar: document.getElementById("userChipAvatar"),
       userChipName: document.getElementById("userChipName"),
@@ -1808,7 +1986,9 @@
       authPassword: document.getElementById("authPassword"),
       emailLoginButton: document.getElementById("emailLoginButton"),
       emailSignupButton: document.getElementById("emailSignupButton"),
-      resetPasswordButton: document.getElementById("resetPasswordButton")
+      resetPasswordButton: document.getElementById("resetPasswordButton"),
+      contactModal: document.getElementById("contactModal"),
+      closeContactButton: document.getElementById("closeContactButton")
     };
 
     let firebaseReady = false;
@@ -2443,6 +2623,16 @@
       window.open(facebookUrl, "_blank", "noopener,noreferrer,width=640,height=560");
     }
 
+    function openContactModal() {
+      dom.contactModal.classList.add("open");
+      dom.contactModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeContactModal() {
+      dom.contactModal.classList.remove("open");
+      dom.contactModal.setAttribute("aria-hidden", "true");
+    }
+
     function showToast(title, message, type = "success") {
       const toast = document.createElement("div");
       toast.className = "toast " + type;
@@ -2531,6 +2721,8 @@
       dom.loginButton.addEventListener("click", signInWithGoogle);
       dom.showEmailAuthButton.addEventListener("click", () => setActiveView("profil"));
       dom.logoutButton.addEventListener("click", signOutUser);
+      dom.contactButton.addEventListener("click", openContactModal);
+      dom.closeContactButton.addEventListener("click", closeContactModal);
       dom.listingForm.addEventListener("submit", handleListingSubmit);
       dom.emailAuthForm.addEventListener("submit", signInWithEmail);
       dom.emailSignupButton.addEventListener("click", signUpWithEmail);
@@ -2552,6 +2744,10 @@
       });
 
       document.addEventListener("click", (event) => {
+        if (event.target === dom.contactModal) {
+          closeContactModal();
+          return;
+        }
         const seoButton = event.target.closest("[data-seo-view]");
         if (seoButton) {
           applySeoRoute(seoButton);
@@ -2562,6 +2758,12 @@
         }
         if (event.target.closest("#myListings")) {
           handleListingsClick(event);
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && dom.contactModal.classList.contains("open")) {
+          closeContactModal();
         }
       });
     }
