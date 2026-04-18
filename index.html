@@ -3,17 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Den Nye Avis 🚀 EMPIRE</title>
+<title>Den Nye Avis 💰 MONEY MODE</title>
 <style>
 body{font-family:Arial;margin:0;background:#0f172a;color:#fff}
 header{background:linear-gradient(90deg,#003399,#00c853);padding:15px;display:flex;justify-content:space-between;flex-wrap:wrap}
 button{padding:8px 12px;margin:2px;border:none;border-radius:20px;background:#ffcc00;cursor:pointer;font-weight:bold}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;padding:15px}
-.card{background:#1e293b;padding:12px;border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,0.4);transition:0.3s}
-.card:hover{transform:scale(1.05)}
+.card{background:#1e293b;padding:12px;border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,0.4)}
 .badge{background:#00c853;padding:4px 8px;border-radius:8px;font-size:10px}
 .top{background:#ff5252}
-.hero{text-align:center;padding:40px}
+.moneybar{position:fixed;bottom:0;width:100%;background:#003399;padding:10px;display:flex;justify-content:space-between}
 </style>
 </head>
 <body>
@@ -22,19 +21,18 @@ button{padding:8px 12px;margin:2px;border:none;border-radius:20px;background:#ff
 <div><b>Den Nye Avis 🚀</b></div>
 <div>
 <span id="user">Ikke logget ind</span>
-<button onclick="googleLogin()">Login</button>
+<button onclick="login()">Login</button>
 <button onclick="logout()">Logout</button>
-<button onclick="toggleMyAds()">Mine annoncer</button>
 <button onclick="openModal()">+ Opret</button>
 </div>
 </header>
 
-<div class="hero">
-<h1>🔥 Den nye markedsplads i Danmark</h1>
-<p id="live">200 personer kigger lige nu 👀</p>
-</div>
-
 <div class="grid" id="listings"></div>
+
+<div class="moneybar">
+<div>💰 Tjen penge på dine annoncer</div>
+<button onclick="showPricing()">Se priser</button>
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -52,13 +50,11 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 
 let currentUser=null;
-let showMine=false;
 
-function googleLogin(){
+function login(){
   const provider=new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(provider);
 }
-
 function logout(){auth.signOut();}
 
 auth.onAuthStateChanged(user=>{
@@ -66,8 +62,6 @@ auth.onAuthStateChanged(user=>{
   document.getElementById("user").innerText=user?"✅ "+user.email:"❌ Ikke logget ind";
   loadAds();
 });
-
-function toggleMyAds(){showMine=!showMine;loadAds();}
 
 function loadAds(){
   const container=document.getElementById("listings");
@@ -77,21 +71,17 @@ function loadAds(){
 
     snap.forEach(doc=>{
       const d=doc.data();
-      if(showMine && currentUser && d.user!==currentUser.uid)return;
 
       const div=document.createElement("div");
       div.className="card";
 
       div.innerHTML=`
-        <div class="badge ${d.premium?'top':''}">${d.premium?'⭐ PREMIUM':'🔥 HOT'}</div>
-        <img src="${d.image||'https://via.placeholder.com/200'}" width="100%">
+        <div class="badge ${d.premium?'top':''}">${d.premium?'⭐ PREMIUM':'Gratis'}</div>
         <h3>${d.title}</h3>
         <p>${d.price} kr</p>
 
-        <button onclick="boost('${doc.id}')">🚀 Boost</button>
-        <button onclick="premium('${doc.id}')">⭐ Premium</button>
-        <button onclick="chat()">💬 Chat</button>
-        <button onclick="share()">📢 Del</button>
+        <button onclick="buyBoost('${doc.id}')">🚀 Boost (19 kr)</button>
+        <button onclick="buyPremium('${doc.id}')">⭐ Premium (49 kr)</button>
 
         ${currentUser && d.user===currentUser.uid?`<button onclick="deleteAd('${doc.id}')">Slet</button>`:""}
       `;
@@ -101,21 +91,33 @@ function loadAds(){
   });
 }
 
-function boost(id){
-  showToast("🚀 Boost aktiveret (simuleret)");
+// 💰 MOBILEPAY FLOW
+function buyBoost(id){
+  window.open("https://mobilepay.dk");
+  alert("Send 19 kr til 22473434 og skriv annonce titel");
+  markPending(id,"boost");
 }
 
-function premium(id){
-  db.collection("listings").doc(id).update({premium:true});
-  showToast("⭐ Premium aktiv!");
+function buyPremium(id){
+  window.open("https://mobilepay.dk");
+  alert("Send 49 kr til 22473434 og skriv annonce titel");
+  markPending(id,"premium");
 }
 
-function chat(){
-  showToast("💬 Ny besked!");
+function markPending(id,type){
+  db.collection("payments").add({
+    adId:id,
+    type:type,
+    user:currentUser?currentUser.uid:"guest",
+    created:Date.now(),
+    status:"pending"
+  });
 }
 
-function share(){
-  window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(window.location.href));
+// 🔥 ADMIN: GODKEND BETALING (manual)
+function approvePayment(adId){
+  db.collection("listings").doc(adId).update({premium:true});
+  alert("Premium aktiveret 💰");
 }
 
 function openModal(){
@@ -123,33 +125,17 @@ function openModal(){
   const title=prompt("Titel");
   const price=prompt("Pris");
 
-  db.collection("listings").add({title,price,user:currentUser.uid,created:Date.now(),premium:false});
+  db.collection("listings").add({
+    title,price,user:currentUser.uid,created:Date.now(),premium:false
+  });
 }
 
 function deleteAd(id){db.collection("listings").doc(id).delete();}
 
-// live users
-setInterval(()=>{
-  const num=Math.floor(Math.random()*500+100);
-  document.getElementById("live").innerText=num+" personer kigger lige nu 👀";
-},2000);
-
-// fake activity
-setInterval(()=>showToast("🔥 En annonce blev lige solgt!"),8000);
-
-function showToast(text){
-  const t=document.createElement("div");
-  t.style.position="fixed";
-  t.style.bottom="20px";
-  t.style.left="20px";
-  t.style.background="#00c853";
-  t.style.color="#fff";
-  t.style.padding="10px";
-  t.style.borderRadius="10px";
-  t.innerText=text;
-  document.body.appendChild(t);
-  setTimeout(()=>t.remove(),3000);
+function showPricing(){
+  alert("Gratis annoncer\nBoost: 19 kr\nPremium: 49 kr");
 }
+
 </script>
 
 </body>
