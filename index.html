@@ -5,7 +5,8 @@
   <title>Den Nye Avis</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <!-- ✅ KORREKT SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
   <style>
     body {
@@ -63,7 +64,7 @@
 
   <form id="form">
     <input id="title" placeholder="Titel" required>
-    <input id="price" placeholder="Pris" required>
+    <input id="price" type="number" placeholder="Pris" required>
     <input id="city" placeholder="By">
     <input id="category" placeholder="Kategori">
     <textarea id="desc" placeholder="Beskrivelse"></textarea>
@@ -83,47 +84,67 @@ const supabase = window.supabase.createClient(
 
 let user = null;
 
-/* LOGIN */
+/* 🔐 LOGIN */
 async function login() {
-  await supabase.auth.signInWithOAuth({
+  const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
       redirectTo: "https://dennyeavis.github.io/dennyeavis-site/"
     }
   });
-}
-
-/* LOGOUT */
-async function logout() {
-  await supabase.auth.signOut();
-}
-
-/* SESSION */
-supabase.auth.onAuthStateChange((event, session) => {
-  user = session?.user || null;
-  console.log("User:", user);
-});
-
-/* LOAD LISTINGS */
-async function load() {
-  let { data, error } = await supabase.from("listings").select("*");
 
   if (error) {
-    console.log(error);
+    alert(error.message);
+  }
+}
+
+/* 🚪 LOGOUT */
+async function logout() {
+  await supabase.auth.signOut();
+  user = null;
+  alert("Logget ud");
+}
+
+/* 🔁 CHECK USER */
+async function checkUser() {
+  const { data } = await supabase.auth.getUser();
+  user = data?.user || null;
+  console.log("USER:", user);
+}
+
+checkUser();
+
+/* 🔄 LISTENER */
+supabase.auth.onAuthStateChange((event, session) => {
+  user = session?.user || null;
+  console.log("LOGIN STATE:", user);
+  load();
+});
+
+/* 📦 LOAD */
+async function load() {
+  const { data, error } = await supabase
+    .from("listings")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.log("LOAD ERROR:", error);
     return;
   }
 
   document.getElementById("list").innerHTML =
     (data || []).map(l => `
       <div class="listing">
-        <h3>${l.title}</h3>
+        <h3>${l.title || ""}</h3>
         <p>${l.description || ""}</p>
-        <strong>${l.price} DKK</strong>
+        <strong>${l.price || 0} DKK</strong>
+        <br>${l.city || ""} - ${l.category || ""}
       </div>
     `).join("");
 }
 
-/* CREATE LISTING */
+/* ➕ CREATE */
 document.getElementById("form").onsubmit = async (e) => {
   e.preventDefault();
 
@@ -132,18 +153,28 @@ document.getElementById("form").onsubmit = async (e) => {
     return;
   }
 
-  await supabase.from("listings").insert([{
-    title: title.value,
-    price: price.value,
-    city: city.value,
-    category: category.value,
-    description: desc.value,
-    user_id: user.id
+  const { error } = await supabase.from("listings").insert([{
+    title: document.getElementById("title").value,
+    price: Number(document.getElementById("price").value),
+    description: document.getElementById("desc").value,
+    city: document.getElementById("city").value,
+    category: document.getElementById("category").value,
+    image_urls: [],
+    user_id: user.id,
+    user_name: user.email
   }]);
 
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  alert("Annonce oprettet!");
+  document.getElementById("form").reset();
   load();
 };
 
+/* 🚀 START */
 load();
 </script>
 
