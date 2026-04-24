@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Den Nye Avis</title>
 
-<!-- ✅ FIXED SUPABASE SCRIPT -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
 <style>
@@ -44,33 +43,51 @@ const supabase = window.supabase.createClient(
 
 let user = null;
 
-/* LOGIN */
+/* 🔐 LOGIN */
 async function login(){
-  await supabase.auth.signInWithOAuth({
+  const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: window.location.origin
+      redirectTo: window.location.href
     }
   });
+
+  if(error){
+    alert(error.message);
+  }
 }
 
-/* LOGOUT */
+/* 🚪 LOGOUT */
 async function logout(){
   await supabase.auth.signOut();
+  user = null;
+  alert("Logget ud");
 }
 
-/* AUTH STATE */
+/* 🔁 CHECK USER (vigtigt!) */
+async function checkUser(){
+  const { data } = await supabase.auth.getUser();
+  user = data?.user || null;
+  console.log("USER:", user);
+}
+
+checkUser();
+
+/* 🔄 LYTTER EFTER LOGIN */
 supabase.auth.onAuthStateChange((event, session) => {
   user = session?.user || null;
+  console.log("LOGIN STATE:", user);
   load();
 });
 
-/* LOAD LISTINGS */
+/* 📦 LOAD DATA */
 async function load(){
   const { data, error } = await supabase
     .from("listings")
     .select("*")
     .order("created_at", { ascending: false });
+
+  console.log("DATA:", data);
 
   if(error){
     console.log(error);
@@ -88,7 +105,7 @@ async function load(){
     `).join("");
 }
 
-/* CREATE LISTING */
+/* ➕ OPRET ANNONCE */
 document.getElementById("form").onsubmit = async (e)=>{
   e.preventDefault();
 
@@ -119,7 +136,7 @@ document.getElementById("form").onsubmit = async (e)=>{
   load();
 };
 
-/* INITIAL LOAD */
+/* 🚀 START */
 load();
 </script>
 
