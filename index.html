@@ -1,39 +1,79 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-<meta charset="UTF-8">
-<title>Den Nye Avis</title>
+  <meta charset="UTF-8">
+  <title>Den Nye Avis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-<style>
-body { font-family: Arial; background:#111; color:white; padding:20px; }
-input, textarea { width:100%; margin:5px 0; padding:10px; }
-button { padding:10px 15px; margin-top:10px; }
-.card { background:#222; padding:15px; margin-top:10px; border-radius:10px; }
-</style>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f5f5f5;
+      margin: 0;
+    }
+
+    header {
+      background: #000;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+    }
+
+    .listing {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 
 <body>
 
-<h1>Den Nye Avis</h1>
+<header>
+  <div>Den Nye Avis</div>
+  <div>
+    <button onclick="login()">Login</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+</header>
 
-<button onclick="login()">Login med Google</button>
-<button onclick="logout()">Logout</button>
+<div class="container">
 
-<h2>Opret annonce</h2>
+  <h2>Opret annonce</h2>
 
-<form id="form">
-<input id="title" placeholder="Titel" required>
-<input id="price" type="number" placeholder="Pris" required>
-<input id="city" placeholder="By" required>
-<input id="category" placeholder="Kategori" required>
-<textarea id="desc" placeholder="Beskrivelse"></textarea>
-<button type="submit">Opret</button>
-</form>
+  <form id="form">
+    <input id="title" placeholder="Titel" required>
+    <input id="price" placeholder="Pris" required>
+    <input id="city" placeholder="By">
+    <input id="category" placeholder="Kategori">
+    <textarea id="desc" placeholder="Beskrivelse"></textarea>
+    <button type="submit">Opret</button>
+  </form>
 
-<h2>Annoncer</h2>
-<div id="list"></div>
+  <h2>Annoncer</h2>
+  <div id="list"></div>
+
+</div>
 
 <script>
 const supabase = window.supabase.createClient(
@@ -43,100 +83,67 @@ const supabase = window.supabase.createClient(
 
 let user = null;
 
-/* 🔐 LOGIN */
-async function login(){
-  const { error } = await supabase.auth.signInWithOAuth({
+/* LOGIN */
+async function login() {
+  await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: window.location.href
+      redirectTo: "https://dennyeavis.github.io/dennyeavis-site/"
     }
   });
-
-  if(error){
-    alert(error.message);
-  }
 }
 
-/* 🚪 LOGOUT */
-async function logout(){
+/* LOGOUT */
+async function logout() {
   await supabase.auth.signOut();
-  user = null;
-  alert("Logget ud");
 }
 
-/* 🔁 CHECK USER (vigtigt!) */
-async function checkUser(){
-  const { data } = await supabase.auth.getUser();
-  user = data?.user || null;
-  console.log("USER:", user);
-}
-
-checkUser();
-
-/* 🔄 LYTTER EFTER LOGIN */
+/* SESSION */
 supabase.auth.onAuthStateChange((event, session) => {
   user = session?.user || null;
-  console.log("LOGIN STATE:", user);
-  load();
+  console.log("User:", user);
 });
 
-/* 📦 LOAD DATA */
-async function load(){
-  const { data, error } = await supabase
-    .from("listings")
-    .select("*")
-    .order("created_at", { ascending: false });
+/* LOAD LISTINGS */
+async function load() {
+  let { data, error } = await supabase.from("listings").select("*");
 
-  console.log("DATA:", data);
-
-  if(error){
+  if (error) {
     console.log(error);
     return;
   }
 
   document.getElementById("list").innerHTML =
-    (data || []).map(l=>`
-      <div class="card">
-        <h3>${l.title || ''}</h3>
-        <p>${l.description || ''}</p>
-        <strong>${l.price || 0} DKK</strong>
-        <br>${l.city || ''} - ${l.category || ''}
+    (data || []).map(l => `
+      <div class="listing">
+        <h3>${l.title}</h3>
+        <p>${l.description || ""}</p>
+        <strong>${l.price} DKK</strong>
       </div>
     `).join("");
 }
 
-/* ➕ OPRET ANNONCE */
-document.getElementById("form").onsubmit = async (e)=>{
+/* CREATE LISTING */
+document.getElementById("form").onsubmit = async (e) => {
   e.preventDefault();
 
-  if(!user){
-    alert("Login først");
+  if (!user) {
+    alert("Du skal logge ind først");
     return;
   }
 
-  const { error } = await supabase.from("listings").insert([{
-    title: document.getElementById("title").value,
-    price: Number(document.getElementById("price").value),
-    description: document.getElementById("desc").value,
-    city: document.getElementById("city").value,
-    category: document.getElementById("category").value,
-    image_urls: [],
-    user_id: user.id,
-    user_name: user.email
+  await supabase.from("listings").insert([{
+    title: title.value,
+    price: price.value,
+    city: city.value,
+    category: category.value,
+    description: desc.value,
+    user_id: user.id
   }]);
 
-  if(error){
-    alert(error.message);
-    return;
-  }
-
-  alert("Annonce oprettet!");
-
-  document.getElementById("form").reset();
   load();
 };
 
-/* 🚀 START */
 load();
 </script>
 
