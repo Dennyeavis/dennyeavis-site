@@ -2,199 +2,109 @@
 <html lang="da">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Den Nye Avis 🚀 ULTRA</title>
+<title>Den Nye Avis</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-body{
-  margin:0;
-  font-family:'Manrope',sans-serif;
-  background:#04070d;
-  color:#fff;
-}
-
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px;
-  background:#0b1220;
-  position:sticky;
-  top:0;
-}
-
-button{
-  padding:10px 14px;
-  border-radius:12px;
-  border:none;
-  cursor:pointer;
-  font-weight:bold;
-  background:linear-gradient(135deg,#6ee7f9,#5b8cff);
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-  padding:20px;
-}
-
-.card{
-  background:#0b1220;
-  border-radius:20px;
-  overflow:hidden;
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-}
-
-.card img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-}
-
-.card h3{padding:10px;margin:0}
-.card p{padding:0 10px 10px}
-
-.top-info{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-
-.online{
-  color:#22c55e;
-  font-weight:bold;
-}
-
+body { font-family: Arial; background:#111; color:white; padding:20px; }
+input, textarea { width:100%; margin:5px 0; padding:10px; }
+button { padding:10px 15px; margin-top:10px; }
+.card { background:#222; padding:15px; margin-top:10px; border-radius:10px; }
 </style>
 </head>
+
 <body>
 
-<header>
-<div><b>Den Nye Avis 🚀</b></div>
-<div class="top-info">
-<span id="user">Ikke logget ind</span>
-<span class="online" id="online"></span>
-<button onclick="login()">Login</button>
+<h1>Den Nye Avis</h1>
+
+<button onclick="login()">Login med Google</button>
 <button onclick="logout()">Logout</button>
-<button onclick="toggleMine()">Mine</button>
-<button onclick="openModal()">+ Opret</button>
-</div>
-</header>
 
-<div class="grid" id="listings"></div>
+<h2>Opret annonce</h2>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<form id="form">
+<input id="title" placeholder="Titel" required>
+<input id="price" type="number" placeholder="Pris" required>
+<input id="city" placeholder="By" required>
+<input id="category" placeholder="Kategori" required>
+<textarea id="desc" placeholder="Beskrivelse"></textarea>
+<button type="submit">Opret</button>
+</form>
+
+<h2>Annoncer</h2>
+<div id="list"></div>
 
 <script>
-const firebaseConfig={
- apiKey:"AIzaSyDX7j-Kyo60eOrzQGoCJZL_n7-CE1n5BBk",
- authDomain:"dennyeavis-f2b4a.firebaseapp.com",
- projectId:"dennyeavis-f2b4a"
-};
+const supabase = window.supabase.createClient(
+  "https://qtmztxqmmqutwxwqdovr.supabase.co",
+  "sb_publishable_PTIwcCiqVU7OswHw5Q-w7Q_nRHQzzJP"
+);
 
-firebase.initializeApp(firebaseConfig);
-const db=firebase.firestore();
-const auth=firebase.auth();
+let user = null;
 
-let user=null;
-let showMine=false;
-
-const CLOUD_NAME="dacdmkzmx";
-const UPLOAD_PRESET="dennyeavis";
-
-function login(){
- const provider=new firebase.auth.GoogleAuthProvider();
- auth.signInWithPopup(provider);
+async function login(){
+  await supabase.auth.signInWithOAuth({ provider: "google" });
 }
 
-function logout(){auth.signOut();}
+async function logout(){
+  await supabase.auth.signOut();
+}
 
-auth.onAuthStateChanged(u=>{
- user=u;
- document.getElementById("user").innerText=u?"✅ "+u.email:"❌ Ikke logget ind";
- load();
+supabase.auth.onAuthStateChange((e,s)=>{
+  user = s?.user || null;
 });
 
-function toggleMine(){
- showMine=!showMine;
- load();
+async function load(){
+  const { data, error } = await supabase.from("listings").select("*");
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  document.getElementById("list").innerHTML =
+    data.map(l=>`
+      <div class="card">
+        <h3>${l.title}</h3>
+        <p>${l.description}</p>
+        <strong>${l.price} DKK</strong>
+        <br>${l.city} - ${l.category}
+      </div>
+    `).join("");
 }
 
-function randomOnline(){
- const n=Math.floor(Math.random()*400+120);
- document.getElementById("online").innerText=n+" online";
-}
-setInterval(randomOnline,2000);
-randomOnline();
+document.getElementById("form").onsubmit = async (e)=>{
+  e.preventDefault();
 
-function load(){
- const box=document.getElementById("listings");
- db.collection("listings").orderBy("created","desc").onSnapshot(snap=>{
-  box.innerHTML="";
-  snap.forEach(doc=>{
-   const d=doc.data();
-   if(showMine && user && d.user!==user.uid) return;
+  if(!user){
+    alert("Login først");
+    return;
+  }
 
-   const div=document.createElement("div");
-   div.className="card";
+  const { error } = await supabase.from("listings").insert([{
+    title: document.getElementById("title").value,
+    price: Number(document.getElementById("price").value),
+    description: document.getElementById("desc").value,
+    city: document.getElementById("city").value,
+    category: document.getElementById("category").value,
+    image_urls: [],
+    user_id: user.id,
+    user_name: user.email
+  }]);
 
-   div.innerHTML=`
-    <img src="${d.image||'https://picsum.photos/400'}">
-    <h3>${d.title||''}</h3>
-    <p>${d.price||''} kr</p>
-    ${user && d.user===user.uid?`<button onclick="deleteAd('${doc.id}')">Slet</button>`:""}
-   `;
+  if(error){
+    alert(error.message);
+    return;
+  }
 
-   box.appendChild(div);
-  });
- });
-}
+  alert("Annonce oprettet!");
 
-async function uploadToCloudinary(file){
- const fd=new FormData();
- fd.append("file",file);
- fd.append("upload_preset",UPLOAD_PRESET);
+  document.getElementById("form").reset();
+  load();
+};
 
- const res=await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,{
-  method:"POST",
-  body:fd
- });
- const data=await res.json();
- return data.secure_url;
-}
-
-function openModal(){
- if(!user) return alert("Log ind først");
-
- const title=prompt("Titel");
- const price=prompt("Pris");
-
- const input=document.createElement("input");
- input.type="file";
-
- input.onchange=async()=>{
-  const file=input.files[0];
-  const url=await uploadToCloudinary(file);
-
-  await db.collection("listings").add({
-   title,price,image:url,user:user.uid,created:Date.now()
-  });
- };
- input.click();
-}
-
-function deleteAd(id){
- db.collection("listings").doc(id).delete();
-}
+load();
 </script>
 
 </body>
