@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <title>Den Nye Avis</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- ✅ FIXED SUPABASE SCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
 <style>
 body { font-family: Arial; background:#111; color:white; padding:20px; }
@@ -43,20 +44,33 @@ const supabase = window.supabase.createClient(
 
 let user = null;
 
+/* LOGIN */
 async function login(){
-  await supabase.auth.signInWithOAuth({ provider: "google" });
+  await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: window.location.origin
+    }
+  });
 }
 
+/* LOGOUT */
 async function logout(){
   await supabase.auth.signOut();
 }
 
-supabase.auth.onAuthStateChange((e,s)=>{
-  user = s?.user || null;
+/* AUTH STATE */
+supabase.auth.onAuthStateChange((event, session) => {
+  user = session?.user || null;
+  load();
 });
 
+/* LOAD LISTINGS */
 async function load(){
-  const { data, error } = await supabase.from("listings").select("*");
+  const { data, error } = await supabase
+    .from("listings")
+    .select("*")
+    .order("created_at", { ascending: false });
 
   if(error){
     console.log(error);
@@ -64,16 +78,17 @@ async function load(){
   }
 
   document.getElementById("list").innerHTML =
-    data.map(l=>`
+    (data || []).map(l=>`
       <div class="card">
-        <h3>${l.title}</h3>
-        <p>${l.description}</p>
-        <strong>${l.price} DKK</strong>
-        <br>${l.city} - ${l.category}
+        <h3>${l.title || ''}</h3>
+        <p>${l.description || ''}</p>
+        <strong>${l.price || 0} DKK</strong>
+        <br>${l.city || ''} - ${l.category || ''}
       </div>
     `).join("");
 }
 
+/* CREATE LISTING */
 document.getElementById("form").onsubmit = async (e)=>{
   e.preventDefault();
 
@@ -104,6 +119,7 @@ document.getElementById("form").onsubmit = async (e)=>{
   load();
 };
 
+/* INITIAL LOAD */
 load();
 </script>
 
