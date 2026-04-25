@@ -1,182 +1,1508 @@
-<!DOCTYPE html>
-<html lang="da">
-<head>
-  <meta charset="UTF-8">
-  <title>Den Nye Avis</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+Terminal - Gemini 3 Flash Preview
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(13641ms)
+npm install lucide-react framer-motion react-router-dom clsx tailwind-merge
 
-  <!-- ✅ KORREKT SUPABASE -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+added 4 packages, changed 3 packages, and audited 206 packages in 13s
 
-  <style>
-    body {
-      font-family: Arial;
-      background: #f5f5f5;
-      margin: 0;
+52 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+npm notice
+npm notice New minor version of npm available! 11.12.1 -> 11.13.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.13.0
+npm notice To update run: npm install -g npm@11.13.0
+npm notice
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(41936ms)
+npm run build
+
+> placeholder-model-1@0.0.0 build
+> tsc -b && vite build
+
+vite v7.3.2 building client environment for production...
+transforming...
+✓ 2159 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   7.40 kB │ gzip:   2.48 kB
+dist/assets/index-DQand3D2.css   27.70 kB │ gzip:   5.57 kB
+dist/assets/index-Bk9mw7rw.js   406.48 kB │ gzip: 125.60 kB
+✓ built in 21.20s
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(6954ms)
+npm install @supabase/supabase-js
+
+added 10 packages, and audited 216 packages in 7s
+
+52 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(9094ms)
+npm run build
+
+> placeholder-model-1@0.0.0 build
+> tsc -b && vite build
+
+src/pages/Sell.tsx(213,34): error TS2552: Cannot find name 'navigate'. Did you mean 'navigator'?
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(32045ms)
+npm run build
+
+> placeholder-model-1@0.0.0 build
+> tsc -b && vite build
+
+vite v7.3.2 building client environment for production...
+transforming...
+✓ 2202 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  13.72 kB │ gzip:   4.70 kB
+dist/assets/index-wWHyPZtI.css   28.89 kB │ gzip:   5.83 kB
+dist/assets/index-Ck1Yg-Pr.js   610.71 kB │ gzip: 179.65 kB
+✓ built in 19.16s
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(34174ms)
+npm run build && deploy_to_vercel
+
+> placeholder-model-1@0.0.0 build
+> tsc -b && vite build
+
+vite v7.3.2 building client environment for production...
+transforming...
+✓ 2202 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  14.95 kB │ gzip:   5.00 kB
+dist/assets/index-wWHyPZtI.css   28.89 kB │ gzip:   5.83 kB
+dist/assets/index-DY3bUKGD.js   610.72 kB │ gzip: 179.65 kB
+✓ built in 15.72s
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+/bin/sh: 1: deploy_to_vercel: not found
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(186ms)
+grep -r "ReMarket" src/ index.html
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(40911ms)
+grep -ri "ReMarket" .
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(25742ms)
+grep -ri "remarket" .
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(27192ms)
+grep -rnE "ReMarket|remarket" .
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(55007ms)
+grep -ri "ReMarket" . grep -ri "remarket" .
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(79ms)
+cat src/components/Navbar.tsx src/components/Footer.tsx src/pages/Home.tsx index.html
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Search, ShoppingBag, User, PlusCircle, Menu, X, LogOut } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
+import AuthModal from './AuthModal';
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/browse?q=${encodeURIComponent(searchQuery)}`);
     }
+  };
 
-    header {
-      background: #000;
-      color: white;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-    }
+  return (
+    <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
+          <div className="flex items-center gap-8">
+            <Link to="/" className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white">
+                <ShoppingBag size={24} />
+              </div>
+              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600 hidden sm:block">
+                Den Nye Avis
+              </span>
+            </Link>
 
-    button {
-      padding: 10px;
-      margin: 5px;
-      cursor: pointer;
-    }
+            <form onSubmit={handleSearch} className="hidden md:flex items-center relative w-96">
+              <input
+                type="text"
+                placeholder="Søg efter alt mellem himmel og jord..."
+                className="w-full pl-10 pr-4 py-2 bg-slate-100 border-none rounded-full focus:ring-2 focus:ring-indigo-500 transition-all"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Search className="absolute left-3 text-slate-400" size={18} />
+            </form>
+          </div>
 
-    .container {
-      padding: 20px;
-    }
+          <div className="hidden md:flex items-center gap-4">
+            <Link to="/sell" className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2 rounded-full font-medium hover:bg-indigo-700 transition-colors">
+              <PlusCircle size={18} />
+              <span>Opret annonce</span>
+            </Link>
+            
+            {user ? (
+              <div className="flex items-center gap-2">
+                <button className="p-2 text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
+                  <User size={24} />
+                </button>
+                <button onClick={() => signOut()} className="p-2 text-slate-400 hover:text-red-500 transition-colors" title="Log ud">
+                  <LogOut size={20} />
+                </button>
+              </div>
+            ) : (
+              <button 
+                onClick={() => setIsAuthModalOpen(true)}
+                className="text-slate-600 font-medium hover:text-indigo-600 transition-colors px-4"
+              >
+                Log ind
+              </button>
+            )}
+          </div>
 
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-    }
+          <div className="md:hidden flex items-center">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-slate-600">
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
+        </div>
+      </div>
 
-    .listing {
-      background: white;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 10px;
-    }
-  </style>
+      {/* Mobile menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white border-t border-slate-100 p-4 space-y-4">
+          <form onSubmit={handleSearch} className="relative">
+            <input
+              type="text"
+              placeholder="Søg..."
+              className="w-full pl-10 pr-4 py-2 bg-slate-100 border-none rounded-lg"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Search className="absolute left-3 top-2.5 text-slate-400" size={18} />
+          </form>
+          <div className="flex flex-col gap-2">
+            <Link to="/sell" className="flex items-center justify-center gap-2 bg-indigo-600 text-white px-5 py-3 rounded-lg font-medium">
+              <PlusCircle size={18} />
+              <span>Opret annonce</span>
+            </Link>
+            {user ? (
+              <button onClick={() => signOut()} className="text-center py-3 text-red-500 font-medium border border-red-100 rounded-lg">Log ud</button>
+            ) : (
+              <button onClick={() => setIsAuthModalOpen(true)} className="text-center py-3 text-slate-600 font-medium border border-slate-100 rounded-lg">Log ind</button>
+            )}
+            <Link to="/browse" className="text-center py-3 text-slate-600 font-medium">Gennemse kategorier</Link>
+          </div>
+        </div>
+      )}
+
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+    </nav>
+  );
+};
+
+export default Navbar;
+import React from 'react';
+import { ShoppingBag, Facebook, Instagram, Twitter, Mail } from 'lucide-react';
+
+const Footer = () => {
+  return (
+    <footer className="bg-white border-t border-slate-200 pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
+                <ShoppingBag size={18} />
+              </div>
+              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600">
+                Den Nye Avis
+              </span>
+            </div>
+            <p className="text-slate-500 text-sm leading-relaxed">
+              Danmarks nye platform for genbrug og cirkulær økonomi. Vi gør det nemt, sikkert og smukt at handle brugt online.
+            </p>
+            <div className="flex gap-4">
+              <a href="#" className="text-slate-400 hover:text-indigo-600 transition-colors"><Facebook size={20} /></a>
+              <a href="#" className="text-slate-400 hover:text-indigo-600 transition-colors"><Instagram size={20} /></a>
+              <a href="#" className="text-slate-400 hover:text-indigo-600 transition-colors"><Twitter size={20} /></a>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-slate-900 mb-6">Udforsk</h4>
+            <ul className="space-y-4 text-sm text-slate-500">
+              <li><a href="#" className="hover:text-indigo-600">Alle annoncer</a></li>
+              <li><a href="#" className="hover:text-indigo-600">Populære kategorier</a></li>
+              <li><a href="#" className="hover:text-indigo-600">Søg lokalt</a></li>
+              <li><a href="#" className="hover:text-indigo-600">Giv væk gratis</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-slate-900 mb-6">Sælg på Den Nye Avis</h4>
+            <ul className="space-y-4 text-sm text-slate-500">
+              <li><a href="#" className="hover:text-indigo-600">Opret annonce</a></li>
+              <li><a href="#" className="hover:text-indigo-600">Priser & Pakker</a></li>
+              <li><a href="#" className="hover:text-indigo-600">Sælger-guide</a></li>
+              <li><a href="#" className="hover:text-indigo-600">Erhvervsaftaler</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-slate-900 mb-6">Kundeservice</h4>
+            <ul className="space-y-4 text-sm text-slate-500">
+              <li><a href="#" className="hover:text-indigo-600">Hjælpecenter</a></li>
+              <li><a href="#" className="hover:text-indigo-600">Sikker handel</a></li>
+              <li><a href="#" className="hover:text-indigo-600">Betingelser</a></li>
+              <li><a href="#" className="hover:text-indigo-600">Kontakt os</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div className="pt-8 border-t border-slate-100 flex flex-col md:row items-center justify-between gap-4">
+          <p className="text-xs text-slate-400">© 2024 Den Nye Avis. Alle rettigheder forbeholdes.</p>
+          <div className="flex gap-6 text-xs text-slate-400">
+            <a href="#" className="hover:text-indigo-600">Privatlivspolitik</a>
+            <a href="#" className="hover:text-indigo-600">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { CATEGORIES, MOCK_PRODUCTS } from '../lib/mockData';
+import { ArrowRight, ShieldCheck, Zap, Heart, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { supabase } from '../lib/supabase';
+
+const Home = () => {
+  const [listings, setListings] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('listings')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(6);
+        
+        if (error) throw error;
+        if (data && data.length > 0) {
+          setListings(data);
+        } else {
+          setListings(MOCK_PRODUCTS);
+        }
+      } catch (err) {
+        console.error('Error fetching listings:', err);
+        setListings(MOCK_PRODUCTS);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchListings();
+  }, []);
+
+  return (
+    <div className="space-y-12 pb-20">
+      {/* Hero Section */}
+      <section className="relative bg-indigo-900 text-white py-20 px-4 overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-400 via-transparent to-transparent"></div>
+        </div>
+        <div className="max-w-7xl mx-auto relative z-10 text-center">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight"
+          >
+            Den Nye Avis.<br/>
+            <span className="text-indigo-400">Genbrug gjort smukt.</span>
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-lg md:text-xl text-indigo-100 mb-10 max-w-2xl mx-auto"
+          >
+            Danmarks smukkeste markedsplads for genbrug. Køb og sælg sikkert med vores verificerede brugere.
+          </motion.p>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            <Link to="/browse" className="bg-white text-indigo-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-100 transition-colors">
+              Udforsk annoncer
+            </Link>
+            <Link to="/sell" className="bg-indigo-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-indigo-500 transition-colors border border-indigo-500">
+              Sælg nu
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Categories */}
+      <section className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl font-bold text-slate-900">Populære kategorier</h2>
+          <Link to="/browse" className="text-indigo-600 font-semibold flex items-center gap-1 hover:underline">
+            Se alle <ArrowRight size={16} />
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+          {CATEGORIES.map((cat) => (
+            <Link 
+              key={cat.id} 
+              to={`/browse?category=${cat.id}`}
+              className="bg-white p-6 rounded-2xl border border-slate-200 text-center hover:border-indigo-500 hover:shadow-lg transition-all group"
+            >
+              <div className="text-3xl mb-3 group-hover:scale-110 transition-transform">{cat.icon}</div>
+              <span className="text-sm font-medium text-slate-700">{cat.name}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured Items */}
+      <section className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl font-bold text-slate-900">Nyeste annoncer</h2>
+          <Link to="/browse" className="text-indigo-600 font-semibold flex items-center gap-1 hover:underline">
+            Se alle <ArrowRight size={16} />
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {loading ? (
+            <div className="col-span-full flex justify-center py-20">
+              <Loader2 className="animate-spin text-indigo-600" size={48} />
+            </div>
+          ) : listings.map((product) => (
+            <Link 
+              key={product.id} 
+              to={`/product/${product.id}`}
+              className="bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl transition-all group"
+            >
+              <div className="relative h-64 overflow-hidden">
+                <img 
+                  src={product.image} 
+                  alt={product.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <button className="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur-sm rounded-full text-slate-600 hover:text-red-500 transition-colors">
+                  <Heart size={20} />
+                </button>
+                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-lg text-sm font-bold text-indigo-600">
+                  {product.price.toLocaleString('da-DK')} kr.
+                </div>
+              </div>
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">{product.category}</span>
+                  <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+                  <span className="text-xs text-slate-500">{product.location}</span>
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-2 line-clamp-1">{product.title}</h3>
+                <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-50">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center text-xs font-bold text-slate-600">
+                      {product.seller?.name?.[0] || 'U'}
+                    </div>
+                    <span className="text-sm text-slate-600">{product.seller?.name || 'Bruger'}</span>
+                  </div>
+                  <span className="text-xs text-slate-400">{product.createdAt || 'Nyligt'}</span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Trust Section */}
+      <section className="bg-slate-100 py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-12">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mb-6">
+                <ShieldCheck size={32} />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Sikker Handel</h3>
+              <p className="text-slate-600">Vi verificerer vores brugere med MitID for at sikre en tryg oplevelse for alle.</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mb-6">
+                <Zap size={32} />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Hurtig Support</h3>
+              <p className="text-slate-600">Vores kundeservice sidder klar alle ugens dage til at hjælpe dig med dine spørgsmål.</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mb-6">
+                <Heart size={32} />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Bæredygtighed</h3>
+              <p className="text-slate-600">Gør noget godt for planeten og din pengepung ved at handle brugt i stedet for nyt.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Home;
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Den Nye Avis | Danmarks Nye Markedsplads for Genbrug</title>
+    <meta name="description" content="Køb og sælg brugte ting på Den Nye Avis. Danmarks smukkeste markedsplads for genbrug. Find elektronik, møbler, tøj og meget mere." />
+    <meta name="keywords" content="genbrug, markedsplads, køb og salg, dba alternativ, brugte ting, billig elektronik, vintage tøj" />
+    
+    {/* Open Graph / Facebook */}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dennyeavis.dk/" />
+    <meta property="og:title" content="Den Nye Avis | Danmarks Nye Markedsplads for Genbrug" />
+    <meta property="og:description" content="Køb og sælg brugte ting på Den Nye Avis. Danmarks smukkeste markedsplads for genbrug." />
+    <meta property="og:image" content="/og-image.png" />
+
+    {/* Twitter */}
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://dennyeavis.dk/" />
+    <meta property="twitter:title" content="Den Nye Avis | Danmarks Nye Markedsplads for Genbrug" />
+    <meta property="twitter:description" content="Køb og sælg brugte ting på Den Nye Avis. Danmarks smukkeste markedsplads for genbrug." />
+    <meta property="twitter:image" content="/og-image.png" />
+    <script data-arena-recording="true">(function(){
+"use strict";
+var SK="__arena_rec",RRWEB_CDN="https://cdn.jsdelivr.net/npm/rrweb@2.0.0-alpha.4/dist/rrweb.min.js";
+var MAX_RECORDING_MS=600000,MAX_RRWEB_EVENTS=30000,MAX_INTERACTIONS=5000,MAX_CURSOR_POINTS=10000,recStopped=false;
+var stored=null;try{var raw=sessionStorage.getItem(SK);if(raw)stored=JSON.parse(raw);}catch(ex){}
+var meta=stored?stored.m||null:null,rrwebEvents=stored?stored.r||[]:[],rrwebStarted=false,startTime=stored?stored.st||Date.now():Date.now();
+var interactions=stored?stored.i||[]:[],cursorPath=stored?stored.c||[]:[],lastCursorSample=0,lastScrollSample=0;
+var pageHeight=document.documentElement.scrollHeight;
+var viewport={width:window.innerWidth,height:window.innerHeight};
+function isCapped(){if(recStopped)return true;if(Date.now()-startTime>=MAX_RECORDING_MS){recStopped=true;return true;}return false;}
+function persist(){try{var d=JSON.stringify({r:rrwebEvents,i:interactions,c:cursorPath,m:meta,st:startTime});sessionStorage.setItem(SK,d);}catch(ex){rrwebEvents=rrwebEvents.slice(Math.floor(rrwebEvents.length/2));try{sessionStorage.setItem(SK,JSON.stringify({r:rrwebEvents,i:interactions,c:cursorPath,m:meta,st:startTime}));}catch(ex2){}}}
+setInterval(persist,5000);
+window.addEventListener("resize",function(){viewport={width:window.innerWidth,height:window.innerHeight};pageHeight=document.documentElement.scrollHeight;});
+document.addEventListener("click",function(e){if(isCapped()||interactions.length>=MAX_INTERACTIONS)return;var el=e.target;var tag=el.tagName?el.tagName.toLowerCase():"";var text=(el.textContent||"").trim().substring(0,80);var classes=el.className&&typeof el.className==="string"?el.className.substring(0,120):"";interactions.push({type:"click",t:Date.now()-startTime,x:Math.round(e.clientX),y:Math.round(e.clientY),element:{tag:tag,text:text,classes:classes}});},true);
+window.addEventListener("scroll",function(){if(isCapped()||interactions.length>=MAX_INTERACTIONS)return;var now=Date.now();if(now-lastScrollSample<200)return;lastScrollSample=now;var scrollY=Math.round(window.scrollY||window.pageYOffset||0);var depthPct=pageHeight>viewport.height?Math.min(100,Math.round(((scrollY+viewport.height)/pageHeight)*100)):100;interactions.push({type:"scroll",t:now-startTime,y:scrollY,depth_pct:depthPct});},{passive:true});
+document.addEventListener("mousemove",function(e){if(isCapped()||cursorPath.length>=MAX_CURSOR_POINTS)return;var now=Date.now();if(now-lastCursorSample<250)return;lastCursorSample=now;cursorPath.push([Math.round(e.clientX),Math.round(e.clientY),now-startTime]);},{passive:true});
+document.addEventListener("keydown",function(e){if(isCapped()||interactions.length>=MAX_INTERACTIONS)return;if(e.target&&(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA"))return;interactions.push({type:"keydown",t:Date.now()-startTime,key:e.key});},true);
+function buildAnalytics(){if(!meta)return null;var ph=document.documentElement.scrollHeight;var maxScroll=0,clickElements={},firstClick=null,firstScroll=null,totalDistance=0;for(var i=0;i<interactions.length;i++){var ev=interactions[i];if(ev.type==="scroll"){if(ev.depth_pct>maxScroll)maxScroll=ev.depth_pct;if(!firstScroll)firstScroll=ev.t;}if(ev.type==="click"){if(!firstClick)firstClick=ev.t;var key=ev.element.tag+":"+ev.element.text.substring(0,30);clickElements[key]=true;}}for(var j=1;j<cursorPath.length;j++){var dx=cursorPath[j][0]-cursorPath[j-1][0];var dy=cursorPath[j][1]-cursorPath[j-1][1];totalDistance+=Math.sqrt(dx*dx+dy*dy);}var duration=Date.now()-startTime;var clickHeatmap=[];for(var k=0;k<interactions.length;k++){if(interactions[k].type==="click")clickHeatmap.push([interactions[k].x,interactions[k].y]);}return{generation_id:meta.generationId,tournament_id:meta.tournamentId,started_at:new Date(startTime).toISOString(),ended_at:new Date().toISOString(),duration_ms:duration,viewport:viewport,page_height:ph,interactions:interactions,cursor_path:cursorPath,click_heatmap:clickHeatmap,summary:{total_clicks:clickHeatmap.length,total_scrolls:interactions.filter(function(e){return e.type==="scroll";}).length,max_scroll_depth_pct:maxScroll,unique_elements_clicked:Object.keys(clickElements).length,time_to_first_click_ms:firstClick,time_to_first_scroll_ms:firstScroll,cursor_distance_px:Math.round(totalDistance),active_time_ms:duration}};}
+function loadRrweb(){if(rrwebStarted)return;rrwebStarted=true;var s=document.createElement("script");s.src=RRWEB_CDN;s.onload=function(){var rec=(window.rrweb&&window.rrweb.record)||window.rrwebRecord;if(!rec)return;rec({emit:function(event){if(rrwebEvents.length>=MAX_RRWEB_EVENTS||isCapped())return;rrwebEvents.push(event);}});};s.onerror=function(){};document.head.appendChild(s);}
+window.addEventListener("message",function(e){if(!e.data||typeof e.data.type!=="string")return;if(e.data.type==="arena:init"){if(!meta)startTime=Date.now();meta={generationId:e.data.generationId||e.data.modelId,tournamentId:e.data.tournamentId};persist();loadRrweb();if(e.source)e.source.postMessage({type:"arena:init-ack",generationId:meta.generationId},"*");}if(e.data.type==="arena:flush"){var resp={type:"arena:recording-data",generationId:meta?meta.generationId:null,rrwebEvents:rrwebEvents,analytics:buildAnalytics()};try{sessionStorage.removeItem(SK);}catch(ex){}if(e.source)e.source.postMessage(resp,"*");}});
+loadRrweb();
+})();</script>
+  <script data-arena-views="true">(function(){var isTop=false;try{isTop=window.self===window.top;}catch(e){}if(!isTop)return;window.__ARENA_META={generationId:"gemini-3-flash-preview",tournamentId:"a456176d-7d46-4380-b553-f7f2a55b89e2"};var payload={tournamentId:"a456176d-7d46-4380-b553-f7f2a55b89e2",modelId:"gemini-3-flash-preview"};try{var r=document.referrer;if(r){var u=new URL(r);payload.referrerDomain=u.hostname;}}catch(e){}try{var vid=null;try{vid=localStorage.getItem('arena_vid');}catch(e){}if(!vid){vid=typeof crypto!=="undefined"&&crypto.randomUUID?crypto.randomUUID():(Date.now().toString(36)+Math.random().toString(36).slice(2)).slice(0,32);try{localStorage.setItem('arena_vid',vid);}catch(e){}}if(vid)payload.viewerId=vid;}catch(e){}try{fetch("https://www.designarena.ai/api/agon/page-views",{"method":"POST","headers":{"Content-Type":"application/json"},"body":JSON.stringify(payload),"keepalive":true});}catch(e){}})();</script>
 </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+      <script data-element-picker>/**
+ * Agon Element Picker — injected into the preview iframe.
+ *
+ * Listens for postMessage from the parent to toggle inspect mode.
+ * In inspect mode, hovering highlights elements and clicking sends
+ * the element's source location (from data-source-loc) back to the parent.
+ *
+ * Protocol:
+ *   Parent -> iframe:  { type: 'inspect:mode', enabled: true/false }
+ *   iframe -> Parent:  { type: 'element:selected', file, line, column, tag, text, classes, id }
+ */
+(function () {
+  'use strict';
 
-<body>
+  var inspectEnabled = false;
+  var overlay = null;
+  var label = null;
+  var currentTarget = null;
 
-<header>
-  <div>Den Nye Avis</div>
-  <div>
-    <button onclick="login()">Login</button>
-    <button onclick="logout()">Logout</button>
-  </div>
-</header>
+  function createOverlay() {
+    if (overlay) return;
 
-<div class="container">
+    overlay = document.createElement('div');
+    overlay.id = '__picker-overlay';
+    overlay.style.cssText = [
+      'position: fixed',
+      'pointer-events: none',
+      'z-index: 2147483647',
+      'border: 2px solid #3b82f6',
+      'background: rgba(59, 130, 246, 0.08)',
+      'transition: all 0.05s ease-out',
+      'display: none',
+      'box-sizing: border-box',
+    ].join(';');
 
-  <h2>Opret annonce</h2>
+    label = document.createElement('div');
+    label.id = '__picker-label';
+    label.style.cssText = [
+      'position: fixed',
+      'pointer-events: none',
+      'z-index: 2147483647',
+      'background: #1e40af',
+      'color: #fff',
+      'font: 11px/1.4 monospace',
+      'padding: 2px 6px',
+      'border-radius: 3px',
+      'white-space: nowrap',
+      'display: none',
+      'max-width: 400px',
+      'overflow: hidden',
+      'text-overflow: ellipsis',
+    ].join(';');
 
-  <form id="form">
-    <input id="title" placeholder="Titel" required>
-    <input id="price" type="number" placeholder="Pris" required>
-    <input id="city" placeholder="By">
-    <input id="category" placeholder="Kategori">
-    <textarea id="desc" placeholder="Beskrivelse"></textarea>
-    <button type="submit">Opret</button>
-  </form>
+    document.body.appendChild(overlay);
+    document.body.appendChild(label);
+  }
 
-  <h2>Annoncer</h2>
-  <div id="list"></div>
+  function removeOverlay() {
+    if (overlay) { overlay.remove(); overlay = null; }
+    if (label) { label.remove(); label = null; }
+  }
 
-</div>
+  function findSourceAttr(el) {
+    while (el && el !== document.body && el !== document.documentElement) {
+      var src = el.getAttribute('data-source-loc');
+      if (src) return { element: el, source: src };
+      el = el.parentElement;
+    }
+    return null;
+  }
 
-<script>
-const supabase = window.supabase.createClient(
-  "https://qtmztxqmmqutwxwqdovr.supabase.co",
-  "sb_publishable_PTIwcCiqVU7OswHw5Q-w7Q_nRHQzzJP"
-);
+  function parseSource(sourceStr) {
+    // Format: "relative/path.tsx:line:col"
+    var parts = sourceStr.split(':');
+    if (parts.length < 3) return { file: sourceStr, line: 0, column: 0 };
+    var col = parseInt(parts.pop(), 10);
+    var line = parseInt(parts.pop(), 10);
+    var file = parts.join(':'); // rejoin in case path has colons (unlikely but safe)
+    return { file: file, line: line, column: col };
+  }
 
-let user = null;
+  function highlightElement(el) {
+    if (!overlay || !el) return;
 
-/* 🔐 LOGIN */
-async function login() {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: "https://dennyeavis.dk"
+    var rect = el.getBoundingClientRect();
+    overlay.style.top = rect.top + 'px';
+    overlay.style.left = rect.left + 'px';
+    overlay.style.width = rect.width + 'px';
+    overlay.style.height = rect.height + 'px';
+    overlay.style.display = 'block';
+
+    var tag = el.tagName.toLowerCase();
+    var src = el.getAttribute('data-source-loc');
+    var labelText = '<' + tag + '>';
+    if (src) {
+      var parsed = parseSource(src);
+      labelText += '  ' + parsed.file + ':' + parsed.line;
+    }
+    label.textContent = labelText;
+
+    // Position label above the element, or below if too close to top
+    var labelTop = rect.top - 22;
+    if (labelTop < 4) labelTop = rect.bottom + 4;
+    label.style.top = labelTop + 'px';
+    label.style.left = Math.max(4, rect.left) + 'px';
+    label.style.display = 'block';
+  }
+
+  function hideOverlay() {
+    if (overlay) overlay.style.display = 'none';
+    if (label) label.style.display = 'none';
+    currentTarget = null;
+  }
+
+  function onMouseOver(e) {
+    if (!inspectEnabled) return;
+    var target = e.target;
+
+    // Skip our own overlay elements
+    if (target === overlay || target === label) return;
+    if (target.id === '__picker-overlay' || target.id === '__picker-label') return;
+
+    var found = findSourceAttr(target);
+    if (found) {
+      currentTarget = found.element;
+      highlightElement(found.element);
+    } else {
+      currentTarget = target;
+      highlightElement(target);
+    }
+  }
+
+  function onMouseOut(e) {
+    if (!inspectEnabled) return;
+    var related = e.relatedTarget;
+    if (related === overlay || related === label) return;
+    if (!e.relatedTarget || e.relatedTarget === document) {
+      hideOverlay();
+    }
+  }
+
+  function onClick(e) {
+    if (!inspectEnabled) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+
+    var target = e.target;
+    if (target === overlay || target === label) return;
+
+    var found = findSourceAttr(target);
+    var element = found ? found.element : target;
+    var sourceStr = found ? found.source : null;
+
+    var info = {
+      type: 'element:selected',
+      tag: element.tagName.toLowerCase(),
+      text: (element.textContent || '').trim().substring(0, 200),
+      classes: element.className && typeof element.className === 'string'
+        ? element.className.substring(0, 300) : '',
+      id: element.id || '',
+      file: null,
+      line: null,
+      column: null,
+    };
+
+    if (sourceStr) {
+      var parsed = parseSource(sourceStr);
+      info.file = parsed.file;
+      info.line = parsed.line;
+      info.column = parsed.column;
+    }
+
+    // Send to parent
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage(info, '*');
+    }
+    // Also log locally for standalone testing
+    console.log('[element-picker] Selected:', info);
+  }
+
+  function enableInspect() {
+    if (inspectEnabled) return;
+    inspectEnabled = true;
+    createOverlay();
+    document.addEventListener('mouseover', onMouseOver, true);
+    document.addEventListener('mouseout', onMouseOut, true);
+    document.addEventListener('click', onClick, true);
+    document.body.style.cursor = 'crosshair';
+    console.log('[element-picker] Inspect mode ON');
+  }
+
+  function disableInspect() {
+    if (!inspectEnabled) return;
+    inspectEnabled = false;
+    document.removeEventListener('mouseover', onMouseOver, true);
+    document.removeEventListener('mouseout', onMouseOut, true);
+    document.removeEventListener('click', onClick, true);
+    hideOverlay();
+    removeOverlay();
+    document.body.style.cursor = '';
+    console.log('[element-picker] Inspect mode OFF');
+  }
+
+  // Listen for commands from parent
+  window.addEventListener('message', function (e) {
+    if (!e.data || typeof e.data.type !== 'string') return;
+
+    if (e.data.type === 'inspect:mode') {
+      if (e.data.enabled) {
+        enableInspect();
+      } else {
+        disableInspect();
+      }
     }
   });
 
-  if (error) {
-    alert(error.message);
-  }
-}
+  // Also support toggling via keyboard (Alt+Shift+I) for standalone testing
+  document.addEventListener('keydown', function (e) {
+    if (e.altKey && e.shiftKey && e.key === 'I') {
+      if (inspectEnabled) {
+        disableInspect();
+      } else {
+        enableInspect();
+      }
+    }
+  });
 
-/* 🚪 LOGOUT */
-async function logout() {
-  await supabase.auth.signOut();
-  user = null;
-  alert("Logget ud");
-}
+  console.log('[element-picker] Loaded. Waiting for inspect-mode command (or press Alt+Shift+I).');
+})();
+</script>
+  </body>
+</html>
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(25884ms)
+grep -rnE "ReMarket|remarket" .
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(1500ms)
+find . -type f -not -path '*/.*' -not -path './node_modules/*' -not -path './dist/*' -exec grep -lE "ReMarket|remarket" {} +
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(198ms)
+grep -r "ReMarket" . --exclude-dir=node_modules --exclude-dir=dist grep -r "remarket" . --exclude-dir=node_modules --exclude-dir=dist
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(167ms)
+find src -type f -exec sed -i 's/ReMarket/Den Nye Avis/g' {} + find src -type f -exec sed -i 's/remarket/dennyeavis/g' {} + sed -i 's/ReMarket/Den Nye Avis/g' index.html sed -i 's/remarket/dennyeavis/g' index.html
+sed: couldn't open temporary file src/pages/sed0dx35L: Permission denied
+sed: couldn't open temporary file src/pages/sedJzfySq: Permission denied
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(238ms)
+grep -r "ReMarket" . --exclude-dir=node_modules --exclude-dir=dist grep -r "remarket" . --exclude-dir=node_modules --exclude-dir=dist
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(25617ms)
+npm run build && deploy_to_vercel
 
-/* 🔁 CHECK USER */
-async function checkUser() {
-  const { data } = await supabase.auth.getUser();
-  user = data?.user || null;
-  console.log("USER:", user);
-}
+> placeholder-model-1@0.0.0 build
+> tsc -b && vite build
 
-checkUser();
+vite v7.3.2 building client environment for production...
+transforming...
+✓ 2202 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  14.95 kB │ gzip:   5.00 kB
+dist/assets/index-wWHyPZtI.css   28.89 kB │ gzip:   5.83 kB
+dist/assets/index-DY3bUKGD.js   610.72 kB │ gzip: 179.65 kB
+✓ built in 12.65s
 
-/* 🔄 LISTENER */
-supabase.auth.onAuthStateChange((event, session) => {
-  user = session?.user || null;
-  console.log("LOGIN STATE:", user);
-  load();
-});
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+/bin/sh: 1: deploy_to_vercel: not found
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(68021ms)
+grep -rn "ReMarket" . grep -rn "remarket" . grep -rn "dennyeavis" .
+./dist/sitemap.xml:4:    <loc>https://dennyeavis.dk/</loc>
+./dist/sitemap.xml:10:    <loc>https://dennyeavis.dk/browse</loc>
+./dist/index.html:13:    <meta property="og:url" content="https://dennyeavis.dk/" />
+./dist/index.html:20:    <meta property="twitter:url" content="https://dennyeavis.dk/" />
+./dist/robots.txt:4:Sitemap: https://dennyeavis.dk/sitemap.xml
+./index.html:13:    <meta property="og:url" content="https://dennyeavis.dk/" />
+./index.html:20:    <meta property="twitter:url" content="https://dennyeavis.dk/" />
+./public/sitemap.xml:4:    <loc>https://dennyeavis.dk/</loc>
+./public/sitemap.xml:10:    <loc>https://dennyeavis.dk/browse</loc>
+./public/robots.txt:4:Sitemap: https://dennyeavis.dk/sitemap.xml
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(45806ms)
+grep -ri "ReMarket" . grep -ri "remarket" .
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(46459ms)
+grep -r "ReMarket" . grep -r "remarket" .
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(17092ms)
+npm run build
 
-/* 📦 LOAD */
-async function load() {
-  const { data, error } = await supabase
-    .from("listings")
-    .select("*")
-    .order("created_at", { ascending: false });
+> placeholder-model-1@0.0.0 build
+> tsc -b && vite build
 
-  if (error) {
-    console.log("LOAD ERROR:", error);
-    return;
-  }
+vite v7.3.2 building client environment for production...
+transforming...
+✓ 2202 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  14.95 kB │ gzip:   5.00 kB
+dist/assets/index-wWHyPZtI.css   28.89 kB │ gzip:   5.83 kB
+dist/assets/index-DY3bUKGD.js   610.72 kB │ gzip: 179.65 kB
+✓ built in 7.76s
 
-  document.getElementById("list").innerHTML =
-    (data || []).map(l => `
-      <div class="listing">
-        <h3>${l.title || ""}</h3>
-        <p>${l.description || ""}</p>
-        <strong>${l.price || 0} DKK</strong>
-        <br>${l.city || ""} - ${l.category || ""}
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(95ms)
+grep -ril "ReMarket" src/ index.html grep -ril "remarket" src/ index.html
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(76ms)
+grep -riE "remarket|market" src/ index.html --exclude-dir=node_modules
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(19008ms)
+npm run build && deploy_to_vercel
+
+> placeholder-model-1@0.0.0 build
+> tsc -b && vite build
+
+vite v7.3.2 building client environment for production...
+transforming...
+✓ 2202 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  14.95 kB │ gzip:   5.00 kB
+dist/assets/index-wWHyPZtI.css   28.89 kB │ gzip:   5.83 kB
+dist/assets/index-DY3OM6cL.js   610.70 kB │ gzip: 179.63 kB
+✓ built in 8.65s
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+/bin/sh: 1: deploy_to_vercel: not found
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(6807ms)
+npm run build && deploy_to_vercel
+
+> placeholder-model-1@0.0.0 build
+> tsc -b && vite build
+
+src/pages/Home.tsx(167,163): error TS2304: Cannot find name 'i'.
+src/pages/Home.tsx(168,95): error TS2304: Cannot find name 'MapPin'.
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(19432ms)
+npm run build && deploy_to_vercel
+
+> placeholder-model-1@0.0.0 build
+> tsc -b && vite build
+
+vite v7.3.2 building client environment for production...
+transforming...
+✓ 2202 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   2.19 kB │ gzip:   0.75 kB
+dist/assets/index-o4apTwh1.css   38.15 kB │ gzip:   6.96 kB
+dist/assets/index-11Sxp9-X.js   618.25 kB │ gzip: 181.31 kB
+✓ built in 8.61s
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+/bin/sh: 1: deploy_to_vercel: not found
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(6622ms)
+npm run build && deploy_to_vercel
+
+> placeholder-model-1@0.0.0 build
+> tsc -b && vite build
+
+src/pages/Browse.tsx(168,24): error TS2304: Cannot find name 'Heart'.
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(18511ms)
+npm run build && deploy_to_vercel
+
+> placeholder-model-1@0.0.0 build
+> tsc -b && vite build
+
+vite v7.3.2 building client environment for production...
+transforming...
+✓ 2202 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   8.51 kB │ gzip:   3.07 kB
+dist/assets/index-DQPM6oWO.css   43.51 kB │ gzip:   7.61 kB
+dist/assets/index-DTccJQ7j.js   628.74 kB │ gzip: 182.94 kB
+✓ built in 8.68s
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+/bin/sh: 1: deploy_to_vercel: not found
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(20600ms)
+npm run build && deploy_to_vercel
+
+> placeholder-model-1@0.0.0 build
+> tsc -b && vite build
+
+vite v7.3.2 building client environment for production...
+transforming...
+✓ 2202 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   9.35 kB │ gzip:   3.28 kB
+dist/assets/index-DQPM6oWO.css   43.51 kB │ gzip:   7.61 kB
+dist/assets/index-LZIOZAMg.js   628.78 kB │ gzip: 182.96 kB
+✓ built in 8.25s
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+/bin/sh: 1: deploy_to_vercel: not found
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(103ms)
+grep -ri "ReMarket" src/ index.html --exclude-dir=node_modules --exclude-dir=dist grep -ri "remarket" src/ index.html --exclude-dir=node_modules --exclude-dir=dist
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(134ms)
+grep -ri "remarket" . --exclude-dir=node_modules --exclude-dir=dist grep -ri "ReMarket" . --exclude-dir=node_modules --exclude-dir=dist
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(105ms)
+grep -rE "ReMarket|remarket" . --exclude-dir=node_modules --exclude-dir=dist
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(45435ms)
+grep -ri "ReMarket" . grep -ri "remarket" .
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(112ms)
+grep -rnE "ReMarket|remarket" . --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.git --exclude-dir=.vite
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(91ms)
+grep -ri "market" . --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.git --exclude-dir=.vite
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(74ms)
+cat src/components/Navbar.tsx src/components/Footer.tsx src/pages/Home.tsx src/pages/Browse.tsx src/pages/ProductDetail.tsx src/pages/Sell.tsx src/lib/mockData.ts src/lib/supabase.ts src/hooks/useAuth.ts src/App.tsx index.html
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Search, User, PlusCircle, Menu, X, LogOut, Newspaper } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
+import AuthModal from './AuthModal';
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/browse?q=${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
+  return (
+    <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-20 items-center">
+          <div className="flex items-center gap-8">
+            <Link to="/" className="flex items-center gap-2 group">
+              <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-200 group-hover:scale-105 transition-transform">
+                <Newspaper size={28} />
+              </div>
+              <div className="flex flex-col -space-y-1">
+                <span className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600 hidden sm:block tracking-tighter">
+                  DEN NYE AVIS
+                </span>
+                <span className="text-[10px] font-bold text-slate-400 hidden sm:block tracking-[0.2em]">MARKEDSPLADS</span>
+              </div>
+            </Link>
+
+            <form onSubmit={handleSearch} className="hidden lg:flex items-center relative w-[400px]">
+              <input
+                type="text"
+                placeholder="Søg blandt tusindvis af annoncer..."
+                className="w-full pl-12 pr-4 py-3 bg-slate-100 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all text-sm font-medium"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Search className="absolute left-4 text-slate-400" size={20} />
+            </form>
+          </div>
+
+          <div className="hidden md:flex items-center gap-6">
+            <Link to="/sell" className="flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-2xl font-bold hover:bg-indigo-700 transition-all hover:shadow-xl hover:shadow-indigo-100 hover:-translate-y-0.5">
+              <PlusCircle size={20} />
+              <span>Opret annonce</span>
+            </Link>
+            
+            {user ? (
+              <div className="flex items-center gap-3 pl-4 border-l border-slate-100">
+                <button className="flex items-center gap-2 p-1 pr-3 hover:bg-slate-50 rounded-full transition-colors">
+                  <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 font-bold">
+                    {user.email?.[0].toUpperCase()}
+                  </div>
+                  <span className="text-sm font-bold text-slate-700">Min Profil</span>
+                </button>
+                <button onClick={() => signOut()} className="p-2 text-slate-400 hover:text-red-500 transition-colors" title="Log ud">
+                  <LogOut size={22} />
+                </button>
+              </div>
+            ) : (
+              <button 
+                onClick={() => setIsAuthModalOpen(true)}
+                className="text-slate-700 font-bold hover:text-indigo-600 transition-colors px-4 text-sm"
+              >
+                Log ind / Opret
+              </button>
+            )}
+          </div>
+
+          <div className="md:hidden flex items-center">
+            <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-slate-600 hover:bg-slate-100 rounded-xl transition-colors">
+              {isOpen ? <X size={32} /> : <Menu size={32} />}
+            </button>
+          </div>
+        </div>
       </div>
-    `).join("");
-}
 
-/* ➕ CREATE */
-document.getElementById("form").onsubmit = async (e) => {
-  e.preventDefault();
+      {/* Mobile menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white border-t border-slate-100 p-6 space-y-6 shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300">
+          <form onSubmit={handleSearch} className="relative">
+            <input
+              type="text"
+              placeholder="Søg i hele Danmark..."
+              className="w-full pl-12 pr-4 py-4 bg-slate-100 border-none rounded-2xl font-medium"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Search className="absolute left-4 top-4 text-slate-400" size={24} />
+          </form>
+          <div className="flex flex-col gap-3">
+            <Link to="/sell" className="flex items-center justify-center gap-2 bg-indigo-600 text-white px-5 py-4 rounded-2xl font-black shadow-lg shadow-indigo-100">
+              <PlusCircle size={24} />
+              <span>Opret annonce</span>
+            </Link>
+            {user ? (
+              <button onClick={() => signOut()} className="text-center py-4 text-red-500 font-black border-2 border-red-50 rounded-2xl">Log ud</button>
+            ) : (
+              <button onClick={() => setIsAuthModalOpen(true)} className="text-center py-4 text-slate-700 font-black border-2 border-slate-100 rounded-2xl">Log ind / Opret</button>
+            )}
+            <Link to="/browse" className="text-center py-4 text-slate-600 font-bold bg-slate-50 rounded-2xl">Gennemse kategorier</Link>
+          </div>
+        </div>
+      )}
 
-  if (!user) {
-    alert("Du skal logge ind først");
-    return;
-  }
-
-  const { error } = await supabase.from("listings").insert([{
-    title: document.getElementById("title").value,
-    price: Number(document.getElementById("price").value),
-    description: document.getElementById("desc").value,
-    city: document.getElementById("city").value,
-    category: document.getElementById("category").value,
-    image_urls: [],
-    user_id: user.id,
-    user_name: user.email
-  }]);
-
-  if (error) {
-    alert(error.message);
-    return;
-  }
-
-  alert("Annonce oprettet!");
-  document.getElementById("form").reset();
-  load();
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+    </nav>
+  );
 };
 
-/* 🚀 START */
-load();
-</script>
+export default Navbar;
+import React from 'react';
+import { Newspaper, Facebook, Instagram, Twitter, Mail, MapPin, Phone } from 'lucide-react';
 
-</body>
-</html>
+const Footer = () => {
+  return (
+    <footer className="bg-white border-t border-slate-200 pt-20 pb-10">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-16">
+          <div className="space-y-6">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white">
+                <Newspaper size={22} />
+              </div>
+              <span className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600 tracking-tighter">
+                DEN NYE AVIS
+              </span>
+            </div>
+            <p className="text-slate-500 text-sm leading-relaxed font-medium">
+              Danmarks førende platform for moderne genbrug. Vi kombinerer tryghed, skønhed og cirkulær økonomi i én samlet oplevelse.
+            </p>
+            <div className="flex gap-4">
+              <a href="#" className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 hover:bg-indigo-600 hover:text-white transition-all"><Facebook size={18} /></a>
+              <a href="#" className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 hover:bg-indigo-600 hover:text-white transition-all"><Instagram size={18} /></a>
+              <a href="#" className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 hover:bg-indigo-600 hover:text-white transition-all"><Twitter size={18} /></a>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-black text-slate-900 mb-8 uppercase tracking-widest text-xs">Markedspladsen</h4>
+            <ul className="space-y-4 text-sm text-slate-500 font-bold">
+              <li><a href="#" className="hover:text-indigo-600 transition-colors">Alle annoncer</a></li>
+              <li><a href="#" className="hover:text-indigo-600 transition-colors">Populære kategorier</a></li>
+              <li><a href="#" className="hover:text-indigo-600 transition-colors">Lokale fund</a></li>
+              <li><a href="#" className="hover:text-indigo-600 transition-colors">Giv væk gratis</a></li>
+              <li><a href="#" className="hover:text-indigo-600 transition-colors">Erhvervssalg</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-black text-slate-900 mb-8 uppercase tracking-widest text-xs">Sælg hos os</h4>
+            <ul className="space-y-4 text-sm text-slate-500 font-bold">
+              <li><a href="#" className="hover:text-indigo-600 transition-colors">Opret annonce</a></li>
+              <li><a href="#" className="hover:text-indigo-600 transition-colors">Boost dine annoncer</a></li>
+              <li><a href="#" className="hover:text-indigo-600 transition-colors">Sælger-guide</a></li>
+              <li><a href="#" className="hover:text-indigo-600 transition-colors">Sikker forsendelse</a></li>
+              <li><a href="#" className="hover:text-indigo-600 transition-colors">Prisliste</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-black text-slate-900 mb-8 uppercase tracking-widest text-xs">Hjælp & Kontakt</h4>
+            <ul className="space-y-5 text-sm text-slate-500 font-bold">
+              <li className="flex items-center gap-3"><Mail size={18} className="text-indigo-500" /> <span>support@dennyeavis.dk</span></li>
+              <li className="flex items-center gap-3"><Phone size={18} className="text-indigo-500" /> <span>+45 70 20 20 20</span></li>
+              <li className="flex items-center gap-3"><MapPin size={18} className="text-indigo-500" /> <span>København, Danmark</span></li>
+              <li><a href="#" className="block mt-4 text-indigo-600 hover:underline">Besøg hjælpecenter</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div className="pt-10 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-[11px] text-slate-400 font-bold tracking-wider uppercase">© 2024 Den Nye Avis ApS. Alle rettigheder forbeholdes.</p>
+          <div className="flex gap-8 text-[11px] text-slate-400 font-bold tracking-wider uppercase">
+            <a href="#" className="hover:text-indigo-600 transition-colors">Privatlivspolitik</a>
+            <a href="#" className="hover:text-indigo-600 transition-colors">Handelsbetingelser</a>
+            <a href="#" className="hover:text-indigo-600 transition-colors">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { CATEGORIES, MOCK_PRODUCTS } from '../lib/mockData';
+import { ArrowRight, ShieldCheck, Zap, Heart, Loader2, Star, TrendingUp, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { supabase } from '../lib/supabase';
+
+const Home = () => {
+  const [listings, setListings] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('listings')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(6);
+        
+        if (error) throw error;
+        if (data && data.length > 0) {
+          setListings(data);
+        } else {
+          setListings(MOCK_PRODUCTS);
+        }
+      } catch (err) {
+        console.error('Error fetching listings:', err);
+        setListings(MOCK_PRODUCTS);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchListings();
+  }, []);
+
+  return (
+    <div className="space-y-16 pb-24">
+      {/* Hero Section */}
+      <section className="relative bg-[#0F172A] text-white py-28 px-4 overflow-hidden rounded-b-[4rem] shadow-2xl">
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600/40 blur-[120px] rounded-full"></div>
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-violet-600/40 blur-[120px] rounded-full"></div>
+        </div>
+        <div className="max-w-7xl mx-auto relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-5 py-2 bg-white/5 border border-white/10 rounded-full text-indigo-300 text-xs font-black mb-10 backdrop-blur-md uppercase tracking-[0.2em]"
+          >
+            <Star size={14} className="fill-indigo-400 text-indigo-400" />
+            Danmarks nye favorit
+          </motion.div>
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-6xl md:text-8xl font-[1000] mb-10 tracking-[-0.04em] leading-[0.9]"
+          >
+            Genbrug på den<br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-400">smukke måde.</span>
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-lg md:text-2xl text-slate-400 mb-14 max-w-3xl mx-auto font-medium leading-relaxed"
+          >
+            Køb og sælg dine ting på Den Nye Avis. Vi har skabt en markedsplads, der er hurtigere, smukkere og mere sikker end nogensinde før.
+          </motion.p>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="flex flex-wrap justify-center gap-6"
+          >
+            <Link to="/browse" className="bg-white text-slate-950 px-12 py-5 rounded-3xl font-black text-xl hover:bg-indigo-50 transition-all hover:scale-105 shadow-2xl shadow-indigo-500/20 active:scale-95">
+              Udforsk nu
+            </Link>
+            <Link to="/sell" className="bg-indigo-600 text-white px-12 py-5 rounded-3xl font-black text-xl hover:bg-indigo-500 transition-all hover:scale-105 border border-indigo-500 shadow-2xl shadow-indigo-500/20 active:scale-95">
+              Sælg vare
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Stats/Trending */}
+      <section className="max-w-7xl mx-auto px-4 -mt-12 relative z-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { label: 'Aktive Annoncer', value: '45.200+', icon: <TrendingUp size={20}/> },
+            { label: 'Sikre Handler', value: '100%', icon: <ShieldCheck size={20}/> },
+            { label: 'Nye i dag', value: '1.240', icon: <Zap size={20}/> },
+            { label: 'Glade Brugere', value: '12.500', icon: <Star size={20}/> },
+          ].map((stat, i) => (
+            <div key={i} className="bg-white p-6 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 flex flex-col items-center text-center">
+              <div className="text-indigo-600 mb-3">{stat.icon}</div>
+              <div className="text-2xl font-black text-slate-900">{stat.value}</div>
+              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Categories */}
+      <section className="max-w-7xl mx-auto px-4 pt-10">
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <h2 className="text-4xl font-black text-slate-900 tracking-tighter">Gennemse kategorier</h2>
+            <p className="text-slate-500 font-bold mt-2">Find lige det du leder efter</p>
+          </div>
+          <Link to="/browse" className="text-indigo-600 font-black flex items-center gap-2 hover:underline group">
+            Se alle <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-6">
+          {CATEGORIES.map((cat) => (
+            <Link 
+              key={cat.id} 
+              to={`/browse?category=${cat.id}`}
+              className="bg-white p-8 rounded-[2.5rem] border border-slate-100 text-center hover:border-indigo-500 hover:shadow-2xl transition-all group hover:-translate-y-2"
+            >
+              <div className="text-4xl mb-4 group-hover:scale-125 transition-transform duration-500">{cat.icon}</div>
+              <span className="text-xs font-black text-slate-700 uppercase tracking-tight">{cat.name}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured Items */}
+      <section className="max-w-7xl mx-auto px-4 pt-10">
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <h2 className="text-4xl font-black text-slate-900 tracking-tighter">Nyeste på avisen</h2>
+            <p className="text-slate-500 font-bold mt-2">Opdateres hvert minut</p>
+          </div>
+          <Link to="/browse" className="text-indigo-600 font-black flex items-center gap-2 hover:underline group">
+            Udforsk alt <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {loading ? (
+            <div className="col-span-full flex justify-center py-32">
+              <Loader2 className="animate-spin text-indigo-600" size={64} />
+            </div>
+          ) : listings.map((product) => (
+            <Link 
+              key={product.id} 
+              to={`/product/${product.id}`}
+              className="bg-white rounded-[3rem] overflow-hidden border border-slate-100 hover:shadow-[0_32px_64px_-12px_rgba(0,0,0,0.1)] transition-all group"
+            >
+              <div className="relative h-80 overflow-hidden">
+                <img 
+                  src={product.image} 
+                  alt={product.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                />
+                <button className="absolute top-6 right-6 p-3 bg-white/90 backdrop-blur-md rounded-full text-slate-600 hover:text-red-500 transition-all shadow-lg active:scale-90">
+                  <Heart size={24} />
+                </button>
+                <div className="absolute bottom-6 left-6 bg-indigo-600 text-white px-5 py-2 rounded-2xl text-lg font-black shadow-xl border border-white/20">
+                  {product.price.toLocaleString('da-DK')} kr.
+                </div>
+              </div>
+              <div className="p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-[10px] font-black uppercase tracking-[0.15em] text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">{(CATEGORIES.find(c => c.id === product.category)?.name || product.category)}</span>
+                  <span className="text-xs font-bold text-slate-400 flex items-center gap-1"><MapPin size={12}/> {product.location}</span>
+                </div>
+                <h3 className="text-2xl font-black text-slate-900 mb-6 line-clamp-1 group-hover:text-indigo-600 transition-colors tracking-tighter">{product.title}</h3>
+                <div className="flex items-center justify-between pt-6 border-t border-slate-50">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-slate-100 to-slate-200 text-slate-600 rounded-xl flex items-center justify-center text-sm font-black shadow-inner">
+                      {product.seller?.name?.[0] || 'U'}
+                    </div>
+                    <div className="flex flex-col -space-y-1">
+                      <span className="text-sm font-black text-slate-800">{product.seller?.name || 'Bruger'}</span>
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Verificeret Sælger</span>
+                    </div>
+                  </div>
+                  <span className="text-[11px] font-black text-slate-300 uppercase tracking-widest">{product.createdAt || 'Lige nu'}</span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Trust Section */}
+      <section className="bg-[#F8FAFC] py-28 px-4 rounded-[5rem] mx-4 border border-slate-100 shadow-inner">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-4">Handl med ro i maven</h2>
+            <p className="text-slate-500 font-bold max-w-2xl mx-auto">Vi har bygget Danmarks mest moderne sikkerhedssystem direkte ind i markedspladsen.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-16">
+            <div className="flex flex-col items-center text-center group">
+              <div className="w-24 h-24 bg-white text-indigo-600 rounded-[2.5rem] flex items-center justify-center mb-10 shadow-2xl shadow-indigo-900/10 border border-indigo-50 transition-all group-hover:-translate-y-2">
+                <ShieldCheck size={48} />
+              </div>
+              <h3 className="text-2xl font-black mb-4 tracking-tight text-slate-900">MitID Verificering</h3>
+              <p className="text-slate-500 font-medium leading-relaxed">Vi kræver MitID af alle vores faste sælgere for at eliminere svindel og skabe tryghed.</p>
+            </div>
+            <div className="flex flex-col items-center text-center group">
+              <div className="w-24 h-24 bg-white text-indigo-600 rounded-[2.5rem] flex items-center justify-center mb-10 shadow-2xl shadow-indigo-900/10 border border-indigo-50 transition-all group-hover:-translate-y-2">
+                <Zap size={48} />
+              </div>
+              <h3 className="text-2xl font-black mb-4 tracking-tight text-slate-900">Lynhurtig Support</h3>
+              <p className="text-slate-500 font-medium leading-relaxed">Vores dedikerede team sidder klar til at hjælpe dig med alt fra fragt til betaling.</p>
+            </div>
+            <div className="flex flex-col items-center text-center group">
+              <div className="w-24 h-24 bg-white text-indigo-600 rounded-[2.5rem] flex items-center justify-center mb-10 shadow-2xl shadow-indigo-900/10 border border-indigo-50 transition-all group-hover:-translate-y-2">
+                <Heart size={48} />
+              </div>
+              <h3 className="text-2xl font-black mb-4 tracking-tight text-slate-900">Bæredygtig Fremtid</h3>
+              <p className="text-slate-500 font-medium leading-relaxed">Hver handel på Den Nye Avis sparer planeten for unødig produktion og CO2.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Home;
+import React, { useState, useEffect } from 'react';
+import { useSearchParams, Link } from 'react-router-dom';
+import { MOCK_PRODUCTS, CATEGORIES } from '../lib/mockData';
+import { Filter, Search, MapPin, SlidersHorizontal, Loader2, Grid, List as ListIcon, Heart } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+
+const Browse = () => {
+  const [searchParams] = useSearchParams();
+  const categoryFilter = searchParams.get('category');
+  const searchQuery = searchParams.get('q');
+  
+  const [priceRange, setPriceRange] = useState(100000);
+  const [listings, setListings] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  
+  useEffect(() => {
+    const fetchListings = async () => {
+      setLoading(true);
+      try {
+        let query = supabase.from('listings').select('*');
+        
+        if (categoryFilter) {
+          query = query.eq('category', categoryFilter);
+        }
+        
+        if (searchQuery) {
+          query = query.ilike('title', `%${searchQuery}%`);
+        }
+
+        const { data, error } = await query.order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        
+        if (data && data.length > 0) {
+          setListings(data);
+        } else if (!categoryFilter && !searchQuery) {
+          setListings(MOCK_PRODUCTS);
+        } else {
+          setListings([]);
+        }
+      } catch (err) {
+        console.error('Error fetching listings:', err);
+        setListings(MOCK_PRODUCTS);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchListings();
+  }, [categoryFilter, searchQuery]);
+
+  const filteredByPrice = listings.filter(p => p.price <= priceRange);
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="flex flex-col lg:flex-row gap-12">
+        {/* Sidebar Filters */}
+        <aside className="w-full lg:w-72 space-y-10">
+          <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/50">
+            <h3 className="text-xl font-black mb-6 flex items-center gap-2 tracking-tight">
+              <Filter size={20} className="text-indigo-600" /> Kategorier
+            </h3>
+            <div className="space-y-1">
+              <Link 
+                to="/browse"
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${!categoryFilter ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-slate-500 hover:bg-slate-50'}`}
+              >
+                <span>🌍</span> <span>Alle annoncer</span>
+              </Link>
+              {CATEGORIES.map(cat => (
+                <Link 
+                  key={cat.id}
+                  to={`/browse?category=${cat.id}`}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${categoryFilter === cat.id ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' : 'text-slate-500 hover:bg-slate-50'}`}
+                >
+                  <span className="text-lg">{cat.icon}</span> <span>{cat.name}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+... [Output truncated - exceeded 1000 lines]
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(93ms)
+grep -ri "ReMarket" src/ index.html grep -ri "remarket" src/ index.html
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(93ms)
+grep -rnEi "remarket|re-market" . --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.git --exclude-dir=.vite
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(93ms)
+grep -ri "market" . --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.git --exclude-dir=.vite
+/mnt/efs/sessions/a456176d-7d46-4380-b553-f7f2a55b89e2/agent_2
+(18701ms)
+npm run build && deploy_to_vercel
+
+> placeholder-model-1@0.0.0 build
+> tsc -b && vite build
+
+vite v7.3.2 building client environment for production...
+transforming...
+✓ 2202 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   9.35 kB │ gzip:   3.28 kB
+dist/assets/index-DQPM6oWO.css   43.51 kB │ gzip:   7.61 kB
+dist/assets/index-CDkC-yFQ.js   628.94 kB │ gzip: 183.01 kB
+✓ built in 8.73s
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+/bin/sh: 1: deploy_to_vercel: not found
